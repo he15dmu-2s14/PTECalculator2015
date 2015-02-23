@@ -1,2 +1,2 @@
-# PTUCalculator2015
-UP Projekt m. PTU EAMV
+# PTECalculator2015
+UP Projekt m. PTE EAMV
