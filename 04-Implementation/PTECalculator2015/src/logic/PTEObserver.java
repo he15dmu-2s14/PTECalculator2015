@@ -3,7 +3,8 @@ package logic;
 public interface PTEObserver {
 	
 	/**
-	 * Kaldes når der er sket ændringer i logikken.
+	 * Kaldes naar der er sket �aedringer i logikken.
+	 * Brugergraensefladen boer updatere for at afspejle brugergraensefladen
 	 */
 	public void update();
 
