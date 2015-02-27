@@ -18,5 +18,7 @@ public interface PTECalculatorController {
 	public Belastning getBelastning();
 	
 	public Tvaerkraft getTvaerkraft();
+	
+	public void notifyObservers();
 
 }
