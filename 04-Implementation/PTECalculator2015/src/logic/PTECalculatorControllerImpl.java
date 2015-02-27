@@ -3,22 +3,30 @@ package logic;
 import java.util.LinkedList;
 
 public class PTECalculatorControllerImpl implements PTECalculatorController {
-
-	private Belastning b;
-	private LinkedList<PTEObserver> observerListe = new LinkedList();;
+   private Belastning belastning;
+   private Vinkel vinkel;
+   private Tvaerkraft tvaerkraft;
+	private LinkedList<PTEObserver> observerListe = new LinkedList<>();;
 	
 	@Override
 	public void angivBelastning(double vaerdi, Enhed enhed)
 			throws UgyldigBelastningException {
-		b = new BelastningImpl();
-		b.setBelastning(vaerdi, enhed);
+		belastning = new BelastningImpl();
+		belastning.setBelastning(vaerdi, enhed);
+		
 		notifyObservers();
 	}
 
 	@Override
-	public void beregnTvaerkraft(double vinkel, boolean tilVandret) {
-		// TODO Auto-generated method stub
-		
+	public void beregnTvaerkraft(double gradtal, boolean tilVandret) {
+	   vinkel = new VinkelImpl();
+	   vinkel.setGradtal(gradtal, tilVandret);
+	   
+	   tvaerkraft = new TvaerkraftImpl();
+	   tvaerkraft.setVinkel(vinkel);
+	   tvaerkraft.setBelastning(belastning);
+	   
+	   notifyObservers();
 	}
 
 	@Override
@@ -29,20 +37,17 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 
 	@Override
 	public Vinkel getVinkel() {
-		// TODO Auto-generated method stub
-		return null;
+	   return vinkel;
 	}
 
 	@Override
 	public Belastning getBelastning() {
-		// TODO Auto-generated method stub
-		return null;
+	   return belastning;
 	}
 
 	@Override
 	public Tvaerkraft getTvaerkraft() {
-		// TODO Auto-generated method stub
-		return null;
+	   return tvaerkraft;
 	}
 
 	@Override
@@ -50,5 +55,4 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 		for (PTEObserver obs : observerListe)
 			obs.update();
 	}
-
 }
