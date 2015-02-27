@@ -1,19 +1,29 @@
 package logic;
 
 public class PTECalculatorControllerImpl implements PTECalculatorController {
-
+   private Belastning belastning;
+   private Vinkel vinkel;
+   private Tvaerkraft tvaerkraft;
+   
 	@Override
 	public void angivBelastning(double vaerdi, Enhed enhed)
 			throws UgyldigBelastningException {
-		Belastning b = new BelastningImpl();
-		b.setBelastning(vaerdi, enhed);
-		//notifyObservers();
+		belastning = new BelastningImpl();
+		belastning.setBelastning(vaerdi, enhed);
+		
+		notifyObservers();
 	}
 
 	@Override
-	public void beregnTvaerkraft(double vinkel, boolean tilVandret) {
-		// TODO Auto-generated method stub
-		
+	public void beregnTvaerkraft(double gradtal, boolean tilVandret) {
+	   vinkel = new VinkelImpl();
+	   vinkel.setGradtal(gradtal, tilVandret);
+	   
+	   tvaerkraft = new TvaerkraftImpl();
+	   tvaerkraft.setVinkel(vinkel);
+	   tvaerkraft.setBelastning(belastning);
+	   
+	   notifyObservers();
 	}
 
 	@Override
@@ -24,25 +34,21 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 
 	@Override
 	public Vinkel getVinkel() {
-		// TODO Auto-generated method stub
-		return null;
+	   return vinkel;
 	}
 
 	@Override
 	public Belastning getBelastning() {
-		// TODO Auto-generated method stub
-		return null;
+	   return belastning;
 	}
 
 	@Override
 	public Tvaerkraft getTvaerkraft() {
-		// TODO Auto-generated method stub
-		return null;
+	   return tvaerkraft;
 	}
 
 	@Override
 	public void notifyObservers() {
 		
 	}
-
 }
