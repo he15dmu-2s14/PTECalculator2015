@@ -50,7 +50,7 @@ public class TvaerkraftTest {
 	}
 	
 	@Test
-	public void vinkelErStørrerEnd90() throws UgyldigBelastningException {
+	public void vinkelErStoerrerEnd90() throws UgyldigBelastningException {
 		vinkel.setGradtal(100, true);
 		belastning.setBelastning(490.8, Enhed.Newton);
 		tvaerkraft.setBelastning(belastning);

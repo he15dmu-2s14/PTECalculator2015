@@ -126,4 +126,10 @@ public class PTECalculatorControllerStub implements PTECalculatorController {
 		return null;
 	}
 
+	@Override
+	public void notifyObservers() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
