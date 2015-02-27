@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import logic.PTECalculatorController;
+import logic.PTECalculatorControllerImpl;
 import logic.PTECalculatorControllerStub;
 import logic.PTEObserver;
 import logic.UgyldigBelastningException;
@@ -164,27 +165,38 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 
 	@Override
 	public void update() {
+		String belastningText = "";
 		switch ((logic.Enhed) enhed.getSelectedItem()) {
 		case kg:
-			belastning.setText("" + pteCalc.getBelastning().getBelastningIKg());
+			if (pteCalc.getBelastning() != null)
+				belastningText = "" + pteCalc.getBelastning().getBelastningIKg();
+			belastning.setText(belastningText);
 			break;
 
 		case ton:
-			belastning
-					.setText("" + pteCalc.getBelastning().getBelastningITon());
+			if (pteCalc.getBelastning() != null)
+				belastningText = "" + pteCalc.getBelastning().getBelastningITon();
+			belastning.setText(belastningText);
 			break;
 
 		default:
-			belastning.setText("" + pteCalc.getBelastning().getBelastning());
+			if (pteCalc.getBelastning() != null)
+				belastningText = "" + pteCalc.getBelastning().getBelastning();
+			belastning.setText(belastningText);
 			break;
 		}
-
-		fDim.setText("" + pteCalc.getBelastning().getBelastning() + " N");
-
-		if (pteCalc.getVinkel().tilVandret()) {
-			vandretLodret.setSelectedItem("Vandret");
-		} else
-			vandretLodret.setSelectedItem("Lodret");
+		
+		if (pteCalc.getBelastning() != null)
+			fDim.setText("" + pteCalc.getBelastning().getBelastning() + " N");
+		
+		if (pteCalc.getVinkel() != null)
+			if (pteCalc.getVinkel().tilVandret()) {
+				vandretLodret.setSelectedItem("Vandret");
+			} else
+				vandretLodret.setSelectedItem("Lodret");
+		
+		if (pteCalc.getTvaerkraft() != null)
+			ftResultat.setText("" + pteCalc.getTvaerkraft().getTvaerkraft());
 
 	}
 
