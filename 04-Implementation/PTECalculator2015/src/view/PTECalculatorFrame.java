@@ -90,6 +90,7 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 		con = createGBC(1, 2, 1, 1);
 		con.insets = new Insets(5, 5, 20, 5);
 		vinkel = new JTextField(4);
+		vinkel.addFocusListener(this);
 		add(vinkel, con);
 
 		con = createGBC(2, 2, 1, 1);
