@@ -4,8 +4,8 @@ import java.util.LinkedList;
 
 public class PTECalculatorControllerImpl implements PTECalculatorController {
 
-	Belastning b;
-	LinkedList<PTEObserver> observerListe = new LinkedList();;
+	private Belastning b;
+	private LinkedList<PTEObserver> observerListe = new LinkedList();;
 	
 	@Override
 	public void angivBelastning(double vaerdi, Enhed enhed)
