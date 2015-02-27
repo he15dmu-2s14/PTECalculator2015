@@ -1,13 +1,18 @@
 package logic;
 
+import java.util.LinkedList;
+
 public class PTECalculatorControllerImpl implements PTECalculatorController {
 
+	Belastning b;
+	LinkedList<PTEObserver> observerListe = new LinkedList();;
+	
 	@Override
 	public void angivBelastning(double vaerdi, Enhed enhed)
 			throws UgyldigBelastningException {
-		Belastning b = new BelastningImpl();
+		b = new BelastningImpl();
 		b.setBelastning(vaerdi, enhed);
-		//notifyObservers();
+		notifyObservers();
 	}
 
 	@Override
@@ -18,8 +23,8 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 
 	@Override
 	public void tilmeldObserver(PTEObserver observer) {
-		// TODO Auto-generated method stub
-		
+		if (observer != null && !observerListe.contains(observer))
+			observerListe.add(observer);
 	}
 
 	@Override
@@ -42,7 +47,8 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 
 	@Override
 	public void notifyObservers() {
-		
+		for (PTEObserver obs : observerListe)
+			obs.update();
 	}
 
 }
