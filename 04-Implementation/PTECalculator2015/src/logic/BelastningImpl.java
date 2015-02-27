@@ -40,14 +40,17 @@ public class BelastningImpl implements Belastning {
 				this.kg = vaerdi;
 				this.ton = vaerdi / 1000;
 				this.newton = vaerdi * tyngdeAcceleration;
+				break;
 			case ton:
 				this.kg = vaerdi * 1000;
 				this.ton = vaerdi;
 				this.newton = this.kg * tyngdeAcceleration;
+				break;
 			case Newton:
 				this.kg = vaerdi / tyngdeAcceleration;
 				this.ton = this.kg / 1000;
 				this.newton = vaerdi;
+				break;
 		}
 	}
 
