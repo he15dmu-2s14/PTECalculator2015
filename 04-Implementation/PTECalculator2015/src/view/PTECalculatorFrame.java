@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.text.DecimalFormat;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -29,10 +30,14 @@ public class PTECalculatorFrame extends JFrame implements
    private JComboBox<String> vandretLodret;
    private JTextField fnFormel, ftFormel, fnResultat, ftResultat;
    private PTECalculatorController pteCalc;
+   
+   private DecimalFormat forceFormatter;
 
    public PTECalculatorFrame() {
       pteCalc = new PTECalculatorControllerImpl();
       pteCalc.tilmeldObserver(this);
+      
+      forceFormatter = new DecimalFormat("#.## N");
 
       initComponents();
       layoutComponents();
@@ -49,7 +54,7 @@ public class PTECalculatorFrame extends JFrame implements
    }
 
    private void initComponents() {
-      belastning = new JTextField(4);
+      belastning = new JTextField(5);
       belastning.addFocusListener(this);
 
       enhed = new JComboBox<Enhed>();
@@ -60,10 +65,10 @@ public class PTECalculatorFrame extends JFrame implements
       belastningFormel = new JTextField(8);
       belastningFormel.setEditable(false);
 
-      fDim = new JTextField(5);
+      fDim = new JTextField(6);
       fDim.setEditable(false);
 
-      vinkel = new JTextField(4);
+      vinkel = new JTextField(5);
       vinkel.addFocusListener(this);
 
       vandretLodret = new JComboBox<>();
@@ -73,13 +78,13 @@ public class PTECalculatorFrame extends JFrame implements
       fnFormel = new JTextField(8);
       fnFormel.setEditable(false);
 
-      fnResultat = new JTextField(4);
+      fnResultat = new JTextField(6);
       fnResultat.setEditable(false);
 
       ftFormel = new JTextField(8);
       ftFormel.setEditable(false);
 
-      ftResultat = new JTextField(4);
+      ftResultat = new JTextField(6);
       ftResultat.setEditable(false);
    }
 
@@ -209,16 +214,20 @@ public class PTECalculatorFrame extends JFrame implements
             break;
       }
 
-      if (pteCalc.getBelastning() != null)
-         fDim.setText(pteCalc.getBelastning().getBelastning() + " N");
+      if (pteCalc.getBelastning() != null) {
+         double f = pteCalc.getBelastning().getBelastning();
+         fDim.setText(forceFormatter.format(f));
+      }
 
       if (pteCalc.getVinkel() != null)
          vandretLodret.setSelectedItem(pteCalc.getVinkel().tilVandret()
                ? VANDRET
                : LODRET);
 
-      if (pteCalc.getTvaerkraft() != null)
-         ftResultat.setText(pteCalc.getTvaerkraft().getTvaerkraft() + " N");
+      if (pteCalc.getTvaerkraft() != null) {
+         double f = pteCalc.getTvaerkraft().getTvaerkraft();
+         ftResultat.setText(forceFormatter.format(f));
+      }
    }
 
    @Override
