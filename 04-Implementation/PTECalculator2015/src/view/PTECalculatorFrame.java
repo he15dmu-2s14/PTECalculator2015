@@ -30,13 +30,13 @@ public class PTECalculatorFrame extends JFrame implements
    private JComboBox<String> vandretLodret;
    private JTextField fnFormel, ftFormel, fnResultat, ftResultat;
    private PTECalculatorController pteCalc;
-   
+
    private DecimalFormat forceFormatter;
 
    public PTECalculatorFrame() {
       pteCalc = new PTECalculatorControllerImpl();
       pteCalc.tilmeldObserver(this);
-      
+
       forceFormatter = new DecimalFormat("#.## N");
 
       initComponents();
