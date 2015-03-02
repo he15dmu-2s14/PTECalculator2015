@@ -31,8 +31,8 @@ public class BelastningImpl implements Belastning {
 	@Override
 	public void setBelastning(double vaerdi, Enhed enhed)
 			throws UgyldigBelastningException {
-		
-		if (vaerdi < 0)
+		// Gyldigt vaerdiområde er [0;infty[
+		if (!(vaerdi >= 0 && vaerdi < Double.POSITIVE_INFINITY))
 			throw new UgyldigBelastningException();
 		
 		switch(enhed) {
