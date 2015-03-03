@@ -264,7 +264,7 @@ public class PTECalculatorFrame extends JFrame implements
    private void updateFields(Object e) {
 	   if (e == belastning || e == enhed) {
 	         try {
-	        	if (!belastning.getText().isEmpty()) {
+	        	if (!belastning.getText().isEmpty()) { // check om belastning er tom. Gir Ugyldig input melding om det ikke checkes
 		            double b = Double.parseDouble(belastning.getText());
 		            Enhed enh = (Enhed) enhed.getSelectedItem();
 		            pteCalc.angivBelastning(b, enh);
@@ -274,7 +274,7 @@ public class PTECalculatorFrame extends JFrame implements
 	         }
 	      } else if (e == vinkel || e == vandretLodret) {
 	         try {
-	        	if (!vinkel.getText().isEmpty()) {
+	        	if (!vinkel.getText().isEmpty()) { // check om vinkel er tom. Gir Ugyldig nummer melding om det ikke checkes
 	        		double v = Double.parseDouble(vinkel.getText());
 	        		boolean vandret = vandretLodret.getSelectedItem().equals(VANDRET);
 	        		pteCalc.beregnTvaerkraft(v, vandret);
