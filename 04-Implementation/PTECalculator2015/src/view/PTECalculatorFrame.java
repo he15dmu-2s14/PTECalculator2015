@@ -274,6 +274,7 @@ public class PTECalculatorFrame extends JFrame implements
 	        	double v = Double.parseDouble(vinkel.getText());
 	        	boolean vandret = vandretLodret.getSelectedItem().equals(VANDRET);
 	            pteCalc.beregnTvaerkraft(v, vandret);
+	            pteCalc.beregnNormalkraft(v, vandret);
 	         } catch (UgyldigVinkelException ex) {
 	        	 JOptionPane.showMessageDialog(null, "Vinkel skal være mellem 0 og 90 grader");
 	         } catch (NumberFormatException ex) {
