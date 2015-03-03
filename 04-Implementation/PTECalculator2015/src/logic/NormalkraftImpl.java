@@ -1,18 +1,6 @@
 package logic;
 
-public class NormalkraftImpl implements Normalkraft {
-   private Vinkel vinkel;
-   private Belastning belastning;
-   
-   @Override
-   public void setVinkel(Vinkel vinkel) {
-      this.vinkel = vinkel;
-   }
-
-   @Override
-   public void setBelastning(Belastning belastning) {
-      this.belastning = belastning;
-   }
+public class NormalkraftImpl extends KraftImpl implements Normalkraft {
 
    @Override
    public double getNormalkraft() {
