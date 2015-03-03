@@ -59,7 +59,9 @@ public class PTECalculatorFrame extends JFrame implements
 
    private void initComponents() {
       belastning = new JTextField(5);
-      belastning.addFocusListener(this);
+      // FocusListener gir en uønsket effekt med popups når PTECalc mister fokus (alt-tab) og generelt når text feltene mister fokus
+//      belastning.addFocusListener(this);
+      belastning.addActionListener(this);
 
       enhed = new JComboBox<Enhed>();
       enhed.addItem(Enhed.kg);
@@ -74,7 +76,8 @@ public class PTECalculatorFrame extends JFrame implements
       fDim.setEditable(false);
 
       vinkel = new JTextField(5);
-      vinkel.addFocusListener(this);
+//      vinkel.addFocusListener(this);
+      vinkel.addActionListener(this);
 
       vandretLodret = new JComboBox<>();
       vandretLodret.addItem(VANDRET);
@@ -234,6 +237,11 @@ public class PTECalculatorFrame extends JFrame implements
          double f = pteCalc.getTvaerkraft().getTvaerkraft();
          ftResultat.setText(forceFormatter.format(f));
       }
+      
+      if (pteCalc.getNormalkraft() != null) {
+          double n = pteCalc.getNormalkraft().getNormalkraft();
+          fnResultat.setText(forceFormatter.format(n));
+       }
    }
 
    @Override
