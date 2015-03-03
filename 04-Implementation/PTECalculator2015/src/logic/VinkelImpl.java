@@ -11,10 +11,10 @@ public class VinkelImpl implements Vinkel {
 
    @Override
    public void setGradtal(double vinkel, boolean tilVandret) throws UgyldigVinkelException {
-	  if (vinkel < 0 || vinkel > 90)
-		  throw new UgyldigVinkelException();
       this.gradtal = vinkel;
       this.tilVandret = tilVandret;
+      if (erUdenForNormalomraade())
+    		  throw new UgyldigVinkelException();
    }
 
    @Override
