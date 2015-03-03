@@ -33,13 +33,13 @@ public class TvaerkraftTest {
 	}
 
 	@Test
-	public void vinkelErMindreEnd0() throws UgyldigVinkelException, UgyldigBelastningException {
-		vinkel.setGradtal(-50, true);
-		belastning.setBelastning(490.8, Enhed.Newton);
-		tvaerkraft.setBelastning(belastning);
-		tvaerkraft.setVinkel(vinkel);
-		
-		assertEquals(315.48, tvaerkraft.getTvaerkraft(), 0.01);
+	public void vinkelErMindreEnd0() throws UgyldigVinkelException {
+		try {
+			vinkel.setGradtal(-50, true);
+			fail("Exception forventet");
+		} catch (UgyldigVinkelException e) {
+			//Test passed
+		}
 	}
 	
 	@Test
@@ -50,13 +50,13 @@ public class TvaerkraftTest {
 	}
 	
 	@Test
-	public void vinkelErStoerrerEnd90() throws UgyldigVinkelException, UgyldigBelastningException {
-		vinkel.setGradtal(100, true);
-		belastning.setBelastning(490.8, Enhed.Newton);
-		tvaerkraft.setBelastning(belastning);
-		tvaerkraft.setVinkel(vinkel);
-	
-		assertEquals(-85.22, tvaerkraft.getTvaerkraft(), 0.01);
+	public void vinkelErStoerrerEnd90() throws UgyldigVinkelException {
+		try {
+			vinkel.setGradtal(100, true);
+			fail("Exception forventet");
+		} catch (UgyldigVinkelException e) {
+			//Test passed
+		}
 	}
 	
 	@Test
