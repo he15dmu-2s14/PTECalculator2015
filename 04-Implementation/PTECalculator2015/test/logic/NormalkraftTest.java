@@ -59,7 +59,6 @@ public class NormalkraftTest {
 		}
 	}
 	
-	//her skal laves en ny udregning
 	@Test
 	public void tilVandretSatTilFalse() throws UgyldigVinkelException, UgyldigBelastningException {
 		vinkel.setGradtal(50, false);
@@ -67,10 +66,9 @@ public class NormalkraftTest {
 		normalkraft.setBelastning(belastning);
 		normalkraft.setVinkel(vinkel);
 		
-		assertEquals(375.97, normalkraft.getNormalkraft(), 0.01);
+		assertEquals(315.48, normalkraft.getNormalkraft(), 0.01);
 	}
 	
-	//her skal laves en ny udregning
 	@Test
 	public void tilVandretSatTiltrue() throws UgyldigVinkelException, UgyldigBelastningException {
 		vinkel.setGradtal(50, true);
@@ -78,10 +76,9 @@ public class NormalkraftTest {
 		normalkraft.setBelastning(belastning);
 		normalkraft.setVinkel(vinkel);
 		
-		assertEquals(315.48, normalkraft.getNormalkraft(), 0.01);
+		assertEquals(375.97, normalkraft.getNormalkraft(), 0.01);
 	}
 
-	//her skal laves en ny udregning
 	@Test
 	public void tvaerkraftBeregnetMedBelastningIKg() throws UgyldigVinkelException, UgyldigBelastningException {
 		vinkel.setGradtal(50, true);
@@ -89,10 +86,9 @@ public class NormalkraftTest {
 		normalkraft.setBelastning(belastning);
 		normalkraft.setVinkel(vinkel);
 		
-		assertEquals(3096.75, normalkraft.getNormalkraft(), 0.01);
+		assertEquals(3690.57, normalkraft.getNormalkraft(), 0.01);
 	}
 	
-	//her skal laves en ny udregning
 	@Test
 	public void normalkraftBeregnetMedBelastningITon() throws UgyldigVinkelException, UgyldigBelastningException {
 		vinkel.setGradtal(50, true);
@@ -100,6 +96,6 @@ public class NormalkraftTest {
 		normalkraft.setBelastning(belastning);
 		normalkraft.setVinkel(vinkel);
 		
-		assertEquals(126.19, normalkraft.getNormalkraft(), 0.01);
+		assertEquals(150.39, normalkraft.getNormalkraft(), 0.01);
 	}	
 }
