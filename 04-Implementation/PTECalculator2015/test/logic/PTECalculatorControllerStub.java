@@ -100,11 +100,6 @@ public class PTECalculatorControllerStub implements PTECalculatorController {
 	}
 
     @Override
-    public void beregnNormalkraft(double vinkel, boolean tilVandret) throws UgyldigVinkelException {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
 	public void tilmeldObserver(PTEObserver observer) {
 		// TODO Auto-generated method stub
 
@@ -130,12 +125,6 @@ public class PTECalculatorControllerStub implements PTECalculatorController {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-    @Override
-    public Normalkraft getNormalkraft() {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     @Override
 	public void notifyObservers() {
