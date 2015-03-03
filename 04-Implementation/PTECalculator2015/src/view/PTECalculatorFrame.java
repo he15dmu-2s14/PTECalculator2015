@@ -53,14 +53,14 @@ public class PTECalculatorFrame extends JFrame implements
       setVisible(true);
       setDefaultCloseOperation(EXIT_ON_CLOSE);
       setLocationRelativeTo(null);
-
+      
       update();
    }
 
    private void initComponents() {
+	  // Belastning har ActionListener og FoculListener saa det er mulig aa bruke baade tab og enter for aa beregne resultat
       belastning = new JTextField(5);
-      // FocusListener gir en uønsket effekt med popups når PTECalc mister fokus (alt-tab) og generelt når text feltene mister fokus
-//      belastning.addFocusListener(this);
+      belastning.addFocusListener(this);
       belastning.addActionListener(this);
 
       enhed = new JComboBox<Enhed>();
@@ -75,8 +75,9 @@ public class PTECalculatorFrame extends JFrame implements
       fDim = new JTextField(6);
       fDim.setEditable(false);
 
+      // vinkel har ActionListener og FoculListener saa det er mulig aa bruke baade tab og enter for aa beregne resultat 
       vinkel = new JTextField(5);
-//      vinkel.addFocusListener(this);
+      vinkel.addFocusListener(this);
       vinkel.addActionListener(this);
 
       vandretLodret = new JComboBox<>();
@@ -263,18 +264,22 @@ public class PTECalculatorFrame extends JFrame implements
    private void updateFields(Object e) {
 	   if (e == belastning || e == enhed) {
 	         try {
-	            double b = Double.parseDouble(belastning.getText());
-	            Enhed enh = (Enhed) enhed.getSelectedItem();
-	            pteCalc.angivBelastning(b, enh);
+	        	if (!belastning.getText().isEmpty()) {
+		            double b = Double.parseDouble(belastning.getText());
+		            Enhed enh = (Enhed) enhed.getSelectedItem();
+		            pteCalc.angivBelastning(b, enh);
+	        	}
 	         } catch (NumberFormatException | UgyldigBelastningException ex) {
 	            JOptionPane.showMessageDialog(null, "Ugyldigt input");
 	         }
 	      } else if (e == vinkel || e == vandretLodret) {
 	         try {
-	        	double v = Double.parseDouble(vinkel.getText());
-	        	boolean vandret = vandretLodret.getSelectedItem().equals(VANDRET);
-	            pteCalc.beregnTvaerkraft(v, vandret);
-	            pteCalc.beregnNormalkraft(v, vandret);
+	        	if (!vinkel.getText().isEmpty()) {
+	        		double v = Double.parseDouble(vinkel.getText());
+	        		boolean vandret = vandretLodret.getSelectedItem().equals(VANDRET);
+	        		pteCalc.beregnTvaerkraft(v, vandret);
+	        		pteCalc.beregnNormalkraft(v, vandret);
+	        	}
 	         } catch (UgyldigVinkelException ex) {
 	        	 JOptionPane.showMessageDialog(null, "Vinkel skal være mellem 0 og 90 grader");
 	         } catch (NumberFormatException ex) {
