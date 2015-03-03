@@ -1,18 +1,6 @@
 package logic;
 
-public class TvaerkraftImpl implements Tvaerkraft {
-   private Vinkel vinkel;
-   private Belastning belastning;
-   
-   @Override
-   public void setVinkel(Vinkel vinkel) {
-      this.vinkel = vinkel;
-   }
-
-   @Override
-   public void setBelastning(Belastning belastning) {
-      this.belastning = belastning;
-   }
+public class TvaerkraftImpl extends KraftImpl implements Tvaerkraft {
 
    @Override
    public double getTvaerkraft() {
