@@ -57,6 +57,8 @@ public interface PTECalculatorController {
 	 * 		   Ellers returneres NaN
 	 */
 	public Tvaerkraft getTvaerkraft();
+
+    public Normalkraft getNormalkraft();
 	
 	public void notifyObservers();
 

@@ -63,8 +63,13 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 
    @Override
    public Tvaerkraft getTvaerkraft() {
-      return tvaerkraft;
+       return tvaerkraft;
    }
+
+    @Override
+    public Normalkraft getNormalkraft() {
+        return normalkraft;
+    }
 
    @Override
    public void notifyObservers() {
