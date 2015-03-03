@@ -252,7 +252,7 @@ public class PTECalculatorFrame extends JFrame implements
         	boolean vandret = vandretLodret.getSelectedItem().equals(VANDRET);
             pteCalc.beregnTvaerkraft(v, vandret);
          } catch (UgyldigVinkelException ex) {
-        	 JOptionPane.showMessageDialog(null, "Vinkel er for stor eller for lille");
+        	 JOptionPane.showMessageDialog(null, "Vinkel skal være mellem 0 og 90 grader");
          }
       }
    }
