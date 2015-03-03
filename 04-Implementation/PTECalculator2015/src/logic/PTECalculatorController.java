@@ -22,6 +22,14 @@ public interface PTECalculatorController {
 	 * @throws UgyldigVinkelException 
 	 */
 	public void beregnTvaerkraft(double vinkel, boolean tilVandret) throws UgyldigVinkelException;
+
+    /**
+     * Denne metode bruges til at beregne normalkraften (Fn) og angive vinklen
+     * @param vinkel er vinklen angivet i grader
+     * @param tilVandret om der er tale om en vinket maalt til vandret
+     * @throws UgyldigVinkelException
+     */
+    public void beregnNormalkraft(double vinkel, boolean tilVandret) throws UgyldigVinkelException;
 	
 	/**
 	 * Denne metode bruges til at tilmelder PTEObserveren

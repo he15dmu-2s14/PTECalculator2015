@@ -6,6 +6,7 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
    private Belastning belastning;
    private Vinkel vinkel;
    private Tvaerkraft tvaerkraft;
+   private Normalkraft normalkraft;
    private LinkedList<PTEObserver> observerListe = new LinkedList<>();
 
    @Override
@@ -29,6 +30,20 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 
       notifyObservers();
    }
+
+    @Override
+    public void beregnNormalkraft(double gradtal, boolean tilVandret)
+            throws UgyldigVinkelException {
+        vinkel = new VinkelImpl();
+        vinkel.setGradtal(gradtal, tilVandret);
+
+        normalkraft = new NormalkraftImpl();
+        normalkraft.setVinkel(vinkel);
+        normalkraft.setBelastning(belastning);
+
+        notifyObservers();
+    }
+
 
    @Override
    public void tilmeldObserver(PTEObserver observer) {
