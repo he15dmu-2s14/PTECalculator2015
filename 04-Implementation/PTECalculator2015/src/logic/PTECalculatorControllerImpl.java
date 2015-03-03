@@ -18,7 +18,8 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
    }
 
    @Override
-   public void beregnTvaerkraft(double gradtal, boolean tilVandret) {
+   public void beregnTvaerkraft(double gradtal, boolean tilVandret) 
+   			throws UgyldigVinkelException {
       vinkel = new VinkelImpl();
       vinkel.setGradtal(gradtal, tilVandret);
 

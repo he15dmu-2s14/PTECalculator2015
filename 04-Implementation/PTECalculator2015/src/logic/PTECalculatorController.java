@@ -9,7 +9,7 @@ public interface PTECalculatorController {
 	
 	/**
 	 * Denne metode bruges til at angive belastningen i vha. to parametre.
-	 * @param vaerdi er det reele tal værdien er
+	 * @param vaerdi er det reele tal vï¿½rdien er
 	 * @param enhed er om vaerdien er angivet i N, kg el. ton
 	 * @throws UgyldigBelastningException hvis vaerdien er negativ
 	 */
@@ -19,8 +19,9 @@ public interface PTECalculatorController {
 	 * Denne metode bruges til at beregne tvaerkraften (Ft) og angive vinklen
 	 * @param vinkel er vinklen angivet i grader
 	 * @param tilVandret om der er tale om en vinket maalt til vandret
+	 * @throws UgyldigVinkelException 
 	 */
-	public void beregnTvaerkraft(double vinkel, boolean tilVandret);
+	public void beregnTvaerkraft(double vinkel, boolean tilVandret) throws UgyldigVinkelException;
 	
 	/**
 	 * Denne metode bruges til at tilmelder PTEObserveren

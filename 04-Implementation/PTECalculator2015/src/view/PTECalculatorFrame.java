@@ -18,6 +18,7 @@ import logic.PTECalculatorController;
 import logic.PTECalculatorControllerImpl;
 import logic.PTEObserver;
 import logic.UgyldigBelastningException;
+import logic.UgyldigVinkelException;
 
 public class PTECalculatorFrame extends JFrame implements
       PTEObserver,
@@ -44,7 +45,7 @@ public class PTECalculatorFrame extends JFrame implements
 
       // settings på framen
       setTitle("PTECalculator");
-      setSize(500, 300);
+      setSize(600, 300);
       setResizable(false);
       setVisible(true);
       setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -247,11 +248,11 @@ public class PTECalculatorFrame extends JFrame implements
          }
       } else if (e.getSource() == vinkel) {
          try {
-            double v = Double.parseDouble(vinkel.getText());
-            boolean vandret = vandretLodret.getSelectedItem().equals(VANDRET);
+        	double v = Double.parseDouble(vinkel.getText());
+        	boolean vandret = vandretLodret.getSelectedItem().equals(VANDRET);
             pteCalc.beregnTvaerkraft(v, vandret);
-         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Ugyldigt input");
+         } catch (UgyldigVinkelException ex) {
+        	 JOptionPane.showMessageDialog(null, "Vinkel er for stor eller for lille");
          }
       }
    }

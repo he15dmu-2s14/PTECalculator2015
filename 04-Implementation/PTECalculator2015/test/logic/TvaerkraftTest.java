@@ -33,7 +33,7 @@ public class TvaerkraftTest {
 	}
 
 	@Test
-	public void vinkelErMindreEnd0() throws UgyldigBelastningException {
+	public void vinkelErMindreEnd0() throws UgyldigVinkelException, UgyldigBelastningException {
 		vinkel.setGradtal(-50, true);
 		belastning.setBelastning(490.8, Enhed.Newton);
 		tvaerkraft.setBelastning(belastning);
@@ -50,7 +50,7 @@ public class TvaerkraftTest {
 	}
 	
 	@Test
-	public void vinkelErStoerrerEnd90() throws UgyldigBelastningException {
+	public void vinkelErStoerrerEnd90() throws UgyldigVinkelException, UgyldigBelastningException {
 		vinkel.setGradtal(100, true);
 		belastning.setBelastning(490.8, Enhed.Newton);
 		tvaerkraft.setBelastning(belastning);
@@ -60,7 +60,7 @@ public class TvaerkraftTest {
 	}
 	
 	@Test
-	public void tilVandretSatTilFalse() throws UgyldigBelastningException {
+	public void tilVandretSatTilFalse() throws UgyldigVinkelException, UgyldigBelastningException {
 		vinkel.setGradtal(50, false);
 		belastning.setBelastning(490.8, Enhed.Newton);
 		tvaerkraft.setBelastning(belastning);
@@ -70,7 +70,7 @@ public class TvaerkraftTest {
 	}
 	
 	@Test
-	public void tilVandretSatTiltrue() throws UgyldigBelastningException {
+	public void tilVandretSatTiltrue() throws UgyldigVinkelException, UgyldigBelastningException {
 		vinkel.setGradtal(50, true);
 		belastning.setBelastning(490.8, Enhed.Newton);
 		tvaerkraft.setBelastning(belastning);
@@ -80,7 +80,7 @@ public class TvaerkraftTest {
 	}
 	
 	@Test
-	public void tvaerkraftBeregnetMedBelastningIKg() throws UgyldigBelastningException {
+	public void tvaerkraftBeregnetMedBelastningIKg() throws UgyldigVinkelException, UgyldigBelastningException {
 		vinkel.setGradtal(50, true);
 		belastning.setBelastning(490.8, Enhed.kg);
 		tvaerkraft.setBelastning(belastning);
@@ -90,7 +90,7 @@ public class TvaerkraftTest {
 	}
 	
 	@Test
-	public void tvaerkraftBeregnetMedBelastningITon() throws UgyldigBelastningException {
+	public void tvaerkraftBeregnetMedBelastningITon() throws UgyldigVinkelException, UgyldigBelastningException {
 		vinkel.setGradtal(50, true);
 		belastning.setBelastning(0.02, Enhed.ton);
 		tvaerkraft.setBelastning(belastning);

@@ -7,7 +7,7 @@ package logic;
 public interface Vinkel {
 	
 	/**
-	 * Denne metode bruges til at få oplyst vinklen i grader.
+	 * Denne metode bruges til at fï¿½ oplyst vinklen i grader.
 	 * @return vinklens antal grader
 	 */
 	public double getGradtal();
@@ -22,12 +22,13 @@ public interface Vinkel {
 	 * Denne metode bruge til at faa angive vinklens stoerrelse i grader, og om det er vandret el. lodret
 	 * @param vinkel er vinklen i grader
 	 * @param tilVandret er on vinklen er maalt til vandret
+	 * @throws UgyldigVinkelException 
 	 */
-	public void setGradtal(double vinkel, boolean tilVandret);
+	public void setGradtal(double vinkel, boolean tilVandret) throws UgyldigVinkelException;
 	
 	/**
 	 * Denne metode bruges til at fortaelle, om den angivne vaerdi ligger udenfor normalen.
-	 * Normalt interval ligger på 0 < 90
+	 * Normalt interval ligger pï¿½ 0 < 90
 	 * @return True hvis mindre end 0 el. stoerre end 90 
 	 */
 	public boolean erUdenForNormalomraade();
