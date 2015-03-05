@@ -9,5 +9,5 @@ public interface Areal {
   
   public double getAreal();
   
-  public void setAreal(double areal, ArealEnhed enhed);
+  public void setAreal(double areal, ArealEnhed enhed) throws UgyldigArealException;
 }

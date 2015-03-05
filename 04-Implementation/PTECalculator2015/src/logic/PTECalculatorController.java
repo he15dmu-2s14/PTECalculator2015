@@ -62,7 +62,7 @@ public interface PTECalculatorController {
 	
     public void notifyObservers();
     
-    public void beregnForskydningsspaending(double areal, ArealEnhed enhed);
+    public void beregnForskydningsspaending(double areal, ArealEnhed enhed) throws UgyldigArealException;
     
     public Forskydningsspaending getForskydningsspaending();
     
