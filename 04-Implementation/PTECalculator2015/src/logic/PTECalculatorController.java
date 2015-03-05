@@ -61,5 +61,11 @@ public interface PTECalculatorController {
     public Normalkraft getNormalkraft();
 	
     public void notifyObservers();
-
+    
+    public void beregnForskydningsspaending(double areal, ArealEnhed enhed);
+    
+    public Forskydningsspaending getForskydningsspaending();
+    
+    public Areal getAreal();
+    
 }
