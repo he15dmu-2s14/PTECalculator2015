@@ -37,21 +37,24 @@ public class ArealTest {
   public void testAfGyldigtInputIkvadratMM() {
     areal.setAreal( 490, ArealEnhed.mm2 );
     
-    assertEquals( 490, areal.getAreal(), 0.01 );
+    assertEquals( 490, areal.getAreal(), 0.0049999 );
+    assertEquals( 4.9, areal.getArealIcm2(), 0.0049999 );
   }
-  
+   
   @Test
   public void testAfGyldigtInputIkvadratCM() {
     areal.setAreal( 500, ArealEnhed.cm2 );
     
-    assertEquals( 50000, areal.getAreal(), 0.01);
+    assertEquals( 50000, areal.getAreal(), 0.0049999);
+    assertEquals( 0.05, areal.getArealIm2(), 0.0049999 );
+    
   }
   
   @Test
   public void testAfGyldigtInputIkvadratM() {
     areal.setAreal( 1, ArealEnhed.m2 );
     
-    assertEquals( 1000000, areal.getAreal(), 0.01);
+    assertEquals( 1000000, areal.getAreal(), 0.0049999);
   }
   
   @Test
