@@ -7,6 +7,8 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
     private Vinkel vinkel;
     private Tvaerkraft tvaerkraft;
     private Normalkraft normalkraft;
+    private Areal areal;
+    private Forskydningsspaending forskydningsspaending;
     private LinkedList<PTEObserver> observerListe = new LinkedList<>();
 
     @Override
@@ -75,4 +77,25 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
         for (PTEObserver obs : observerListe)
             obs.update();
     }
+
+	@Override
+	public void beregnForskydningsspaending(double areal, ArealEnhed enhed)
+			throws UgyldigArealException {
+			this.areal = new ArealImpl();
+			this.areal.setAreal(areal, enhed);
+			this.forskydningsspaending = new ForskydningsspaendingImpl();
+			this.forskydningsspaending.setAreal(this.areal);
+			this.forskydningsspaending.setTvaerkraft(this.tvaerkraft);
+			notifyObservers();
+	}
+
+	@Override
+	public Forskydningsspaending getForskydningsspaending() {
+		return forskydningsspaending;
+	}
+
+	@Override
+	public Areal getAreal() {
+		return areal;
+	}
 }
