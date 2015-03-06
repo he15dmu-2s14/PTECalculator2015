@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import logic.ArealEnhed;
 import logic.Enhed;
 import logic.PTECalculatorController;
 import logic.PTECalculatorControllerImpl;
@@ -31,8 +32,9 @@ public class PTECalculatorFrame extends JFrame implements
 
    private JTextField belastning, belastningFormel, fDim, vinkel;
    private JComboBox<Enhed> enhed;
+   private JComboBox<ArealEnhed> arealEnhed;
    private JComboBox<String> vandretLodret;
-   private JTextField fnFormel, ftFormel, fnResultat, ftResultat;
+   private JTextField fnFormel, ftFormel, fnResultat, ftResultat, arealIndskrivning, arealResultat;
    private PTECalculatorController pteCalc;
 
    private DecimalFormat forceFormatter;
@@ -69,6 +71,12 @@ public class PTECalculatorFrame extends JFrame implements
       enhed.addItem(Enhed.Newton);
       enhed.addActionListener(this);
 
+      arealEnhed = new JComboBox<ArealEnhed>();
+      arealEnhed.addItem(ArealEnhed.mm2);
+      arealEnhed.addItem(ArealEnhed.cm2);
+      arealEnhed.addItem(ArealEnhed.m2);
+      arealEnhed.addActionListener(this);
+      
       belastningFormel = new JTextField(8);
       belastningFormel.setEditable(false);
 
@@ -96,6 +104,12 @@ public class PTECalculatorFrame extends JFrame implements
 
       ftResultat = new JTextField(6);
       ftResultat.setEditable(false);
+      
+      arealIndskrivning = new JTextField(10);
+      arealIndskrivning.setEditable(true);
+      
+      arealResultat = new JTextField(10);
+      arealResultat.setEditable(false);
    }
 
    private void layoutComponents() {
@@ -184,6 +198,35 @@ public class PTECalculatorFrame extends JFrame implements
       con = createGBC(2, 5, 1, 1);
       con.insets = ins;
       add(ftResultat, con);
+      
+      //Linje 6 (ny)
+      con = createGBC(1, 6, 1, 1);
+      con.insets = new Insets(5, 5, 0, 5);
+      con.anchor = GridBagConstraints.WEST;
+      add(new JLabel("_________"), con);
+      
+      //Linje 7 (ny)
+      con = createGBC(0, 7, 1, 1);
+      con.insets = ins;
+      con.anchor = GridBagConstraints.WEST;
+      add(new JLabel("Areal: "), con);
+
+      con = createGBC(1, 7, 1, 1);
+      con.insets = ins;
+      add(arealIndskrivning, con);
+      
+      con = createGBC(2, 7, 1, 1);
+      con.insets = ins;
+      add(arealEnhed, con);
+
+      con = createGBC(3, 7, 1, 1);
+      con.insets = ins;
+      add(arealResultat, con);
+      
+      con = createGBC(4, 7, 1, 1);
+      con.insets = ins;
+      con.anchor = GridBagConstraints.WEST;
+      add(new JLabel("mm^2"), con);
    }
 
    public GridBagConstraints createGBC(int x, int y, int width, int height) {
