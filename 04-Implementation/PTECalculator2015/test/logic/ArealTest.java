@@ -21,16 +21,11 @@ public class ArealTest {
 
   @Before
   public void setUp() throws Exception {
-    areal = null; //Skal være ArealImpl.
+    areal = new ArealImpl(); //Skal være ArealImpl.
   }
 
   @After
   public void tearDown() throws Exception {
-  }
-
-  @Test
-  public void test() {
-    fail( "Not yet implemented" );
   }
   
   @Test

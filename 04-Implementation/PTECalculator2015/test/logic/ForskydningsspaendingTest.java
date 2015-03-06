@@ -23,8 +23,8 @@ public class ForskydningsspaendingTest {
 
   @Before
   public void setUp() throws Exception {
-    tau=null; //skal være ForskydningsspaendingImpl
-    areal=null; //skal være ArealImpl
+    tau=new ForskydningsspaendingImpl(); //skal være ForskydningsspaendingImpl
+    areal=new ArealImpl(); //skal være ArealImpl
     ft=new TvaerkraftStub(); //må ikke ændres til TvaerkraftImpl! -hbh
     
   }

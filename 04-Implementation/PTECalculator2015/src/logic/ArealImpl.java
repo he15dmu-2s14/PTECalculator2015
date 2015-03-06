@@ -2,7 +2,7 @@ package logic;
 
 public class ArealImpl implements Areal {
 	private double areal;
-	
+
 	public ArealImpl() {
 		this.areal = Double.NaN;
 	}
@@ -24,7 +24,22 @@ public class ArealImpl implements Areal {
 
 	@Override
 	public void setAreal(double areal, ArealEnhed enhed) throws UgyldigArealException {
-		this.areal = areal;
+		if(areal <= 0)
+			throw new UgyldigArealException();
+
+		switch (enhed) {
+		case cm2:
+			this.areal = areal * 100;
+
+			break;
+		case m2:
+			this.areal = areal * 1000000;
+
+			break;
+
+		default: this.areal = areal;
+			break;
+		}
 	}
 
 }
