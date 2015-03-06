@@ -145,4 +145,22 @@ public class PTECalculatorControllerStub implements PTECalculatorController {
 		return null;
 	}
 
+	@Override
+	public void beregnForskydningsspaending(double areal, ArealEnhed enhed) throws UgyldigArealException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Forskydningsspaending getForskydningsspaending() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Areal getAreal() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

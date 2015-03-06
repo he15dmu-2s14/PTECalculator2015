@@ -34,7 +34,7 @@ public class ForskydningsspaendingTest {
   }
 
   @Test
-  public void testTauErOver100() {
+  public void testTauErOver100() throws UgyldigArealException {
     areal.setAreal(490, ArealEnhed.mm2);
     
     tau.setAreal(areal);
@@ -45,7 +45,7 @@ public class ForskydningsspaendingTest {
   }
   
   @Test
-  public void testTauErOK() {
+  public void testTauErOK() throws UgyldigArealException {
     areal.setAreal(50000, ArealEnhed.mm2);
     
     tau.setAreal(areal);

@@ -34,7 +34,7 @@ public class ArealTest {
   }
   
   @Test
-  public void testAfGyldigtInputIkvadratMM() {
+  public void testAfGyldigtInputIkvadratMM() throws UgyldigArealException {
     areal.setAreal( 490, ArealEnhed.mm2 );
     
     assertEquals( 490, areal.getAreal(), 0.0049999 );
@@ -42,7 +42,7 @@ public class ArealTest {
   }
    
   @Test
-  public void testAfGyldigtInputIkvadratCM() {
+  public void testAfGyldigtInputIkvadratCM() throws UgyldigArealException {
     areal.setAreal( 500, ArealEnhed.cm2 );
     
     assertEquals( 50000, areal.getAreal(), 0.0049999);
@@ -51,7 +51,7 @@ public class ArealTest {
   }
   
   @Test
-  public void testAfGyldigtInputIkvadratM() {
+  public void testAfGyldigtInputIkvadratM() throws UgyldigArealException {
     areal.setAreal( 1, ArealEnhed.m2 );
     
     assertEquals( 1000000, areal.getAreal(), 0.0049999);
