@@ -1,4 +1,4 @@
-package logic;
+package domain;
 
 /**
  * Klassen Tvaerkraft fungere som Information Expert indenfor tvaerkraft

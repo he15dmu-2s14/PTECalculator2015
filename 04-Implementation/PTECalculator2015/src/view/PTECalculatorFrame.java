@@ -16,14 +16,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import logic.ArealEnhed;
-import logic.Enhed;
+import domain.ArealEnhed;
+import domain.Enhed;
+import exceptions.UgyldigArealException;
+import exceptions.UgyldigBelastningException;
+import exceptions.UgyldigVinkelException;
 import logic.PTECalculatorController;
 import logic.PTECalculatorControllerImpl;
 import logic.PTEObserver;
-import logic.UgyldigArealException;
-import logic.UgyldigBelastningException;
-import logic.UgyldigVinkelException;
 
 public class PTECalculatorFrame extends JFrame implements PTEObserver, FocusListener, ActionListener {
 	private static final long serialVersionUID = 1L;

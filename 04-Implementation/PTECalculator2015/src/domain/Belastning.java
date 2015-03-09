@@ -1,4 +1,6 @@
-package logic;
+package domain;
+
+import exceptions.UgyldigBelastningException;
 
 /**
  * Klassen Belastning fungere som Information Expert indenfor belastningen 
@@ -34,7 +36,7 @@ public interface Belastning {
 	 * @param vaerdi
 	 * @param enhed
 	 * @throws UgyldigBelastningException
-	 * @see logic.Enhed
+	 * @see domain.Enhed
 	 */
 	public void setBelastning(double vaerdi, Enhed enhed) throws UgyldigBelastningException;
 

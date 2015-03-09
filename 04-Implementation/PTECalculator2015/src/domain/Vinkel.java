@@ -1,4 +1,6 @@
-package logic;
+package domain;
+
+import exceptions.UgyldigVinkelException;
 
 /**
  * Klassen Vinkel fungere som information Expert indenfor vinkler 

@@ -8,6 +8,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import domain.Belastning;
+import domain.BelastningImpl;
+import domain.Enhed;
+import domain.Tvaerkraft;
+import domain.TvaerkraftImpl;
+import domain.Vinkel;
+import domain.VinkelImpl;
+import exceptions.UgyldigBelastningException;
+import exceptions.UgyldigVinkelException;
+
 public class TvaerkraftTest {
 	private Tvaerkraft tvaerkraft;
 	private Vinkel vinkel;
