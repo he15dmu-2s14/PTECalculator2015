@@ -1,5 +1,7 @@
 
-package logic;
+package domain;
+
+import exceptions.UgyldigArealException;
 
 public interface Areal {
   

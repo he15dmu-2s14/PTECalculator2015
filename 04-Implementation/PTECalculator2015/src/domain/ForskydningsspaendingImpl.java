@@ -1,4 +1,5 @@
-package logic;
+package domain;
+
 
 public class ForskydningsspaendingImpl implements Forskydningsspaending {
 	private Areal areal;

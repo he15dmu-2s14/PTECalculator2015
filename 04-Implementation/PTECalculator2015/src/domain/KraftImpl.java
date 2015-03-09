@@ -1,4 +1,5 @@
-package logic;
+package domain;
+
 
 public class KraftImpl implements Kraft {
 	protected Vinkel vinkel;
