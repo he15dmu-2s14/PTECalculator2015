@@ -8,6 +8,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import domain.Areal;
+import domain.ArealEnhed;
+import domain.ArealImpl;
+import domain.Belastning;
+import domain.Forskydningsspaending;
+import domain.ForskydningsspaendingImpl;
+import domain.Tvaerkraft;
+import domain.Vinkel;
+import exceptions.UgyldigArealException;
+
 public class ForskydningsspaendingTest {
   private Forskydningsspaending tau;
   private Areal areal;

@@ -1,5 +1,5 @@
 
-package logic;
+package domain;
 
 public interface Forskydningsspaending {
   

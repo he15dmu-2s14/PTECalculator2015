@@ -8,6 +8,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import domain.Areal;
+import domain.ArealEnhed;
+import domain.ArealImpl;
+import exceptions.UgyldigArealException;
+
 public class ArealTest {
   private Areal areal;
 

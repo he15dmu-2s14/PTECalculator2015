@@ -2,6 +2,24 @@ package logic;
 
 import java.util.LinkedList;
 
+import domain.Areal;
+import domain.ArealEnhed;
+import domain.ArealImpl;
+import domain.Belastning;
+import domain.BelastningImpl;
+import domain.Enhed;
+import domain.Forskydningsspaending;
+import domain.ForskydningsspaendingImpl;
+import domain.Normalkraft;
+import domain.NormalkraftImpl;
+import domain.Tvaerkraft;
+import domain.TvaerkraftImpl;
+import domain.Vinkel;
+import domain.VinkelImpl;
+import exceptions.UgyldigArealException;
+import exceptions.UgyldigBelastningException;
+import exceptions.UgyldigVinkelException;
+
 public class PTECalculatorControllerImpl implements PTECalculatorController {
     private Belastning belastning;
     private Vinkel vinkel;

@@ -1,4 +1,6 @@
-package logic;
+package domain;
+
+import exceptions.UgyldigArealException;
 
 public class ArealImpl implements Areal {
 	private double areal;

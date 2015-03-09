@@ -1,14 +1,16 @@
 package logic;
 import static org.junit.Assert.*;
-import logic.Belastning;
-import logic.Enhed;
-import logic.UgyldigBelastningException;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import domain.Belastning;
+import domain.BelastningImpl;
+import domain.Enhed;
+import exceptions.UgyldigBelastningException;
 
 
 public class BelastningTest {
