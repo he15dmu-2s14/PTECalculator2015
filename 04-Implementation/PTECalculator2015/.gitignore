@@ -1,3 +1,6 @@
-.idea\
+/bin/
+
+#Intellij
+.idea/
 *.iml
-.iws
+*.iws
