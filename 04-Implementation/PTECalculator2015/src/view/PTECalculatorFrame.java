@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -313,22 +312,22 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver, FocusList
 		}
 
 		if (pteCalc.getAreal() != null) {
-			double n = pteCalc.getAreal().getAreal();
-			arealResultat.setText(forceFormatter.format(n));
-			double angivetAreal = 0;
-			switch ((ArealEnhed) arealEnhed.getSelectedItem()) {
-			case cm2:
-				angivetAreal = pteCalc.getAreal().getArealIcm2();
-				break;
-			case m2:
-				angivetAreal = pteCalc.getAreal().getArealIm2();
-				break;
-
-			default: pteCalc.getAreal().getAreal();
-				break;
-			}
-			arealIndskrivning.setText("" + angivetAreal);
-
+            double n = pteCalc.getAreal().getAreal();
+            arealResultat.setText("" + n);
+            double angivetAreal;
+            ArealEnhed aEnhed = (ArealEnhed) arealEnhed.getSelectedItem();
+            switch (aEnhed) {
+                case cm2:
+                    angivetAreal = pteCalc.getAreal().getArealIcm2();
+                    break;
+                case m2:
+                    angivetAreal = pteCalc.getAreal().getArealIm2();
+                    break;
+                default:
+                    angivetAreal = pteCalc.getAreal().getAreal();
+                    break;
+            }
+            arealIndskrivning.setText("" + angivetAreal);
 		}
 		
 		if(pteCalc.getForskydningsspaending() != null) {
