@@ -1,5 +1,17 @@
 package logic;
 
+import domain.Areal;
+import domain.ArealEnhed;
+import domain.Belastning;
+import domain.Enhed;
+import domain.Forskydningsspaending;
+import domain.Normalkraft;
+import domain.Tvaerkraft;
+import domain.Vinkel;
+import exceptions.UgyldigArealException;
+import exceptions.UgyldigBelastningException;
+import exceptions.UgyldigVinkelException;
+
 public class PTECalculatorControllerStub implements PTECalculatorController {
 
 	private Belastning belastning = new Belastning(){
@@ -99,7 +111,7 @@ public class PTECalculatorControllerStub implements PTECalculatorController {
 
 	}
 
-	@Override
+    @Override
 	public void tilmeldObserver(PTEObserver observer) {
 		// TODO Auto-generated method stub
 
@@ -126,10 +138,41 @@ public class PTECalculatorControllerStub implements PTECalculatorController {
 		return null;
 	}
 
-	@Override
+    @Override
 	public void notifyObservers() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void beregnNormalkraft(double vinkel, boolean tilVandret)
+			throws UgyldigVinkelException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Normalkraft getNormalkraft() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void beregnForskydningsspaending(double areal, ArealEnhed enhed) throws UgyldigArealException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Forskydningsspaending getForskydningsspaending() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Areal getAreal() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

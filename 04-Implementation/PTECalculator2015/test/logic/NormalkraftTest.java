@@ -11,15 +11,15 @@ import org.junit.Test;
 import domain.Belastning;
 import domain.BelastningImpl;
 import domain.Enhed;
-import domain.Tvaerkraft;
-import domain.TvaerkraftImpl;
+import domain.Normalkraft;
+import domain.NormalkraftImpl;
 import domain.Vinkel;
 import domain.VinkelImpl;
 import exceptions.UgyldigBelastningException;
 import exceptions.UgyldigVinkelException;
 
-public class TvaerkraftTest {
-	private Tvaerkraft tvaerkraft;
+public class NormalkraftTest {
+	private Normalkraft normalkraft;
 	private Vinkel vinkel;
 	private Belastning belastning;
 
@@ -33,7 +33,7 @@ public class TvaerkraftTest {
 
 	@Before
 	public void setUp() throws Exception {
-		tvaerkraft = new TvaerkraftImpl();
+		normalkraft = new NormalkraftImpl();
 		vinkel = new VinkelImpl();
 		belastning = new BelastningImpl();
 	}
@@ -56,7 +56,7 @@ public class TvaerkraftTest {
 	public void NaNTestForVinkel() throws UgyldigBelastningException {
 		belastning.setBelastning(490.8, Enhed.Newton );
 		
-		assertEquals(Double.NaN, tvaerkraft.getTvaerkraft(), 0.01);
+		assertEquals(Double.NaN, normalkraft.getNormalkraft(), 0.01);
 	}
 	
 	@Test
@@ -73,39 +73,39 @@ public class TvaerkraftTest {
 	public void tilVandretSatTilFalse() throws UgyldigVinkelException, UgyldigBelastningException {
 		vinkel.setGradtal(50, false);
 		belastning.setBelastning(490.8, Enhed.Newton);
-		tvaerkraft.setBelastning(belastning);
-		tvaerkraft.setVinkel(vinkel);
+		normalkraft.setBelastning(belastning);
+		normalkraft.setVinkel(vinkel);
 		
-		assertEquals(375.97, tvaerkraft.getTvaerkraft(), 0.01);
+		assertEquals(315.48, normalkraft.getNormalkraft(), 0.01);
 	}
 	
 	@Test
 	public void tilVandretSatTiltrue() throws UgyldigVinkelException, UgyldigBelastningException {
 		vinkel.setGradtal(50, true);
 		belastning.setBelastning(490.8, Enhed.Newton);
-		tvaerkraft.setBelastning(belastning);
-		tvaerkraft.setVinkel(vinkel);
+		normalkraft.setBelastning(belastning);
+		normalkraft.setVinkel(vinkel);
 		
-		assertEquals(315.48, tvaerkraft.getTvaerkraft(), 0.01);
+		assertEquals(375.97, normalkraft.getNormalkraft(), 0.01);
 	}
-	
+
 	@Test
 	public void tvaerkraftBeregnetMedBelastningIKg() throws UgyldigVinkelException, UgyldigBelastningException {
 		vinkel.setGradtal(50, true);
 		belastning.setBelastning(490.8, Enhed.kg);
-		tvaerkraft.setBelastning(belastning);
-		tvaerkraft.setVinkel(vinkel);
+		normalkraft.setBelastning(belastning);
+		normalkraft.setVinkel(vinkel);
 		
-		assertEquals(3096.75, tvaerkraft.getTvaerkraft(), 0.01);
+		assertEquals(3690.57, normalkraft.getNormalkraft(), 0.01);
 	}
 	
 	@Test
-	public void tvaerkraftBeregnetMedBelastningITon() throws UgyldigVinkelException, UgyldigBelastningException {
+	public void normalkraftBeregnetMedBelastningITon() throws UgyldigVinkelException, UgyldigBelastningException {
 		vinkel.setGradtal(50, true);
 		belastning.setBelastning(0.02, Enhed.ton);
-		tvaerkraft.setBelastning(belastning);
-		tvaerkraft.setVinkel(vinkel);
+		normalkraft.setBelastning(belastning);
+		normalkraft.setVinkel(vinkel);
 		
-		assertEquals(126.19, tvaerkraft.getTvaerkraft(), 0.01);
+		assertEquals(150.39, normalkraft.getNormalkraft(), 0.01);
 	}	
 }

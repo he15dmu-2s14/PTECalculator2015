@@ -1,4 +1,6 @@
-package logic;
+package domain;
+
+import exceptions.UgyldigVinkelException;
 
 public class VinkelImpl implements Vinkel {
    private double gradtal;

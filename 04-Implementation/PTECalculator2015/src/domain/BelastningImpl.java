@@ -1,4 +1,6 @@
-package logic;
+package domain;
+
+import exceptions.UgyldigBelastningException;
 
 public class BelastningImpl implements Belastning {
 
