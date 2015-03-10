@@ -1,11 +1,6 @@
 package domain;
 
 public class BojningsspendingImpl implements Bojningsspending {
-
-	private double fDim;
-	private double ft;
-	private double arm;
-	private double bøjningsMoment;
 	
 	private double sigmaBoj;
 	
@@ -18,21 +13,4 @@ public class BojningsspendingImpl implements Bojningsspending {
 		return sigmaBoj;
 	}
 
-	//Metoder til MB
-	@Override
-	public void setArmLaengde(double mm) {
-		arm = mm;
-		
-	}
-
-	@Override
-	public double beregnMb(double ft, double mm) {
-		bøjningsMoment = this.ft * arm;
-		return bøjningsMoment;
-	}
-
-	@Override
-	public double getMb() {
-		return bøjningsMoment;
-	}
 }

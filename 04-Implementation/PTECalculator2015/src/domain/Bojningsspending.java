@@ -6,9 +6,4 @@ public interface Bojningsspending {
 	
 	public double getSigmaBoj();
 	
-	public void setArmLaengde( double mm );
-	
-	public double beregnMb( double ft, double mm );
-	
-	public double getMb();
 }
