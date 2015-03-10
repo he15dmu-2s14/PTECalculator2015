@@ -2,14 +2,14 @@ package domain;
 
 public class SigmarefImpl implements Sigmaref {
   private SigmaN sigman;
-  private SigmaBoej sigmaboej;
+  private Bojningsmoment sigmaboej;
   private Forskydningsspaending tau;
 
   @Override
   public double getSigmaRef() {
     if ( sigman == null || sigmaboej == null || tau == null )
       return Double.NaN;
-    return Math.sqrt( Math.pow( (sigman.getSigman() + sigmaboej.getSigmab()), 2 ) + (3*Math.pow( tau.getForskydningsspaending(), 2 )) );
+    return Math.sqrt( Math.pow( (sigman.getSigman() + sigmaboej.getSigmaBoj()), 2 ) + (3*Math.pow( tau.getForskydningsspaending(), 2 )) );
   }
   
   @Override
@@ -18,7 +18,7 @@ public class SigmarefImpl implements Sigmaref {
   }
   
   @Override
-  public void setSigmaBoej(SigmaBoej sigmab) {
+  public void setSigmaBoej(Bojningsmoment sigmab) {
     this.sigmaboej = sigmab;
   }
   

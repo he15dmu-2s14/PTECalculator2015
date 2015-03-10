@@ -6,7 +6,7 @@ public interface Sigmaref {
   
   public void setSigmaN(SigmaN sigman);
   
-  public void setSigmaBoej(SigmaBoej sigmab);
+  public void setSigmaBoej(Bojningsmoment sigmab);
   
   public void setTau(Forskydningsspaending tau);
 }
