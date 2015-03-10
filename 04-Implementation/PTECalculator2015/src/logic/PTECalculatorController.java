@@ -3,9 +3,13 @@ package logic;
 import domain.Areal;
 import domain.ArealEnhed;
 import domain.Belastning;
+import domain.Bojningsmoment;
 import domain.Enhed;
 import domain.Forskydningsspaending;
+import domain.Halvhojde;
+import domain.Inertimoment;
 import domain.Normalkraft;
+import domain.Referencespaending;
 import domain.Tvaerkraft;
 import domain.Vinkel;
 import exceptions.UgyldigArealException;
@@ -80,6 +84,28 @@ public interface PTECalculatorController {
     
     public Areal getAreal();
     
+    //Til Bojningsspaending
     public void beregnSigmaBoj(double i, double e, double MB);
+    
+    //Til Bojningsmoment
+    public Bojningsmoment beregnMB(double fdim, double ft);
+    
+    //Til Normalspaending
+    public Normalspaending beregnNormalspaending();
+    
+    //Til Interimoment
+    public Inertimoment angivInertimoment(double I);
+    
+    public Inertimoment getInertimoment();
+    
+    //Til Halvhoejde
+    public Halvhojde angivHalvhoejde(double e);
+    
+    public Halvhojde getHalvhoejde();
+    
+    //Til Referencespaending
+    public Referencespaending angivReferencespaending();
+
+    public Referencespaending getReferencespaending();
     
 }
