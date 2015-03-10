@@ -175,4 +175,10 @@ public class PTECalculatorControllerStub implements PTECalculatorController {
 		return null;
 	}
 
+	@Override
+	public void beregnSigmaBoj(double i, double e, double MB) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
