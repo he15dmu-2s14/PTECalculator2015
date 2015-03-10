@@ -80,4 +80,24 @@ public interface PTECalculatorController {
     
     public Areal getAreal();
     
+    //Til Bojningsmoment
+    public Bojningsmoment beregnMB(double fdim, double ft);
+    
+    //Til Normalspaending
+    public Normalspaending beregnNormalspaending();
+    
+    //Til Interimoment
+    public Inertimoment angivInertimoment(double I);
+    
+    public Inertimoment getInertimoment();
+    
+    //Til Halvhoejde
+    public Halvhoejde angivHalvhoejde(double e);
+    
+    public Halvhoejde getHalvhoejde();
+    
+    //Til Referencespaending
+    public Referencespaending angivReferencespaending();
+    
+    public Referencespaending getReferencespaending();
 }
