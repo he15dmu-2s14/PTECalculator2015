@@ -1,0 +1,20 @@
+I=inertiamoment: mm i fjerde
+
+E=tyngdepunktsafstand: mm
+
+A=areal: kvadratmilimeter
+
+^^disse indtastes og er opgivet med opgaven (ikke udregnet)
+
+-------------------
+
+T=forskydsningsspænding (tau) --- newton pr kvadratmilimeter
+
+sigmaN(ormal) = tryk eller trækspænding(direkte på snittet) --- newton pr kvadratmilimeter
+
+sigmaB(øj) = udtryk for bøjningspowaaah
+
+sigmaT(illadelig) = udtryk for materialets flydespænding (dens max newton / kvadratmilimeter) 
+
+sigmaRef = den samlede kraft / kvadratmilimeter
+
