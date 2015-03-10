@@ -48,7 +48,7 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver, FocusList
 
 		// settings på framen
 		setTitle("PTECalculator");
-		setSize(600, 400);
+		setSize(600, 600);
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
