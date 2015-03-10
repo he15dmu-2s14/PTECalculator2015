@@ -1,6 +1,6 @@
 package domain;
 
-public class BojningsmomentImpl implements Bojningsmoment {
+public class BojningsspendingImpl implements Bojningsspending {
 
 	private double fDim;
 	private double ft;

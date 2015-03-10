@@ -1,6 +1,6 @@
 package domain;
 
-public interface Bojningsmoment {
+public interface Bojningsspending {
 
 	public void beregnSigmaBoj(double i, double e, double MB);
 	

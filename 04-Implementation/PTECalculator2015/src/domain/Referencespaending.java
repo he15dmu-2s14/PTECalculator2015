@@ -6,7 +6,7 @@ public interface Referencespaending {
   
   public void setSigmaN(SigmaN sigman);
   
-  public void setSigmaBoej(Bojningsmoment sigmab);
+  public void setSigmaBoej(Bojningsspending sigmab);
   
   public void setTau(Forskydningsspaending tau);
 }
