@@ -10,8 +10,8 @@ public class BojningsmomentImpl implements Bojningsmoment {
 	private double sigmaBoj;
 	
 	@Override
-	public void beregnSigmaBoj(double i, double e, double MB) {
-		sigmaBoj = (MB * e) / i;
+	public void beregnSigmaBoj(Inertimoment i, Halvhojde e, double MB) {
+		sigmaBoj = (MB *e.getHalvhojde()) / i.getInertimoment();
 	}
 	
 	public double getSigmaBoj() {
