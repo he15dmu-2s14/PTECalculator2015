@@ -80,4 +80,6 @@ public interface PTECalculatorController {
     
     public Areal getAreal();
     
+    public void beregnSigmaBoj(double i, double e, double MB);
+    
 }

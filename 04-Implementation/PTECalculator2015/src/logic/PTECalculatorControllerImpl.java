@@ -7,6 +7,8 @@ import domain.ArealEnhed;
 import domain.ArealImpl;
 import domain.Belastning;
 import domain.BelastningImpl;
+import domain.Bojningsmoment;
+import domain.BojningsmomentImpl;
 import domain.Enhed;
 import domain.Forskydningsspaending;
 import domain.ForskydningsspaendingImpl;
@@ -115,5 +117,12 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 	@Override
 	public Areal getAreal() {
 		return areal;
+	}
+
+	@Override
+	public void beregnSigmaBoj(double i, double e, double MB) {
+		Bojningsmoment bojMoment = new BojningsmomentImpl();
+		bojMoment.beregnSigmaBoj(i, e, MB);
+		notifyObservers();
 	}
 }
