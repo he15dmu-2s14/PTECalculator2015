@@ -2,7 +2,8 @@ package domain;
 
 public interface Normalspaending {
 	
-	public void angivNormalkraft( Normalkraft normalkraft );
+	public void setNormalkraft( Normalkraft normalkraft );
 	
-	public void angivAreal( Areal areal );
+	public void setAreal( Areal areal );
+	
 }
