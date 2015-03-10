@@ -2,37 +2,29 @@ package domain;
 
 public class BojningsspendingImpl implements Bojningsspending {
 
-	private double fDim;
-	private double ft;
-	private double arm;
-	private double bøjningsMoment;
-	
-	private double sigmaBoj;
+	private Bojningsmoment bojningsmoment;
+	private Halvhojde halvhojde;
+	private Inertimoment inertimoment;
 	
 	@Override
-	public void beregnSigmaBoj(Inertimoment i, Halvhojde e, double MB) {
-		sigmaBoj = (MB *e.getHalvhojde()) / i.getInertimoment();
-	}
-	
-	public double getSigmaBoj() {
-		return sigmaBoj;
-	}
-
-	//Metoder til MB
-	@Override
-	public void setArmLaengde(double mm) {
-		arm = mm;
-		
+	public double getBojningsspending() {
+		return (this.bojningsmoment.getBojningsmoment() * this.halvhojde.getHalvhojde()) / this.inertimoment.getInertimoment();
 	}
 
 	@Override
-	public double beregnMb(double ft, double mm) {
-		bøjningsMoment = this.ft * arm;
-		return bøjningsMoment;
+	public void setInertimoment(Inertimoment inertimoment) {
+		this.inertimoment = inertimoment;
 	}
 
 	@Override
-	public double getMb() {
-		return bøjningsMoment;
+	public void setHalvhojde(Halvhojde halvhojde) {
+		this.halvhojde = halvhojde;
 	}
+
+	@Override
+	public void setBojningsmoment(Bojningsmoment bojningsmoment) {
+		this.bojningsmoment = bojningsmoment;
+	}
+	
+
 }
