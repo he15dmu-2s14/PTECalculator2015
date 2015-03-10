@@ -306,11 +306,6 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver, FocusList
 			fnResultat.setText(forceFormatter.format(n));
 		}
 
-		if (pteCalc.getForskydningsspaending() != null) {
-			double n = pteCalc.getForskydningsspaending().getForskydningsspaending();
-			fnResultat.setText(forceFormatter.format(n));
-		}
-
 		if (pteCalc.getAreal() != null) {
             double n = pteCalc.getAreal().getAreal();
             arealResultat.setText("" + n);
