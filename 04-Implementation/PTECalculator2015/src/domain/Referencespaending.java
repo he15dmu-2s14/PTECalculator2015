@@ -6,7 +6,7 @@ public interface Referencespaending {
   
   public void setNormalspaending(Normalspaending sigman);
   
-  public void setBojningsspending(Bojningsspending sigmab);
+  public void setBojningsspending(Bojningsspaending sigmab);
   
   public void setForskydningsspaending(Forskydningsspaending tau);
 }

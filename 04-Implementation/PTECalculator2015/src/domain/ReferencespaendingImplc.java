@@ -2,7 +2,7 @@ package domain;
 
 public class ReferencespaendingImplc implements Referencespaending {
   private Normalspaending sigman;
-  private Bojningsspending sigmaboej;
+  private Bojningsspaending sigmaboej;
   private Forskydningsspaending tau;
 
   @Override
@@ -18,7 +18,7 @@ public class ReferencespaendingImplc implements Referencespaending {
   }
   
   @Override
-  public void setBojningsspending(Bojningsspending sigmab) {
+  public void setBojningsspending(Bojningsspaending sigmab) {
     this.sigmaboej = sigmab;
   }
   

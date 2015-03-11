@@ -1,6 +1,6 @@
 package domain;
 
-public class BojningsspendingImpl implements Bojningsspending {
+public class BojningsspendingImpl implements Bojningsspaending {
 
 	private Bojningsmoment bojningsmoment;
 	private Halvhojde halvhojde;
