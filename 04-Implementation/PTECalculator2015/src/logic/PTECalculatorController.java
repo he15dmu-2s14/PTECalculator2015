@@ -81,31 +81,53 @@ public interface PTECalculatorController {
     
     public void beregnForskydningsspaending(double areal, ArealEnhed enhed) throws UgyldigArealException;
     
+    
     public Forskydningsspaending getForskydningsspaending();
     
     public Areal getAreal();
     
     //Til Bojningsspaending
-    public void beregnSigmaBoj(double i, double e, double MB);
+    public void beregnBojningspaending(double i, double e, double MB);
+    
+    /** 
+     * Denne metode bruges til at faa Bojningspaending
+     * @return
+     */
     
     //Til Bojningsmoment
-    public Bojningsmoment beregnMB(double fdim, double ft);
+    public Bojningsmoment beregnBojningsmoment(double fdim, double ft);
+    
+    /** 
+     * Denne metode bruges til at faa Bojningsmoment
+     * @return Det aktuelle bojningsmomentobjekt
+     */
     
     //Til Normalspaending
     public Normalspaending beregnNormalspaending();
     
+    /**
+     * Denne metode bruges til at faa normalspaendingen. 
+     * @return Det aktuelle normalspaendingobjekt ellers returneres NaN
+     */
+    
     //Til Interimoment
-    public Inertimoment angivInertimoment(double I);
+    public void angivInertimoment(double I);
+    
     
     public Inertimoment getInertimoment();
     
     //Til Halvhoejde
-    public Halvhojde angivHalvhoejde(double e);
+    public void angivHalvhoejde(double e);
+    
+    /**
+     * Denne metode bruges til at faa Halvhojde
+     * @return Det aktuelle halvhojdeobjekt ellers ugyldigHalvhojdeException
+     */
     
     public Halvhojde getHalvhoejde();
     
     //Til Referencespaending
-    public Referencespaending angivReferencespaending();
+    public void angivReferencespaending();
 
     public Referencespaending getReferencespaending();
     

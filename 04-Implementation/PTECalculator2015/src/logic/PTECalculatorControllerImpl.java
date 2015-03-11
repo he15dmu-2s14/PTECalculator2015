@@ -128,16 +128,16 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 	}
 
 	@Override
-	public void beregnSigmaBoj(double i, double e, double MB) {
+	public void beregnBojningspaending(double i, double e, double MB) {
 		Bojningsspending bojMoment = new BojningsspendingImpl();
-		bojMoment.beregnSigmaBoj(i, e, MB);
+		bojMoment.beregnBojningspaending(i, e, MB);
 		notifyObservers();
 	}
 	
 	//Til Bojningsmoment
 	//!!OBS!! Mangler Impl
 	@Override
-    public Bojningsmoment beregnMB(double fdim, double ft){
+    public Bojningsmoment beregnBojninsmoment(double fdim, double ft){
     	return null;
     }
     
@@ -145,14 +145,14 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 	//!!OBS!! Mangler Impl
 	@Override
     public Normalspaending beregnNormalspaending(){
+		
     	return null;
     }
     
     //Til Interimoment
 	//!!OBS!! Mangler Impl
     @Override
-    public Inertimoment angivInertimoment(double I){
-    	return null;
+    public void angivInertimoment(double I){
     }
     
   //!!OBS!! Mangler Impl
@@ -164,8 +164,10 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
     //Til Halvhoejde
   //!!OBS!! Mangler Impl
     @Override
-    public Halvhojde angivHalvhoejde(double e){
-    	return null;
+    public void angivHalvhoejde(double e) {
+    	throws UgyldigHalvhojdeException() {
+    		
+    	}
     }
     
   //!!OBS!! Mangler Impl
@@ -177,8 +179,8 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
     //Til Referencespaending
   //!!OBS!! Mangler Impl
     @Override
-    public Referencespaending angivReferencespaending(){
-    	return null;
+    public void angivReferencespaending() {
+    	
     }
 
   //!!OBS!! Mangler Impl
@@ -186,5 +188,4 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
     public Referencespaending getReferencespaending(){
     	return referencespaending;
     }
-
 }
