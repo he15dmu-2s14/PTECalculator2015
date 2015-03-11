@@ -26,7 +26,7 @@ import exceptions.UgyldigVinkelException;
 public interface PTECalculatorController {
     /**
      * Denne metode bruges til at angive belastningen i vha. to parametre.
-     * @param vaerdi er det reele tal v�rdien er
+     * @param vaerdi er det reele tal vaerdien er
      * @param enhed er om vaerdien er angivet i N, kg el. ton
      * @throws UgyldigBelastningException hvis vaerdien er negativ
      */
