@@ -1,11 +1,11 @@
 package domain;
 
-public class BojningsspendingImpl implements Bojningsspaending {
+public class BojningsspaendingImpl implements Bojningsspaending {
 
 	private Bojningsmoment bojningsmoment;
 	private Halvhojde halvhojde;
 	private Inertimoment inertimoment;
-	
+
 	@Override
 	public double getBojningsspending() {
 		return (this.bojningsmoment.getBojningsmoment() * this.halvhojde.getHalvhojde()) / this.inertimoment.getInertimoment();
@@ -25,6 +25,6 @@ public class BojningsspendingImpl implements Bojningsspaending {
 	public void setBojningsmoment(Bojningsmoment bojningsmoment) {
 		this.bojningsmoment = bojningsmoment;
 	}
-	
+
 
 }

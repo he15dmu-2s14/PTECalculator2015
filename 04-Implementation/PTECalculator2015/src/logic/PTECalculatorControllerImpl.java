@@ -10,7 +10,7 @@ import domain.BelastningImpl;
 import domain.Bojningsmoment;
 import domain.BojningsmomentImpl;
 import domain.Bojningsspending;
-import domain.BojningsspendingImpl;
+import domain.BojningsspaendingImpl;
 import domain.Enhed;
 import domain.Forskydningsspaending;
 import domain.ForskydningsspaendingImpl;
@@ -142,13 +142,13 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 	  inertimoment.setInertimomoent( i );
 	  halvhojde = new HalvhojdeImpl();
 	  halvhojde.setHalvhojde( e );
-		bojningsspaending = new BojningsspendingImpl();
+		bojningsspaending = new BojningsspaendingImpl();
 		bojningsspaending.setInertimoment( inertimoment );
 		bojningsspaending.setHalvhojde( halvhojde );
 		bojningsspaending.setBojningsmoment( bojningsmoment );
 		notifyObservers();
 	}
-	
+
 
 	@Override
     public void beregnBojningsmoment(double l) {
@@ -157,7 +157,7 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
     	bojningsmoment.setArmlangde( l );
     	notifyObservers();
     }
-    
+
 	@Override
     public void beregnNormalspaending(double areal, ArealEnhed enhed) throws UgyldigArealException{
 	    this.areal = new ArealImpl();
@@ -167,39 +167,39 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 		  normalspaending.setNormalkraft( normalkraft );
 		  notifyObservers();
     }
-    
+
     //Til Interimoment
 	//!!OBS!! Mangler Impl
     @Override
     public void angivInertimoment(double I){
     }
-    
+
   //!!OBS!! Mangler Impl
     @Override
     public Inertimoment getInertimoment(){
     	return inertimoment;
     }
-    
+
     //Til Halvhoejde
   //!!OBS!! Mangler Impl
     @Override
     public void angivHalvhoejde(double e) {
     	throws UgyldigHalvhojdeException() {
-    		
+
     	}
     }
-    
+
   //!!OBS!! Mangler Impl
     @Override
     public Halvhojde getHalvhoejde(){
     	return halvhojde;
     }
-    
+
     //Til Referencespaending
   //!!OBS!! Mangler Impl
     @Override
     public void angivReferencespaending() {
-    	
+
     }
 
   //!!OBS!! Mangler Impl
