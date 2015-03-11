@@ -2,11 +2,11 @@ package domain;
 
 public interface Referencespaending {
   
-  public double getSigmaRef();
+  public double getReferencespaending();
   
-  public void setSigmaN(Normalspaending sigman);
+  public void setNormalspaending(Normalspaending sigman);
   
-  public void setSigmaBoej(Bojningsspending sigmab);
+  public void setBojningsspending(Bojningsspending sigmab);
   
-  public void setTau(Forskydningsspaending tau);
+  public void setForskydningsspaending(Forskydningsspaending tau);
 }

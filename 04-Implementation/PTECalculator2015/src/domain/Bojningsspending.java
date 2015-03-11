@@ -2,8 +2,12 @@ package domain;
 
 public interface Bojningsspending {
 
-	public void beregnSigmaBoj(Inertimoment i, Halvhojde e, double MB);
+	public void setInertimoment(Inertimoment intertimoment);
 	
-	public double getSigmaBoj();
+	public void setHalvhojde(Halvhojde halvhojde);
+	
+	public void setBojningsmoment(Bojningsmoment bojningsmoment);
+	
+	public double getBojningsspending();
 	
 }

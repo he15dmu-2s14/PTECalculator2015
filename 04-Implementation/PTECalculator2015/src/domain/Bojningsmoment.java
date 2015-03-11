@@ -2,10 +2,10 @@ package domain;
 
 public interface Bojningsmoment {
 	
-	public void setArmLaengde( double mm );
+	public void setArmlangde(double armlaengde);
 	
-	public double beregnMB( double fdim, double ft );
+	public void setTvaerkraft(Tvaerkraft tvaerkraft);
 	
-	public double getMB();
+	public double getBojningsmoment();
 
 }

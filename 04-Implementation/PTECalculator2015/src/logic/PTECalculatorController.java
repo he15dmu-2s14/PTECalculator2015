@@ -9,6 +9,7 @@ import domain.Forskydningsspaending;
 import domain.Halvhojde;
 import domain.Inertimoment;
 import domain.Normalkraft;
+import domain.Normalspaending;
 import domain.Referencespaending;
 import domain.Tvaerkraft;
 import domain.Vinkel;

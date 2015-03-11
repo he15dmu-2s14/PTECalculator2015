@@ -2,31 +2,24 @@ package domain;
 
 public class BojningsmomentImpl implements Bojningsmoment {
 	
-	private double fDim;
-	private double ft;
-	private double arm;
-	private double bøjningsMoment;
-	
-	public BojningsmomentImpl( double fdim, double ft ) {
-		this.fDim = fdim;
-		this.ft = ft;
-	}
-	
+	private double armlaengde;
+	private Tvaerkraft tvaerkraft;
+
 	@Override
-	public void setArmLaengde(double mm) {
-		arm = mm;
+	public void setArmlangde(double armlaengde) {
+		this.armlaengde = armlaengde;
+		
 	}
 
 	@Override
-	public double beregnMB(double fdim, double ft) {
-		bøjningsMoment = this.fDim * this.ft;
-		return bøjningsMoment;
+	public void setTvaerkraft(Tvaerkraft tvaerkraft) {
+		this.tvaerkraft = tvaerkraft;
+		
 	}
 
 	@Override
-	public double getMB() {
-		return bøjningsMoment;
+	public double getBojningsmoment() {
+		return this.armlaengde * this.tvaerkraft.getTvaerkraft();
 	}
-
 
 }
