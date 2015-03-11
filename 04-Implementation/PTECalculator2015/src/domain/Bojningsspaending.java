@@ -1,6 +1,6 @@
 package domain;
 
-public interface Bojningsspending {
+public interface Bojningsspaending {
 
 	public void setInertimoment(Inertimoment intertimoment);
 	
