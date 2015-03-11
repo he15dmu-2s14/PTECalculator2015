@@ -1,37 +1,9 @@
 package logic;
 
-import java.util.LinkedList;
+import domain.*;
+import exceptions.*;
 
-import domain.Areal;
-import domain.ArealEnhed;
-import domain.ArealImpl;
-import domain.Belastning;
-import domain.BelastningImpl;
-import domain.Bojningsmoment;
-import domain.BojningsmomentImpl;
-import domain.Bojningsspending;
-import domain.BojningsspendingImpl;
-import domain.Enhed;
-import domain.Forskydningsspaending;
-import domain.ForskydningsspaendingImpl;
-import domain.Halvhojde;
-import domain.HalvhojdeImpl;
-import domain.Inertimoment;
-import domain.InertimomentImpl;
-import domain.Normalkraft;
-import domain.NormalkraftImpl;
-import domain.Normalspaending;
-import domain.NormalspaendingImpl;
-import domain.Referencespaending;
-import domain.Tvaerkraft;
-import domain.TvaerkraftImpl;
-import domain.Vinkel;
-import domain.VinkelImpl;
-import exceptions.UgyldigArealException;
-import exceptions.UgyldigBelastningException;
-import exceptions.UgyldigHalvhojdeException;
-import exceptions.UgyldigInertiMomentException;
-import exceptions.UgyldigVinkelException;
+import java.util.LinkedList;
 
 public class PTECalculatorControllerImpl implements PTECalculatorController {
     private Belastning belastning;
@@ -43,7 +15,7 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
     private Halvhojde halvhojde;
     private Referencespaending referencespaending;
     private Forskydningsspaending forskydningsspaending;
-    private Bojningsspending bojningsspaending;
+    private Bojningsspaending bojningsspaending;
     private Bojningsmoment bojningsmoment;
     private Normalspaending normalspaending;
     private LinkedList<PTEObserver> observerListe = new LinkedList<>();
@@ -104,6 +76,7 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
     public Tvaerkraft getTvaerkraft() {
         return tvaerkraft;
     }
+
     @Override
     public Normalkraft getNormalkraft() {
         return normalkraft;
@@ -137,29 +110,39 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 	}
 
 	@Override
-	public void beregnBojningspaending(double i, double e) throws UgyldigInertiMomentException, UgyldigHalvhojdeException {
+	public void beregnBojningspaending(double i, double e)
+            throws UgyldigInertiMomentException, UgyldigHalvhojdeException {
 	  inertimoment = new InertimomentImpl();
 	  inertimoment.setInertimomoent( i );
 	  halvhojde = new HalvhojdeImpl();
 	  halvhojde.setHalvhojde( e );
-		bojningsspaending = new BojningsspendingImpl();
+		bojningsspaending = new BojningsspaendingImpl();
 		bojningsspaending.setInertimoment( inertimoment );
 		bojningsspaending.setHalvhojde( halvhojde );
 		bojningsspaending.setBojningsmoment( bojningsmoment );
 		notifyObservers();
 	}
-	
 
-	@Override
+    @Override
+    public Bojningsspaending getBojningsspaending() {
+        return null;
+    }
+
+    @Override
     public void beregnBojningsmoment(double l) {
     	bojningsmoment = new BojningsmomentImpl();
     	bojningsmoment.setTvaerkraft( tvaerkraft );
     	bojningsmoment.setArmlangde( l );
     	notifyObservers();
     }
-    
-	@Override
-    public void beregnNormalspaending(double areal, ArealEnhed enhed) throws UgyldigArealException{
+
+    @Override
+    public Bojningsmoment getBojningsmoment() {
+        return null;
+    }
+
+    @Override
+    public void beregnNormalspaending(double areal, ArealEnhed enhed) throws UgyldigArealException {
 	    this.areal = new ArealImpl();
 	    this.areal.setAreal(areal, enhed);
 		  normalspaending = new NormalspaendingImpl();
@@ -167,42 +150,38 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 		  normalspaending.setNormalkraft( normalkraft );
 		  notifyObservers();
     }
-    
-    //Til Interimoment
-	//!!OBS!! Mangler Impl
+
     @Override
-    public void angivInertimoment(double I){
+    public Normalspaending getNormalspaending() {
+        return normalspaending;
     }
-    
-  //!!OBS!! Mangler Impl
+
+    @Override
+    public void angivInertimoment(double i) throws UgyldigInertiMomentException {
+        inertimoment = new InertimomentImpl();
+        inertimoment.setInertimomoent(i);
+
+        notifyObservers();
+    }
+
     @Override
     public Inertimoment getInertimoment(){
     	return inertimoment;
     }
-    
-    //Til Halvhoejde
-  //!!OBS!! Mangler Impl
+
     @Override
-    public void angivHalvhoejde(double e) {
-    	throws UgyldigHalvhojdeException() {
-    		
-    	}
+    public void angivHalvhoejde(double e) throws UgyldigHalvhojdeException {
+        halvhojde = new HalvhojdeImpl();
+        halvhojde.setHalvhojde(e);
+
+        notifyObservers();
     }
-    
-  //!!OBS!! Mangler Impl
+
     @Override
     public Halvhojde getHalvhoejde(){
     	return halvhojde;
     }
-    
-    //Til Referencespaending
-  //!!OBS!! Mangler Impl
-    @Override
-    public void angivReferencespaending() {
-    	
-    }
 
-  //!!OBS!! Mangler Impl
     @Override
     public Referencespaending getReferencespaending(){
     	return referencespaending;
