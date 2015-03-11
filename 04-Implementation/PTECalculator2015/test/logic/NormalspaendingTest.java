@@ -24,11 +24,11 @@ import domain.ArealEnhed;
 
 public class NormalspaendingTest {
 	
-	Belastning b;
-	Vinkel v;
-	Normalkraft n;
-	Areal a;
-	Normalspaending ns;
+	Belastning belastning;
+	Vinkel vinkel;
+	Normalkraft normalkraft;
+	Areal areal;
+	Normalspaending normalspaending;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -40,11 +40,11 @@ public class NormalspaendingTest {
 
 	@Before
 	public void setUp() throws Exception {
-		b = new BelastningImpl();
-		v = new VinkelImpl();
-		n = new NormalkraftImpl();
-		a = new ArealImpl();
-		ns = new NormalspaendingImpl();
+		belastning = new BelastningImpl();
+		vinkel = new VinkelImpl();
+		normalkraft = new NormalkraftImpl();
+		areal = new ArealImpl();
+		normalspaending = new NormalspaendingImpl();
 	}
 
 	@After
@@ -55,52 +55,52 @@ public class NormalspaendingTest {
 	public void testGetNormalspaending() {
 		
 		try {
-			b.setBelastning(20, Enhed.kg);
-			v.setGradtal(20, true);
-			n.setBelastning(b);
-			n.setVinkel(v);
-			a.setAreal(20, ArealEnhed.cm2);
-			ns.setAreal(a);
-			ns.setNormalkraft(n);
+			belastning.setBelastning(20, Enhed.kg);
+			vinkel.setGradtal(20, true);
+			normalkraft.setBelastning(belastning);
+			normalkraft.setVinkel(vinkel);
+			areal.setAreal(20, ArealEnhed.cm2);
+			normalspaending.setAreal(areal);
+			normalspaending.setNormalkraft(normalkraft);
 		} catch (Exception e) {
 			fail("Failer i oppsett");
 		}
-		assertEquals(0.03, ns.getNormalspaending(), 0.01);
+		assertEquals(0.03, normalspaending.getNormalspaending(), 0.01);
 	}
 	
 	@Test
 	public void testGetNormalspaendingArealNaN() {
 		try {
-			b.setBelastning(20, Enhed.kg);
-			v.setGradtal(20, true);
-			n.setBelastning(b);
-			n.setVinkel(v);
+			belastning.setBelastning(20, Enhed.kg);
+			vinkel.setGradtal(20, true);
+			normalkraft.setBelastning(belastning);
+			normalkraft.setVinkel(vinkel);
 			//a.setAreal(20, ArealEnhed.cm2); Areal som null
-			ns.setAreal(a);
-			ns.setNormalkraft(n);
+			normalspaending.setAreal(areal);
+			normalspaending.setNormalkraft(normalkraft);
 		} catch (Exception e) {
 			fail("Failer i oppsett");
 		}
 		
-		assertTrue(Double.isNaN(ns.getNormalspaending()));
+		assertTrue(Double.isNaN(normalspaending.getNormalspaending()));
 		
 	}
 	
 	@Test
 	public void testGetNormalspaendingNormalkraftNaN() {
 		try {
-			b.setBelastning(20, Enhed.kg);
-			v.setGradtal(20, true);
-			n.setBelastning(b);
-			n.setVinkel(v);
-			a.setAreal(20, ArealEnhed.cm2);
-			ns.setAreal(a);
+			belastning.setBelastning(20, Enhed.kg);
+			vinkel.setGradtal(20, true);
+			normalkraft.setBelastning(belastning);
+			normalkraft.setVinkel(vinkel);
+			areal.setAreal(20, ArealEnhed.cm2);
+			normalspaending.setAreal(areal);
 			//ns.setNormalkraft(n); Normalkraft som null
 		} catch (Exception e) {
 			fail("Failer i oppsett");
 		}
 		
-		assertTrue(Double.isNaN(ns.getNormalspaending()));
+		assertTrue(Double.isNaN(normalspaending.getNormalspaending()));
 		
 	}
 
