@@ -4,6 +4,7 @@ import domain.Areal;
 import domain.ArealEnhed;
 import domain.Belastning;
 import domain.Bojningsmoment;
+import domain.Bojningsspaending;
 import domain.Enhed;
 import domain.Forskydningsspaending;
 import domain.Halvhojde;
@@ -23,7 +24,6 @@ import exceptions.UgyldigVinkelException;
  *
  */
 public interface PTECalculatorController {
-	
     /**
      * Denne metode bruges til at angive belastningen i vha. to parametre.
      * @param vaerdi er det reele tal v�rdien er
@@ -81,54 +81,54 @@ public interface PTECalculatorController {
     
     public void beregnForskydningsspaending(double areal, ArealEnhed enhed) throws UgyldigArealException;
     
-    
     public Forskydningsspaending getForskydningsspaending();
     
     public Areal getAreal();
     
-    //Til Bojningsspaending
-    public void beregnBojningspaending(double i, double e, double MB);
+    /**
+     * Beregn boejningsspaending
+     * @param i inertimoment
+     * @param e tyngdepunktsafstand (halvhoejde)
+     */
+    public void beregnBojningspaending(double i, double e);
     
     /** 
      * Denne metode bruges til at faa Bojningspaending
      * @return
      */
+    public Bojningsspaending getBojningsspaending();
     
-    //Til Bojningsmoment
-    public Bojningsmoment beregnBojningsmoment(double fdim, double ft);
+    /**
+     * Beregn boejningsmoment
+     * @param l armslaengde
+     */
+    public void beregnBojningsmoment(double l);
     
-    /** 
+    /**
      * Denne metode bruges til at faa Bojningsmoment
      * @return Det aktuelle bojningsmomentobjekt
      */
+    public Bojningsmoment getBojningsmoment();
     
-    //Til Normalspaending
-    public Normalspaending beregnNormalspaending();
+    public void beregnNormalspaending();
     
     /**
      * Denne metode bruges til at faa normalspaendingen. 
-     * @return Det aktuelle normalspaendingobjekt ellers returneres NaN
+     * @return Det aktuelle normalspaendingobjekt ellers returneres null
      */
+    public Normalspaending getNormalspaending();
     
-    //Til Interimoment
-    public void angivInertimoment(double I);
-    
+    public void angivInertimoment(double i);
     
     public Inertimoment getInertimoment();
     
-    //Til Halvhoejde
     public void angivHalvhoejde(double e);
     
     /**
      * Denne metode bruges til at faa Halvhojde
      * @return Det aktuelle halvhojdeobjekt ellers ugyldigHalvhojdeException
      */
-    
     public Halvhojde getHalvhoejde();
-    
-    //Til Referencespaending
-    public void angivReferencespaending();
 
     public Referencespaending getReferencespaending();
-    
 }
