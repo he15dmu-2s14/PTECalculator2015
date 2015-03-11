@@ -6,6 +6,6 @@ public interface Normalspaending {
 	
 	public void setAreal( Areal areal );
 	
-	public double getNormalspaænding();
+	public double getNormalspaending();
 	
 }
