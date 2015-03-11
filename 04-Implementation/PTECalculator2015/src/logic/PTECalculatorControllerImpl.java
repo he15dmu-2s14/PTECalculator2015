@@ -7,13 +7,18 @@ import domain.ArealEnhed;
 import domain.ArealImpl;
 import domain.Belastning;
 import domain.BelastningImpl;
+import domain.Bojningsmoment;
 import domain.Bojningsspending;
 import domain.BojningsspendingImpl;
 import domain.Enhed;
 import domain.Forskydningsspaending;
 import domain.ForskydningsspaendingImpl;
+import domain.Halvhojde;
+import domain.Inertimoment;
 import domain.Normalkraft;
 import domain.NormalkraftImpl;
+import domain.Normalspaending;
+import domain.Referencespaending;
 import domain.Tvaerkraft;
 import domain.TvaerkraftImpl;
 import domain.Vinkel;
@@ -28,6 +33,9 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
     private Tvaerkraft tvaerkraft;
     private Normalkraft normalkraft;
     private Areal areal;
+    private Inertimoment inertimoment;
+    private Halvhojde halvhojde;
+    private Referencespaending referencespaending;
     private Forskydningsspaending forskydningsspaending;
     private LinkedList<PTEObserver> observerListe = new LinkedList<>();
 
@@ -120,9 +128,64 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 	}
 
 	@Override
-	public void beregnSigmaBoj(double i, double e, double MB) {
+	public void beregnBojningspaending(double i, double e, double MB) {
 		Bojningsspending bojMoment = new BojningsspendingImpl();
-		bojMoment.beregnSigmaBoj(i, e, MB);
+		bojMoment.beregnBojningspaending(i, e, MB);
 		notifyObservers();
 	}
+	
+	//Til Bojningsmoment
+	//!!OBS!! Mangler Impl
+	@Override
+    public Bojningsmoment beregnBojninsmoment(double fdim, double ft){
+    	return null;
+    }
+    
+    //Til Normalspaending
+	//!!OBS!! Mangler Impl
+	@Override
+    public Normalspaending beregnNormalspaending(){
+		
+    	return null;
+    }
+    
+    //Til Interimoment
+	//!!OBS!! Mangler Impl
+    @Override
+    public void angivInertimoment(double I){
+    }
+    
+  //!!OBS!! Mangler Impl
+    @Override
+    public Inertimoment getInertimoment(){
+    	return inertimoment;
+    }
+    
+    //Til Halvhoejde
+  //!!OBS!! Mangler Impl
+    @Override
+    public void angivHalvhoejde(double e) {
+    	throws UgyldigHalvhojdeException() {
+    		
+    	}
+    }
+    
+  //!!OBS!! Mangler Impl
+    @Override
+    public Halvhojde getHalvhoejde(){
+    	return halvhojde;
+    }
+    
+    //Til Referencespaending
+  //!!OBS!! Mangler Impl
+    @Override
+    public void angivReferencespaending() {
+    	
+    }
+
+  //!!OBS!! Mangler Impl
+    @Override
+    public Referencespaending getReferencespaending(){
+    	return referencespaending;
+    }
 }
