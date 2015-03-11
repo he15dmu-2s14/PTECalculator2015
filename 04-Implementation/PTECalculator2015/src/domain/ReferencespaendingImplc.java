@@ -9,7 +9,7 @@ public class ReferencespaendingImplc implements Referencespaending {
   public double getReferencespaending() {
     if ( sigman == null || sigmaboej == null || tau == null )
       return Double.NaN;
-    return Math.sqrt( Math.pow( (sigman.getNormalspaænding() + sigmaboej.getBojningsspending()), 2 ) + (3*Math.pow( tau.getForskydningsspaending(), 2 )) );
+    return Math.sqrt( Math.pow( (sigman.getNormalspaending() + sigmaboej.getBojningsspending()), 2 ) + (3*Math.pow( tau.getForskydningsspaending(), 2 )) );
   }
   
   @Override
