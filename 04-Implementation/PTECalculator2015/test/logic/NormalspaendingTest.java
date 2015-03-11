@@ -69,7 +69,7 @@ public class NormalspaendingTest {
 	}
 	
 	@Test
-	public void testGetNormalspaendingNaN() {
+	public void testGetNormalspaendingArealNaN() {
 		try {
 			b.setBelastning(20, Enhed.kg);
 			v.setGradtal(20, true);
@@ -78,6 +78,24 @@ public class NormalspaendingTest {
 			//a.setAreal(20, ArealEnhed.cm2); Areal som null
 			ns.setAreal(a);
 			ns.setNormalkraft(n);
+		} catch (Exception e) {
+			fail("Failer i oppsett");
+		}
+		
+		assertTrue(Double.isNaN(ns.getNormalspaending()));
+		
+	}
+	
+	@Test
+	public void testGetNormalspaendingNormalkraftNaN() {
+		try {
+			b.setBelastning(20, Enhed.kg);
+			v.setGradtal(20, true);
+			n.setBelastning(b);
+			n.setVinkel(v);
+			a.setAreal(20, ArealEnhed.cm2);
+			ns.setAreal(a);
+			//ns.setNormalkraft(n); Normalkraft som null
 		} catch (Exception e) {
 			fail("Failer i oppsett");
 		}
