@@ -71,12 +71,13 @@ public class NormalspaendingTest {
 	@Test
 	public void testGetNormalspaendingArealNaN() {
 		try {
+			// Areal som null
 			belastning.setBelastning(20, Enhed.kg);
 			vinkel.setGradtal(20, true);
 			normalkraft.setBelastning(belastning);
 			normalkraft.setVinkel(vinkel);
-			//a.setAreal(20, ArealEnhed.cm2); Areal som null
-			normalspaending.setAreal(areal);
+			areal.setAreal(20, ArealEnhed.cm2);
+			normalspaending.setAreal(null);
 			normalspaending.setNormalkraft(normalkraft);
 		} catch (Exception e) {
 			fail("Failer i oppsett");
@@ -89,13 +90,14 @@ public class NormalspaendingTest {
 	@Test
 	public void testGetNormalspaendingNormalkraftNaN() {
 		try {
+			// Normalkraft som null
 			belastning.setBelastning(20, Enhed.kg);
 			vinkel.setGradtal(20, true);
 			normalkraft.setBelastning(belastning);
 			normalkraft.setVinkel(vinkel);
 			areal.setAreal(20, ArealEnhed.cm2);
 			normalspaending.setAreal(areal);
-			//ns.setNormalkraft(n); Normalkraft som null
+			normalspaending.setNormalkraft(null);
 		} catch (Exception e) {
 			fail("Failer i oppsett");
 		}
