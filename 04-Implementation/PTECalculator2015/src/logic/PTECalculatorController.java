@@ -88,7 +88,7 @@ public interface PTECalculatorController {
     public void beregnSigmaBoj(double i, double e, double MB);
     
     //Til Bojningsmoment
-    public Bojningsmoment beregnMB(double fdim, double ft);
+    public Bojningsmoment beregnMB(double ft, double arm);
     
     //Til Normalspaending
     public Normalspaending beregnNormalspaending();

@@ -2,24 +2,20 @@ package domain;
 
 public class BojningsmomentImpl implements Bojningsmoment {
 	
-	private double fDim;
 	private double ft;
 	private double arm;
 	private double bøjningsMoment;
 	
-	public BojningsmomentImpl( double fdim, double ft ) {
-		this.fDim = fdim;
-		this.ft = ft;
+	public BojningsmomentImpl( double ft, double arm ) {
+		beregnMB( ft, arm );
 	}
 	
+	//Denne metode er også set-metode for datakernen
 	@Override
-	public void setArmLaengde(double mm) {
-		arm = mm;
-	}
-
-	@Override
-	public double beregnMB(double fdim, double ft) {
-		bøjningsMoment = this.fDim * this.ft;
+	public double beregnMB(double ft, double arm ) {
+		this.ft = ft;
+		this.arm = arm;
+		bøjningsMoment = this.ft * this.arm;
 		return bøjningsMoment;
 	}
 
