@@ -9,12 +9,18 @@ import domain.Enhed;
 import domain.Forskydningsspaending;
 import domain.Halvhojde;
 import domain.Inertimoment;
+import domain.Laengde;
 import domain.Normalkraft;
 import domain.Normalspaending;
 import domain.Referencespaending;
 import domain.Tvaerkraft;
 import domain.Vinkel;
-import exceptions.*;
+import exceptions.UgyldigArealException;
+import exceptions.UgyldigBelastningException;
+import exceptions.UgyldigHalvhojdeException;
+import exceptions.UgyldigInertiMomentException;
+import exceptions.UgyldigLaengdeException;
+import exceptions.UgyldigVinkelException;
 
 /**
  * Klassen PTECalculator fungerer som Controller og sender informationer videre til de forskellige Information Expert klasser.
