@@ -9,7 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import exceptions.UgyldigHalvhojdeException;
-import exceptions.UgyldigVinkelException;
 
 public class HalvhojdeImplTest {
   private Halvhojde halvhojde;
