@@ -38,24 +38,28 @@ public interface PTECalculatorController {
 
     /**
      * Denne metode instantierer et Vinkel objekt og setter datakernen med de angivne parametre.
-     * Herefter instantieres et Tvaerkraft objekt og dens datakerne bliver sat med det Vinkel objekt, som vi lige har
-     * @param vinkel er vinklen angivet i grader
-     * @param tilVandret om der er tale om en vinket maalt til vandret
-     * @throws UgyldigVinkelException hvis vaerdien er negativ eller >90
+     * Herefter instantieres et Tvaerkraft objekt og dens datakerne bliver sat med det Vinkel objekt,
+     * der netop er blevet oprettet samt det Belastning objekt, der ligger i PTECalculatorController's datakerne.
+     * @param "vinkel" er vinklen angivet i grader.
+     * @param "tilVandret" angiver om vinklen er maalt fra vandret.
+     * @throws UgyldigVinkelException hvis vaerdien er negativ eller over 90.
      */
     public void beregnTvaerkraft(double vinkel, boolean tilVandret) throws UgyldigVinkelException;
 
     /**
-     * Denne metode bruges til at beregne normalkraften (Fn) og angive vinklen
-     * @param vinkel er vinklen angivet i grader
-     * @param tilVandret om der er tale om en vinket maalt til vandret
-     * @throws UgyldigVinkelException hvis vaerdien er negativ eller >90
+     * Denne metode instantierer et Vinkel objekt og setter datakernen med de angivne parametre.
+     * Herefter instantieres et Normalkraft objekt og dens datakerne bliver sat med det Vinkel objekt,
+     * der netop er blevet oprettet samt det Belastning objekt, der ligger i PTECalculatorController's datakerne.
+     * @param "vinkel" er vinklen angivet i grader.
+     * @param "tilVandret" angiver om vinklen er maalt fra vandret.
+     * @throws UgyldigVinkelException hvis vaerdien er negativ eller over 90.
      */
     public void beregnNormalkraft(double vinkel, boolean tilVandret) throws UgyldigVinkelException;
 
     /**
-     * Denne metode bruges til at tilmelde et observer objekt til observerListe
-     * @param angiver det PTEObserver der skal tilmeldes
+     * Denne metode bruges til at tilmelde et observer objekt til observerListe,
+     * hvis det angivne
+     * @param "observer" angiver det PTEObserver objekt der skal tilmeldes.
      */
     public void tilmeldObserver(PTEObserver observer);
 
@@ -140,4 +144,8 @@ public interface PTECalculatorController {
     public Halvhojde getHalvhoejde();
 
     public Referencespaending getReferencespaending();
+    
+    public void beregnSikkerhedsfaktor(double l);
+    
+    public Sikkerhedsfaktor getSikkerhedsfaktor();
 }
