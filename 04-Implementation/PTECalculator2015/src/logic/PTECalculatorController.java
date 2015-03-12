@@ -101,7 +101,7 @@ public interface PTECalculatorController {
      * Beregn boejningsmoment
      * @param l armslaengde
      */
-    public void beregnBojningsmoment(double l);
+    public void beregnBojningsmoment(double l) throws UgyldigLaengdeException ;
 
     /**
      * Denne metode bruges til at faa Bojningsmoment
