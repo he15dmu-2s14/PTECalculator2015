@@ -27,8 +27,7 @@ import exceptions.UgyldigBelastningException;
 import exceptions.UgyldigLaengdeException;
 import exceptions.UgyldigVinkelException;
 
-public class PTECalculatorFrame extends JFrame implements PTEObserver,
-		FocusListener, ActionListener {
+public class PTECalculatorFrame extends JFrame implements PTEObserver, FocusListener, ActionListener {
 	private static final long serialVersionUID = 1L;
 	private static final String VANDRET = "Vandret", LODRET = "Lodret";
 
@@ -38,7 +37,7 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 	private JComboBox<ArealEnhed> arealEnhed;
 	private JComboBox<String> vandretLodret;
 	private JTextField arealIndskrivning, armensLaengdeIndskrivning;
-	private JTextField fnResultat, ftResultat, arealResultat, tauResultat, laengdeResultat;
+	private JTextField fnResultat, ftResultat, arealResultat, tauResultat, laengdeResultat, sigmaNResultat;
 	private JTextField fnFormel, ftFormel, tauFormel;
 	private PTECalculatorController pteCalc;
 
@@ -81,8 +80,7 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 		laengdeEnhed.addItem(Laengde.mm);
 		laengdeEnhed.addItem(Laengde.cm);
 		laengdeEnhed.addItem(Laengde.m);
-		laengdeEnhed.setPreferredSize(new Dimension(73
-				, 22));
+		laengdeEnhed.setPreferredSize(new Dimension(73, 22));
 		laengdeEnhed.addActionListener(this);
 
 		arealEnhed = new JComboBox<ArealEnhed>();
@@ -121,6 +119,9 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 		ftResultat = new JTextField(6);
 		ftResultat.setEditable(false);
 
+		sigmaNResultat = new JTextField(8);
+		sigmaNResultat.setEditable(false);
+
 		arealIndskrivning = new JTextField(8);
 		arealIndskrivning.setEditable(true);
 		arealIndskrivning.addFocusListener(this);
@@ -137,7 +138,7 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 
 		tauResultat = new JTextField(6);
 		tauResultat.setEditable(false);
-		
+
 		laengdeResultat = new JTextField(8);
 		laengdeResultat.setEditable(false);
 	}
@@ -202,12 +203,11 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 		con.insets = new Insets(5, 5, 0, 5);
 		con.anchor = GridBagConstraints.WEST;
 		add(new JLabel("Formel"), con);
-		
+
 		con = createGBC(2, 3, 1, 1);
 		con.insets = new Insets(5, 5, 0, 5);
 		con.anchor = GridBagConstraints.WEST;
 		add(new JLabel("Resultat"), con);
-
 
 		// Linie 4
 		con = createGBC(0, 4, 1, 1);
@@ -245,9 +245,7 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 		con = createGBC(0, 6, 5, 1);
 		con.insets = new Insets(5, 5, 15, 5);
 		con.anchor = GridBagConstraints.WEST;
-		add(new JLabel(
-				"_______________________________________________________________________"),
-				con);
+		add(new JLabel("_______________________________________________________________________"), con);
 
 		// Linje 7 (ny)
 		con = createGBC(0, 7, 1, 1);
@@ -303,12 +301,28 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
 		add(laengdeEnhed, con);
-		
+
 		con = createGBC(3, 9, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
 		add(laengdeResultat, con);
 
+		// linje 10
+		con = createGBC(0, 11, 1, 1);
+		con.insets = ins;
+		con.anchor = GridBagConstraints.WEST;
+		add(new JLabel("SigmaN:"), con);
+
+		// linie 11
+		con = createGBC(0, 11, 1, 1);
+		con.insets = ins;
+		con.anchor = GridBagConstraints.WEST;
+		add(new JLabel("SigmaN:"), con);
+
+		con = createGBC(1, 11, 1, 1);
+		con.insets = ins;
+		con.anchor = GridBagConstraints.WEST;
+		add(sigmaNResultat, con);
 
 	}
 
@@ -356,9 +370,7 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 		}
 
 		if (pteCalc.getVinkel() != null)
-			vandretLodret
-					.setSelectedItem(pteCalc.getVinkel().tilVandret() ? VANDRET
-							: LODRET);
+			vandretLodret.setSelectedItem(pteCalc.getVinkel().tilVandret() ? VANDRET : LODRET);
 
 		if (pteCalc.getTvaerkraft() != null) {
 			double f = pteCalc.getTvaerkraft().getTvaerkraft();
@@ -390,14 +402,38 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 		}
 
 		if (pteCalc.getForskydningsspaending() != null) {
-			double n = pteCalc.getForskydningsspaending()
-					.getForskydningsspaending();
-			tauResultat.setText(forceFormatter.format(n));
+			double n = pteCalc.getForskydningsspaending().getForskydningsspaending();
+			tauResultat.setText(forceFormatter.format(n));	
 		}
-		if(pteCalc.getBojningsmoment() != null) {
+		
+		if (pteCalc.getBojningsmoment() != null) {
+			double angivetArmLaengde;
+			Laengde lEnhed = (Laengde) laengdeEnhed.getSelectedItem();
+			switch (lEnhed) {
+			case cm:
+				angivetArmLaengde = pteCalc.getBojningsmoment().getArmlaengdeIcm();
+				break;
+			case m:
+				angivetArmLaengde = pteCalc.getBojningsmoment().getArmlaengdeIm();
+				break;
+			default:
+				angivetArmLaengde = pteCalc.getBojningsmoment().getArmlaengdeImm();
+				break;
+			}
+			armensLaengdeIndskrivning.setText("" + angivetArmLaengde);
+		}
+		
+		if (pteCalc.getBojningsmoment() != null) {
 			double n = pteCalc.getBojningsmoment().getBojningsmoment();
 			laengdeResultat.setText(forceFormatter.format(n));
+
 		}
+
+		if (pteCalc.getNormalspaending() != null) {
+			double n = pteCalc.getNormalspaending().getNormalspaending();
+			sigmaNResultat.setText(forceFormatter.format(n));
+		}
+
 	}
 
 	@Override
@@ -437,40 +473,46 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 													// melding om det ikke
 													// checkes
 					double v = Double.parseDouble(vinkel.getText());
-					boolean vandret = vandretLodret.getSelectedItem().equals(
-							VANDRET);
+					boolean vandret = vandretLodret.getSelectedItem().equals(VANDRET);
 					pteCalc.beregnTvaerkraft(v, vandret);
 					pteCalc.beregnNormalkraft(v, vandret);
 				}
 			} catch (UgyldigVinkelException ex) {
-				JOptionPane.showMessageDialog(null,
-						"Vinkel skal vre mellem 0 og 90 grader");
+				JOptionPane.showMessageDialog(null, "Vinkel skal vre mellem 0 og 90 grader");
 			} catch (NumberFormatException ex) {
 				JOptionPane.showMessageDialog(null, "Ugyldig nummer");
 			}
 		} else if (e == arealIndskrivning || e == arealEnhed) {
 			if (!vinkel.getText().isEmpty()) {
 				try {
-					double areal = Double.parseDouble(arealIndskrivning
-							.getText());
-					pteCalc.beregnForskydningsspaending(areal,
-							(ArealEnhed) arealEnhed.getSelectedItem());
+					double areal = Double.parseDouble(arealIndskrivning.getText());
+					pteCalc.beregnForskydningsspaending(areal, (ArealEnhed) arealEnhed.getSelectedItem());
 				} catch (UgyldigArealException | NumberFormatException e1) {
-					JOptionPane.showMessageDialog(null,
-							"Ugyldigt Areal. Areal skal være skarpt positivt.");
+					JOptionPane.showMessageDialog(null, "Ugyldigt Areal. Areal skal være skarpt positivt.");
 				}
 			}
-		} else if (e == armensLaengdeIndskrivning || e == laengdeResultat) {
-			if(!armensLaengdeIndskrivning.getText().isEmpty()) {
+		} else if (e == armensLaengdeIndskrivning) {
+			if (!armensLaengdeIndskrivning.getText().isEmpty()) {
 				try {
 					double laengde = Double.parseDouble(armensLaengdeIndskrivning.getText());
-					pteCalc.beregnBojningsmoment(laengde);
+					pteCalc.beregnBojningsmoment(laengde, (Laengde) laengdeEnhed.getSelectedItem());
 				} catch (UgyldigLaengdeException | NumberFormatException e2) {
 					JOptionPane.showMessageDialog(null, "Ugyldig laengde. Laengde skal være skarpt positivt");
 				}
 			}
 		}
-		
+
+		else if (e == arealIndskrivning)
+			if (!arealIndskrivning.getText().isEmpty() && !fnResultat.getText().isEmpty()) {
+				try {
+					double areal = Double.parseDouble(arealIndskrivning.getText());
+					pteCalc.beregnNormalspaending(areal, (ArealEnhed) arealEnhed.getSelectedItem());
+					sigmaNResultat.setText(getNormalspaending());
+				} catch (UgyldigArealException | NumberFormatException e3) {
+					JOptionPane.showMessageDialog(null, "Ugyldigt Areal. Areal skal være skarpt positivt.");
+				}
+			}
+
 	}
 
 }
