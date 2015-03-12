@@ -18,6 +18,7 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
     private Bojningsspaending bojningsspaending;
     private Bojningsmoment bojningsmoment;
     private Normalspaending normalspaending;
+    private Sikkerhedsfaktor sikkerhedsfaktor;
     private LinkedList<PTEObserver> observerListe = new LinkedList<>();
 
     @Override
@@ -186,4 +187,18 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
     public Referencespaending getReferencespaending(){
     	return referencespaending;
     }
+
+   @Override
+   public void beregnSikkerhedsfaktor(double tilladelig) {
+      sikkerhedsfaktor = new SikkerhedsfaktorImpl();
+      sikkerhedsfaktor.setTilladeligSpaending(tilladelig);
+      sikkerhedsfaktor.setReferencespaending(referencespaending);
+
+      notifyObservers();
+   }
+
+   @Override
+   public Sikkerhedsfaktor getSikkerhedsfaktor() {
+      return sikkerhedsfaktor;
+   }
 }
