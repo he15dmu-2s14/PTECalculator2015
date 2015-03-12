@@ -27,7 +27,7 @@ import domain.NormalkraftImpl;
 import domain.Normalspaending;
 import domain.NormalspaendingImpl;
 import domain.Referencespaending;
-import domain.ReferencespaendingImplc;
+import domain.ReferencespaendingImpl;
 import domain.Tvaerkraft;
 import domain.TvaerkraftImpl;
 import domain.Vinkel;
@@ -56,7 +56,7 @@ public class ReferencespaendningTest {
 
 	@Before
 	public void init(){
-		referencespending = new ReferencespaendingImplc();
+		referencespending = new ReferencespaendingImpl();
 		sigman = new NormalspaendingImpl();
 		sigmaboej = new BojningsspaendingImpl();
 		areal = new ArealImpl();
