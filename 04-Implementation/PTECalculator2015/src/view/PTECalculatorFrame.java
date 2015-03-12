@@ -618,7 +618,7 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 							.getText());
 					pteCalc.beregnNormalspaending(areal,
 							(ArealEnhed) arealEnhed.getSelectedItem());
-					sigmaNResultat.setText(getNormalspaending());
+					sigmaNResultat.setText(pteCalc.getNormalspaending().getNormalspaending() + "");
 				} catch (UgyldigArealException | NumberFormatException e3) {
 					JOptionPane.showMessageDialog(null,
 							"Ugyldigt Areal. Areal skal være skarpt positivt.");
