@@ -23,7 +23,7 @@ import exceptions.*;
  */
 public interface PTECalculatorController {
     /**
-     * Denne metode bruges til at angive belastningen i vha. to parametre.
+     * Denne metode instantierer et Belastning objekt og setter dens datakerne med den angivne parameter.
      * @param vaerdi er det reele tal vaerdien er
      * @param enhed er om vaerdien er angivet i N, kg el. ton
      * @throws UgyldigBelastningException hvis vaerdien er negativ
@@ -31,10 +31,11 @@ public interface PTECalculatorController {
     public void angivBelastning(double vaerdi, Enhed enhed) throws UgyldigBelastningException;
 
     /**
-     * Denne metode bruges til at beregne tvaerkraften (Ft) og angive vinklen
+     * Denne metode instantierer et Vinkel objekt og setter dens datakerne med den foerste parameter.
+     * Herefter instantieres et Tvaerkraft objekt og dens datakerne bliver sat til
      * @param vinkel er vinklen angivet i grader
      * @param tilVandret om der er tale om en vinket maalt til vandret
-     * @throws UgyldigVinkelException
+     * @throws UgyldigVinkelException hvis vaerdien er negativ eller >90
      */
     public void beregnTvaerkraft(double vinkel, boolean tilVandret) throws UgyldigVinkelException;
 
@@ -42,20 +43,18 @@ public interface PTECalculatorController {
      * Denne metode bruges til at beregne normalkraften (Fn) og angive vinklen
      * @param vinkel er vinklen angivet i grader
      * @param tilVandret om der er tale om en vinket maalt til vandret
-     * @throws UgyldigVinkelException
+     * @throws UgyldigVinkelException hvis vaerdien er negativ eller >90
      */
     public void beregnNormalkraft(double vinkel, boolean tilVandret) throws UgyldigVinkelException;
 
     /**
-     * Denne metode bruges til at tilmelder PTEObserveren
-     * @param observer
-     *
-     * @see logic.PTEObserver
+     * Denne metode bruges til at tilmelde et observer objekt til observerListe
+     * @param angiver det PTEObserver der skal tilmeldes
      */
     public void tilmeldObserver(PTEObserver observer);
 
     /**
-     * Denne metode bruges til at faa vist vinklen i grader. Metoden er kaldt fra ekspert-klassen Vinkel
+     * Denne metode bruges til at faa vinklen i grader. Metoden er kaldt fra ekspert-klassen Vinkel
      * @return Det aktuelle vinkelobjekt el. null hvis den ikke eksisterer
      */
     public Vinkel getVinkel();
@@ -77,6 +76,11 @@ public interface PTECalculatorController {
 
     public void notifyObservers();
 
+    /**
+     * @param areal
+     * @param enhed
+     * @throws UgyldigArealException
+     */
     public void beregnForskydningsspaending(double areal, ArealEnhed enhed) throws UgyldigArealException;
 
     public Forskydningsspaending getForskydningsspaending();
@@ -101,7 +105,7 @@ public interface PTECalculatorController {
      * Beregn boejningsmoment
      * @param l armslaengde
      */
-    public void beregnBojningsmoment(double l) throws UgyldigLaengdeException ;
+    public void beregnBojningsmoment(double l, Laengde enhed) throws UgyldigLaengdeException ;
 
     /**
      * Denne metode bruges til at faa Bojningsmoment
