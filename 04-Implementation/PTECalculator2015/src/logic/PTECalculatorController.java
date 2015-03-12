@@ -13,6 +13,7 @@ import domain.Laengde;
 import domain.Normalkraft;
 import domain.Normalspaending;
 import domain.Referencespaending;
+import domain.Sikkerhedsfaktor;
 import domain.Tvaerkraft;
 import domain.Vinkel;
 import exceptions.UgyldigArealException;
@@ -29,78 +30,101 @@ import exceptions.UgyldigVinkelException;
  */
 public interface PTECalculatorController {
     /**
-     * Denne metode instantierer et Belastning objekt og setter dens datakerne med den angivne parameter.
-     * @param "vaerdi" er det reele tal vaerdien er.
+     * Denne metode instantierer et Belastning objekt og set'er dens datakerne med den angivne parameter.
+     * @param "vaerdi" er det reelle tal vaerdien er.
      * @param "enhed" er et enum der angiver om vaerdien er i N, kg eller ton.
      * @throws UgyldigBelastningException kastes hvis vaerdien er negativ.
      */
     public void angivBelastning(double vaerdi, Enhed enhed) throws UgyldigBelastningException;
 
     /**
-     * Denne metode instantierer et Vinkel objekt og setter datakernen med de angivne parametre.
-     * Herefter instantieres et Tvaerkraft objekt og dens datakerne bliver sat med det Vinkel objekt,
+     * Denne metode instantierer et Vinkel objekt og set'er datakernen med de angivne parametre.
+     * Herefter instantieres et Tvaerkraft objekt og dens datakerne bliver sat til det Vinkel objekt,
      * der netop er blevet oprettet samt det Belastning objekt, der ligger i PTECalculatorController's datakerne.
      * @param "vinkel" er vinklen angivet i grader.
      * @param "tilVandret" angiver om vinklen er maalt fra vandret.
-     * @throws UgyldigVinkelException hvis vaerdien er negativ eller over 90.
+     * @throws UgyldigVinkelException kastes hvis vaerdien er negativ eller over 90.
      */
     public void beregnTvaerkraft(double vinkel, boolean tilVandret) throws UgyldigVinkelException;
 
     /**
-     * Denne metode instantierer et Vinkel objekt og setter datakernen med de angivne parametre.
-     * Herefter instantieres et Normalkraft objekt og dens datakerne bliver sat med det Vinkel objekt,
+     * Denne metode instantierer et Vinkel objekt og set'er datakernen med de angivne parametre.
+     * Herefter instantieres et Normalkraft objekt og dens datakerne bliver sat til det Vinkel objekt,
      * der netop er blevet oprettet samt det Belastning objekt, der ligger i PTECalculatorController's datakerne.
      * @param "vinkel" er vinklen angivet i grader.
      * @param "tilVandret" angiver om vinklen er maalt fra vandret.
-     * @throws UgyldigVinkelException hvis vaerdien er negativ eller over 90.
+     * @throws UgyldigVinkelException kastes hvis vaerdien er negativ eller over 90.
      */
     public void beregnNormalkraft(double vinkel, boolean tilVandret) throws UgyldigVinkelException;
 
     /**
      * Denne metode bruges til at tilmelde et observer objekt til observerListe,
-     * hvis det angivne
+     * hvis den angivne reference ikke er null og objektet ikke allerede eksisterer i listen.
      * @param "observer" angiver det PTEObserver objekt der skal tilmeldes.
      */
     public void tilmeldObserver(PTEObserver observer);
 
     /**
-     * Denne metode bruges til at faa vinklen i grader. Metoden er kaldt fra ekspert-klassen Vinkel
-     * @return Det aktuelle vinkelobjekt el. null hvis den ikke eksisterer
+     * Denne metode returnerer en reference til et Vinkel objekt, hvis dette eksisterer i datakernen.
+     * @return Det aktuelle Vinkel objekt eller null, hvis den ikke eksisterer
      */
     public Vinkel getVinkel();
 
     /**
-     * Denne metode bruges til at faa vist belastningen i N. Metoden er kaldt fra ekspert-klassen Belastning
-     * @return Det aktuelle belastningsobjekt el. null hvis den ikke eksisterer
+     * Denne metode returnerer en reference til et Belastning objekt, hvis dette eksisterer i datakernen.
+     * @return Det aktuelle Belastning objekt eller null, hvis det ikke eksisterer
      */
     public Belastning getBelastning();
 
     /**
-     * Denne metode bruges til at faa tvaerkraften(Ft). Metoden er kaldt fra ekspert-klassen Tvaerkraft
-     * @return Det aktuelle tvaerkraftsobjekt el. null hvis det ikke elsisterer
-     * 		   Ellers returneres NaN
+     * Denne metode returnerer en reference til et Tvaerkraft objekt, hvis dette eksisterer i datakernen.
+     * @return Det aktuelle Tvaerkraft objekt eller null, hvis det ikke eksisterer
      */
     public Tvaerkraft getTvaerkraft();
 
+    /**
+     * Denne metode returnerer en reference til et Normalkraft objekt, hvis dette eksisterer i datakernen.
+     * @return Det aktuelle Normalkraft objekt eller null, hvis det ikke eksisterer
+     */
     public Normalkraft getNormalkraft();
 
+    /**
+     * Denne metode koerer et for-each loop på observerListe og
+     * kalder update() metoden på alle tilmeldte observere.
+     */
     public void notifyObservers();
 
     /**
-     * @param areal
-     * @param enhed
-     * @throws UgyldigArealException
+     * Denne metode instantierer et Areal objekt og set'er datakernen med de angivne parametre.
+     * Herefter instantieres et Forskydningsspaending objekt og dens datakerne bliver sat til det Areal objekt,
+     * der netop er blevet oprettet samt det Tvaerkraft objekt, der allerede ligger i PTECalculatorController's datakerne.
+     * @param "areal" er det reelle tal vaerdien er.
+     * @param "areal" er et enum der angiver om vaerdien er i mm2, cm2 eller m2.
+     * @throws UgyldigArealException kastes hvis vaerdien er nul eller negativ.
      */
     public void beregnForskydningsspaending(double areal, ArealEnhed enhed) throws UgyldigArealException;
 
+    /**
+     * Denne metode returnerer en reference til et Forskydningsspaending objekt, hvis dette eksisterer i datakernen.
+     * @return Det aktuelle Forskydningsspaending objekt eller null, hvis det ikke eksisterer
+     */
     public Forskydningsspaending getForskydningsspaending();
 
+    /**
+     * Denne metode returnerer en reference til et Areal objekt, hvis dette eksisterer i datakernen.
+     * @return Det aktuelle Areal objekt eller null, hvis det ikke eksisterer
+     */
     public Areal getAreal();
 
     /**
-     * Beregn boejningsspaending
-     * @param i inertimoment
-     * @param e tyngdepunktsafstand (halvhoejde)
+     * Denne metode instantierer et Inertimoment objekt og set'er datakernen med den angivne parameter (i).
+     * Herefter instantieres et Halvhojde objekt og dens datakerne bliver sat til den anden angivne parameter (e).
+     * Til sidst instantieres et Bojningsspaending objekt og dens datakerne bliver sat til det Inertimoment- og Halvhojde objekt,
+     * der netop er blevet oprettet samt det Bojningsmoment objekt, der allerede ligger i PTECalculatorController's datakerne.
+     * @param "i" er inertimomenten, angivet i mm^4.
+     * @param "e" er tyngdepunktsafstanden/halvhoejden, angivet i mm.
+     * @throws UgyldigInertiMomentException
+     * @throws UgyldigHalvhojdeException
      */
     public void beregnBojningspaending(double i, double e)
             throws UgyldigInertiMomentException, UgyldigHalvhojdeException;
