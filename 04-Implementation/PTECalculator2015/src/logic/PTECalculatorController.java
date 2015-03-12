@@ -145,7 +145,7 @@ public interface PTECalculatorController {
 
     public Referencespaending getReferencespaending();
     
-    public void beregnSikkerhedsfaktor(double l);
+    public void beregnSikkerhedsfaktor(double tilladelig);
     
     public Sikkerhedsfaktor getSikkerhedsfaktor();
 }
