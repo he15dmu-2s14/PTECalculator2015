@@ -30,15 +30,15 @@ import exceptions.UgyldigVinkelException;
 public interface PTECalculatorController {
     /**
      * Denne metode instantierer et Belastning objekt og setter dens datakerne med den angivne parameter.
-     * @param vaerdi er det reele tal vaerdien er
-     * @param enhed er om vaerdien er angivet i N, kg el. ton
-     * @throws UgyldigBelastningException hvis vaerdien er negativ
+     * @param "vaerdi" er det reele tal vaerdien er.
+     * @param "enhed" er et enum der angiver om vaerdien er i N, kg eller ton.
+     * @throws UgyldigBelastningException kastes hvis vaerdien er negativ.
      */
     public void angivBelastning(double vaerdi, Enhed enhed) throws UgyldigBelastningException;
 
     /**
-     * Denne metode instantierer et Vinkel objekt og setter dens datakerne med den foerste parameter.
-     * Herefter instantieres et Tvaerkraft objekt og dens datakerne bliver sat til
+     * Denne metode instantierer et Vinkel objekt og setter datakernen med de angivne parametre.
+     * Herefter instantieres et Tvaerkraft objekt og dens datakerne bliver sat med det Vinkel objekt, som vi lige har
      * @param vinkel er vinklen angivet i grader
      * @param tilVandret om der er tale om en vinket maalt til vandret
      * @throws UgyldigVinkelException hvis vaerdien er negativ eller >90
