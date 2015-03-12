@@ -129,10 +129,10 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
     }
 
     @Override
-    public void beregnBojningsmoment(double l) {
+    public void beregnBojningsmoment(double l, Laengde enhed) throws UgyldigLaengdeException {
     	bojningsmoment = new BojningsmomentImpl();
     	bojningsmoment.setTvaerkraft( tvaerkraft );
-    	bojningsmoment.setArmlangde( l );
+    	bojningsmoment.setArmlangde( l, enhed );
     	notifyObservers();
     }
 
