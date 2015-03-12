@@ -1,4 +1,4 @@
-package logic;
+package domain;
 
 import static org.junit.Assert.*;
 
