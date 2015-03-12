@@ -125,7 +125,7 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 
     @Override
     public Bojningsspaending getBojningsspaending() {
-        return null;
+        return bojningsspaending;
     }
 
     @Override
@@ -138,7 +138,7 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 
     @Override
     public Bojningsmoment getBojningsmoment() {
-        return null;
+        return bojningsmoment;
     }
 
     @Override
