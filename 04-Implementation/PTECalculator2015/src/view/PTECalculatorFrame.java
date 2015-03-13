@@ -21,6 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import domain.Vinkel;
+import exceptions.UgyldigHalvhojdeException;
+import exceptions.UgyldigInertiMomentException;
 import logic.PTECalculatorController;
 import logic.PTECalculatorControllerImpl;
 import logic.PTEObserver;
@@ -51,13 +53,17 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
    private Visualizer visualizer;
 	private PTECalculatorController pteCalc;
 
-	private DecimalFormat forceFormatter;
+	private DecimalFormat decimalFormatter, kraftFormatter, momentFormatter, spaendingFormatter, laengdeFormatter;
 
 	public PTECalculatorFrame() {
 		pteCalc = new PTECalculatorControllerImpl();
 		pteCalc.tilmeldObserver(this);
 
-		forceFormatter = new DecimalFormat("#.## N");
+      decimalFormatter = new DecimalFormat("#.##");
+		kraftFormatter = new DecimalFormat("#.## N");
+      momentFormatter = new DecimalFormat("#.## Nmm");
+      spaendingFormatter = new DecimalFormat("#.## N/mm2");
+      laengdeFormatter = new DecimalFormat("#.## mm");
 
 		initComponents();
 		layoutComponents();
@@ -475,7 +481,7 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 
 		if (pteCalc.getBelastning() != null) {
 			double f = pteCalc.getBelastning().getBelastning();
-			fDim.setText(forceFormatter.format(f));
+			fDim.setText(kraftFormatter.format(f));
 		}
 
       Vinkel v = pteCalc.getVinkel();
@@ -486,12 +492,12 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 
 		if (pteCalc.getTvaerkraft() != null) {
 			double f = pteCalc.getTvaerkraft().getTvaerkraft();
-			ftResultat.setText(forceFormatter.format(f));
+			ftResultat.setText(kraftFormatter.format(f));
 		}
 
 		if (pteCalc.getNormalkraft() != null) {
 			double n = pteCalc.getNormalkraft().getNormalkraft();
-			fnResultat.setText(forceFormatter.format(n));
+			fnResultat.setText(kraftFormatter.format(n));
 		}
 
 		if (pteCalc.getAreal() != null) {
@@ -516,7 +522,7 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 		if (pteCalc.getForskydningsspaending() != null) {
 			double n = pteCalc.getForskydningsspaending()
 					.getForskydningsspaending();
-			tauResultat.setText(forceFormatter.format(n));
+			tauResultat.setText(spaendingFormatter.format(n));
 		}
 
 		if (pteCalc.getBojningsmoment() != null) {
@@ -541,15 +547,29 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 
 		if (pteCalc.getBojningsmoment() != null) {
 			double n = pteCalc.getBojningsmoment().getBojningsmoment();
-			laengdeResultat.setText(forceFormatter.format(n));
+			laengdeResultat.setText(laengdeFormatter.format(n));
 
 		}
 
 		if (pteCalc.getNormalspaending() != null) {
 			double n = pteCalc.getNormalspaending().getNormalspaending();
-			sigmaNResultat.setText(forceFormatter.format(n));
+			sigmaNResultat.setText(spaendingFormatter.format(n));
 		}
 
+      if (pteCalc.getBojningsspaending() != null) {
+         double n = pteCalc.getBojningsspaending().getBojningsspending();
+         sigmaBojResultat.setText(spaendingFormatter.format(n));
+      }
+
+      if (pteCalc.getReferencespaending() != null) {
+         double n = pteCalc.getReferencespaending().getReferencespaending();
+         sigmaRefResultat.setText(spaendingFormatter.format(n));
+      }
+
+      if (pteCalc.getSikkerhedsfaktor() != null) {
+         double n = pteCalc.getSikkerhedsfaktor().getSikkerhedsfaktor();
+         sikkerhedsfaktorResultat.setText(decimalFormatter.format(n));
+      }
 	}
 
 	@Override
@@ -596,21 +616,27 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 				}
 			} catch (UgyldigVinkelException ex) {
 				JOptionPane.showMessageDialog(null,
-						"Vinkel skal vre mellem 0 og 90 grader");
+						"Vinkel skal vaere mellem 0 og 90 grader");
 			} catch (NumberFormatException ex) {
 				JOptionPane.showMessageDialog(null, "Ugyldig nummer");
 			}
 		} else if (e == arealIndskrivning || e == arealEnhed) {
 			if (!vinkel.getText().isEmpty()) {
-				try {
-					double areal = Double.parseDouble(arealIndskrivning
-							.getText());
-					pteCalc.beregnForskydningsspaending(areal,
-							(ArealEnhed) arealEnhed.getSelectedItem());
-				} catch (UgyldigArealException | NumberFormatException e1) {
-					JOptionPane.showMessageDialog(null,
-							"Ugyldigt Areal. Areal skal være skarpt positivt.");
-				}
+            if (!arealIndskrivning.getText().isEmpty()
+                    && pteCalc.getNormalkraft() != null) {
+               try {
+                  double areal = Double.parseDouble(arealIndskrivning
+                          .getText());
+                  pteCalc.beregnNormalspaending(areal,
+                          (ArealEnhed) arealEnhed.getSelectedItem());
+                  pteCalc.beregnForskydningsspaending(areal,
+                          (ArealEnhed) arealEnhed.getSelectedItem());
+                  sigmaNResultat.setText(pteCalc.getNormalspaending().getNormalspaending() + "");
+               } catch (UgyldigArealException | NumberFormatException e3) {
+                  JOptionPane.showMessageDialog(null,
+                          "Ugyldigt Areal. Areal skal være skarpt positivt.");
+               }
+            }
 			}
 		} else if (e == armensLaengdeIndskrivning) {
 			if (!armensLaengdeIndskrivning.getText().isEmpty()) {
@@ -625,23 +651,41 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 									"Ugyldig laengde. Laengde skal være skarpt positivt");
 				}
 			}
-		}
+		} else if (e == eIndskrivning || e == iIndskrivning) {
+         if (!eIndskrivning.getText().isEmpty() &&
+                 !iIndskrivning.getText().isEmpty() &&
+                 pteCalc.getBojningsmoment() != null) {
+            Double eVal = null, iVal = null;
+            try {
+               eVal = Double.parseDouble(eIndskrivning.getText());
+            } catch (NumberFormatException ex) {
+               JOptionPane.showMessageDialog(null, "Ugyldig vaerdi for halvhoejde");
+            }
+            try {
+               iVal = Double.parseDouble(iIndskrivning.getText());
+            } catch (NumberFormatException ex) {
+               JOptionPane.showMessageDialog(null, "Ugyldig vaerdi for inertimoment");
+            }
 
-		else if (e == arealIndskrivning)
-			if (!arealIndskrivning.getText().isEmpty()
-					&& !fnResultat.getText().isEmpty()) {
-				try {
-					double areal = Double.parseDouble(arealIndskrivning
-							.getText());
-					pteCalc.beregnNormalspaending(areal,
-							(ArealEnhed) arealEnhed.getSelectedItem());
-					sigmaNResultat.setText(pteCalc.getNormalspaending().getNormalspaending() + "");
-				} catch (UgyldigArealException | NumberFormatException e3) {
-					JOptionPane.showMessageDialog(null,
-							"Ugyldigt Areal. Areal skal være skarpt positivt.");
-				}
-			}
-
+            if (eVal != null && iVal != null) {
+               try {
+                  pteCalc.beregnBojningspaending(iVal, eVal);
+               } catch (UgyldigHalvhojdeException ex) {
+                  JOptionPane.showMessageDialog(null, "Halvhoejde maa ikke vaere negativ");
+               } catch (UgyldigInertiMomentException ex) {
+                  JOptionPane.showMessageDialog(null, "Inertimoment maa ikke vaere negativ");
+               }
+            }
+         }
+      } else if (e == tilladeligSpaendingIndskrivning &&
+              !tilladeligSpaendingIndskrivning.getText().isEmpty()) {
+         try {
+            double n = Double.parseDouble(tilladeligSpaendingIndskrivning.getText());
+            pteCalc.beregnSikkerhedsfaktor(n);
+         } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Ugyldig vaerdi for tilladelig spaending");
+         }
+      }
 	}
 
 }

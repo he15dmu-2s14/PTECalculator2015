@@ -121,8 +121,16 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 		bojningsspaending.setInertimoment( inertimoment );
 		bojningsspaending.setHalvhojde( halvhojde );
 		bojningsspaending.setBojningsmoment( bojningsmoment );
+      beregnReferencespaending();
 		notifyObservers();
 	}
+
+   private void beregnReferencespaending() {
+      referencespaending = new ReferencespaendingImpl();
+      referencespaending.setBojningsspending(bojningsspaending);
+      referencespaending.setForskydningsspaending(forskydningsspaending);
+      referencespaending.setNormalspaending(normalspaending);
+   }
 
     @Override
     public Bojningsspaending getBojningsspaending() {
