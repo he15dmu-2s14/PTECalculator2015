@@ -161,45 +161,54 @@ public class Visualizer extends Component implements MouseListener, MouseMotionL
       g2.drawLine(origin.x, origin.y, p.x, p.y);
 
       // Draw Ft triangle edge
-      double lenFt = Math.sin(toRadians(-90 - deg)) * radius / Math.sin(angP);
+      double len = Math.sin(toRadians(-90 - deg)) * radius / Math.sin(angP);
       double angQ = angP + Math.PI / 2;
       // Endpoint
       Point q = new Point(
-              (int) (Math.cos(angQ) * lenFt) + origin.x,
-              (int) (Math.sin(angQ) * lenFt) + origin.y);
+              (int) (Math.cos(angQ) * len) + origin.x,
+              (int) (Math.sin(angQ) * len) + origin.y);
       g2.drawLine(origin.x, origin.y, q.x, q.y);
 
       // Draw Fdim triangle edge
       g2.drawLine(p.x, p.y, q.x, q.y);
 
       // Draw right angle
+      len = Math.sqrt(2 * square(RIGHT_ANGLE_SIZE));
       boolean flip = (p.x < origin.x && p.y <= origin.y || p.x >= origin.x && p.y > origin.y);
-      double h = Math.sqrt(2 * square(RIGHT_ANGLE_SIZE));
       double angW = angP + Math.PI / 4 * (flip ? -1 : 1);
       Point w = new Point(
-              (int) (Math.cos(angW) * h) + origin.x,
-              (int) (Math.sin(angW) * h) + origin.y);
+              (int) (Math.cos(angW) * len) + origin.x,
+              (int) (Math.sin(angW) * len) + origin.y);
       styleRightAngle(g2);
       // Line parallel with Fn
+      len = RIGHT_ANGLE_SIZE;
       g2.drawLine(
-              (int) (Math.cos(angP) * RIGHT_ANGLE_SIZE) + origin.x,
-              (int) (Math.sin(angP) * RIGHT_ANGLE_SIZE) + origin.y,
+              (int) (Math.cos(angP) * len) + origin.x,
+              (int) (Math.sin(angP) * len) + origin.y,
               w.x, w.y);
       // Line parallel with Ft
+      len = RIGHT_ANGLE_SIZE * (flip ? -1 : 1);
       g2.drawLine(
-              (int) (Math.cos(angQ) * RIGHT_ANGLE_SIZE * (flip ? -1 : 1)) + origin.x,
-              (int) (Math.sin(angQ) * RIGHT_ANGLE_SIZE * (flip ? -1 : 1)) + origin.y,
+              (int) (Math.cos(angQ) * len) + origin.x,
+              (int) (Math.sin(angQ) * len) + origin.y,
               w.x, w.y);
 
       // Draw labels
-      double rotate = -Math.PI / 2;
+      double rotation = -Math.PI / 2;
+      double rotP = angP + rotation;
+      double rotQ = angQ + rotation;
       styleLabels(g2);
+      // Draw Fn
+      len = 40 * (flip ? -1 : 1);
       g2.drawString("Fn",
-              (float) (Math.cos(angP + rotate) * 40 * (flip ? -1 : 1)) + origin.x + (p.x - origin.x) / 2f,
-              (float) (Math.sin(angP + rotate) * 40 * (flip ? -1 : 1)) + origin.y + (p.y - origin.y) / 2f);
+              (float) (Math.cos(rotP) * len) + (origin.x + p.x) / 2f,
+              (float) (Math.sin(rotP) * len) + (origin.y + p.y) / 2f);
+      // Draw Ft
+      len = -40;
       g2.drawString("Ft",
-              (float) (Math.cos(angQ + rotate) * -40) + origin.x + (q.x - origin.x) / 2f,
-              (float) (Math.sin(angQ + rotate) * -40) + origin.y + (q.y - origin.y) / 2f);
+              (float) (Math.cos(rotQ) * len) + (origin.x + q.x) / 2f,
+              (float) (Math.sin(rotQ) * len) + (origin.y + q.y) / 2f);
+      // Draw Fdim
       g2.drawString("Fdim",
               p.x + (p.x < origin.x ? -55 : 15),
               (p.y + q.y) / 2);
