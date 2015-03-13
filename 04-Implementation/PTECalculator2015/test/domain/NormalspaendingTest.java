@@ -19,7 +19,6 @@ import domain.Normalspaending;
 import domain.NormalspaendingImpl;
 import domain.Vinkel;
 import domain.VinkelImpl;
-import domain.Enhed;
 import domain.ArealEnhed;
 
 public class NormalspaendingTest {

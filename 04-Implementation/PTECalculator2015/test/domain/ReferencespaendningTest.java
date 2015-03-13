@@ -27,7 +27,7 @@ import domain.NormalkraftImpl;
 import domain.Normalspaending;
 import domain.NormalspaendingImpl;
 import domain.Referencespaending;
-import domain.ReferencespaendingImplc;
+import domain.ReferencespaendingImpl;
 import domain.Tvaerkraft;
 import domain.TvaerkraftImpl;
 import domain.Vinkel;
@@ -56,7 +56,7 @@ public class ReferencespaendningTest {
 
 	@Before
 	public void init(){
-		referencespending = new ReferencespaendingImplc();
+		referencespending = new ReferencespaendingImpl();
 		sigman = new NormalspaendingImpl();
 		sigmaboej = new BojningsspaendingImpl();
 		areal = new ArealImpl();
@@ -151,7 +151,7 @@ public class ReferencespaendningTest {
 		tvaerkraft.setBelastning(belastning);
 		tvaerkraft.setVinkel(vinkel);
 		
-		bojningsmoment.setArmlangde(2000.5);
+		bojningsmoment.setArmlangde(2000.5,Laengde.mm);
 		bojningsmoment.setTvaerkraft(tvaerkraft);
 		
 		halvhojde.setHalvhojde(200.5);
@@ -178,7 +178,7 @@ public class ReferencespaendningTest {
 		tvaerkraft.setBelastning(belastning);
 		tvaerkraft.setVinkel(vinkel);
 		
-		bojningsmoment.setArmlangde(2000.5);
+		bojningsmoment.setArmlangde(2000.5, Laengde.mm);
 		bojningsmoment.setTvaerkraft(tvaerkraft);
 		
 		halvhojde.setHalvhojde(200.5);
@@ -211,7 +211,7 @@ public class ReferencespaendningTest {
 		tvaerkraft.setBelastning(belastning);
 		tvaerkraft.setVinkel(vinkel);
 		
-		bojningsmoment.setArmlangde(2000.5);
+		bojningsmoment.setArmlangde(2000.5,Laengde.mm);
 		bojningsmoment.setTvaerkraft(tvaerkraft);
 		
 		halvhojde.setHalvhojde(200.5);
@@ -243,7 +243,7 @@ public class ReferencespaendningTest {
 		vinkel.setGradtal(30, true);		
 		ft.setVinkel(vinkel);
 		ft.setBelastning(belastning);
-		bojningsmoment.setArmlangde(2500.0);
+		bojningsmoment.setArmlangde(2500.0, Laengde.mm);
 		bojningsmoment.setTvaerkraft(ft);
 		halvhojde.setHalvhojde(50);
 		intertimoment.setInertimomoent(8333333.33);

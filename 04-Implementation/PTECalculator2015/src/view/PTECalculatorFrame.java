@@ -1,21 +1,26 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.text.DecimalFormat;
 
+import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import domain.Vinkel;
 import logic.PTECalculatorController;
 import logic.PTECalculatorControllerImpl;
 import logic.PTEObserver;
@@ -37,9 +42,13 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 	private JComboBox<Enhed> enhed;
 	private JComboBox<ArealEnhed> arealEnhed;
 	private JComboBox<String> vandretLodret;
-	private JTextField arealIndskrivning, armensLaengdeIndskrivning;
-	private JTextField fnResultat, ftResultat, arealResultat, tauResultat, laengdeResultat;
+	private JTextField arealIndskrivning, armensLaengdeIndskrivning,
+			eIndskrivning, iIndskrivning, tilladeligSpaendingIndskrivning;
+	private JTextField fnResultat, ftResultat, arealResultat, tauResultat,
+			laengdeResultat, sigmaNResultat, sigmaBojResultat,
+			sigmaRefResultat, sikkerhedsfaktorResultat;
 	private JTextField fnFormel, ftFormel, tauFormel;
+   private Visualizer visualizer;
 	private PTECalculatorController pteCalc;
 
 	private DecimalFormat forceFormatter;
@@ -55,7 +64,7 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 
 		// settings på framen
 		setTitle("PTECalculator");
-		setSize(600, 600);
+		setSize(900, 600);
 		setResizable(true);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -81,8 +90,7 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 		laengdeEnhed.addItem(Laengde.mm);
 		laengdeEnhed.addItem(Laengde.cm);
 		laengdeEnhed.addItem(Laengde.m);
-		laengdeEnhed.setPreferredSize(new Dimension(73
-				, 22));
+		laengdeEnhed.setPreferredSize(new Dimension(73, 22));
 		laengdeEnhed.addActionListener(this);
 
 		arealEnhed = new JComboBox<ArealEnhed>();
@@ -121,6 +129,18 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 		ftResultat = new JTextField(6);
 		ftResultat.setEditable(false);
 
+		sigmaNResultat = new JTextField(8);
+		sigmaNResultat.setEditable(false);
+
+		sigmaBojResultat = new JTextField(8);
+		sigmaBojResultat.setEditable(false);
+
+		sigmaRefResultat = new JTextField(8);
+		sigmaRefResultat.setEditable(false);
+
+		sikkerhedsfaktorResultat = new JTextField(8);
+		sikkerhedsfaktorResultat.setEditable(false);
+
 		arealIndskrivning = new JTextField(8);
 		arealIndskrivning.setEditable(true);
 		arealIndskrivning.addFocusListener(this);
@@ -128,6 +148,18 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 		armensLaengdeIndskrivning = new JTextField(8);
 		armensLaengdeIndskrivning.setEditable(true);
 		armensLaengdeIndskrivning.addFocusListener(this);
+
+		tilladeligSpaendingIndskrivning = new JTextField(8);
+		tilladeligSpaendingIndskrivning.setEditable(true);
+		tilladeligSpaendingIndskrivning.addFocusListener(this);
+
+		eIndskrivning = new JTextField(8);
+		eIndskrivning.setEditable(true);
+		eIndskrivning.addFocusListener(this);
+
+		iIndskrivning = new JTextField(8);
+		iIndskrivning.setEditable(true);
+		iIndskrivning.addFocusListener(this);
 
 		arealResultat = new JTextField(10);
 		arealResultat.setEditable(false);
@@ -137,13 +169,19 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 
 		tauResultat = new JTextField(6);
 		tauResultat.setEditable(false);
-		
+
 		laengdeResultat = new JTextField(8);
 		laengdeResultat.setEditable(false);
+
+      visualizer = new Visualizer();
+      visualizer.setPreferredSize(new Dimension(300, 450));
+      visualizer.setOrigin(new Point(25, 275));
+      visualizer.setDraggable(true);
 	}
 
 	private void layoutComponents() {
-		getContentPane().setLayout(new GridBagLayout());
+		JPanel inputPanel = new JPanel(new GridBagLayout());
+      add(inputPanel);
 
 		GridBagConstraints con;
 		Insets ins = new Insets(5, 5, 5, 5);
@@ -152,100 +190,99 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 		con = createGBC(3, 0, 1, 1);
 		con.insets = new Insets(5, 15, 0, 5);
 		con.anchor = GridBagConstraints.WEST;
-		add(new JLabel("Formel"), con);
+      inputPanel.add(new JLabel("Formel"), con);
 
 		con = createGBC(4, 0, 1, 1);
 		con.insets = new Insets(5, 5, 0, 5);
 		con.anchor = GridBagConstraints.WEST;
-		add(new JLabel("Fdim"), con);
+      inputPanel.add(new JLabel("Fdim"), con);
 
 		// Linie 1
 		con = createGBC(0, 1, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		add(new JLabel("Belastning (Fdim):  "), con);
+      inputPanel.add(new JLabel("Belastning (Fdim):  "), con);
 
 		con = createGBC(1, 1, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		add(belastning, con);
+      inputPanel.add(belastning, con);
 
 		con = createGBC(2, 1, 1, 1);
 		con.insets = ins;
-		add(enhed, con);
+      inputPanel.add(enhed, con);
 
 		con = createGBC(3, 1, 1, 1);
 		con.insets = new Insets(0, 5, 5, 5);
-		add(belastningFormel, con);
+      inputPanel.add(belastningFormel, con);
 
 		con = createGBC(4, 1, 1, 1);
 		con.insets = new Insets(0, 5, 5, 5);
-		add(fDim, con);
+      inputPanel.add(fDim, con);
 
 		// Linie 2
 		con = createGBC(0, 2, 1, 1);
 		con.insets = new Insets(5, 5, 20, 5);
 		con.anchor = GridBagConstraints.WEST;
-		add(new JLabel("Vinkel: "), con);
+      inputPanel.add(new JLabel("Vinkel: "), con);
 
 		con = createGBC(1, 2, 1, 1);
 		con.insets = new Insets(5, 5, 20, 5);
 		con.anchor = GridBagConstraints.WEST;
-		add(vinkel, con);
+      inputPanel.add(vinkel, con);
 
 		con = createGBC(2, 2, 1, 1);
 		con.insets = new Insets(5, 5, 20, 5);
-		add(vandretLodret, con);
+      inputPanel.add(vandretLodret, con);
 
 		// Linie 3
 		con = createGBC(1, 3, 1, 1);
 		con.insets = new Insets(5, 5, 0, 5);
 		con.anchor = GridBagConstraints.WEST;
-		add(new JLabel("Formel"), con);
-		
+      inputPanel.add(new JLabel("Formel"), con);
+
 		con = createGBC(2, 3, 1, 1);
 		con.insets = new Insets(5, 5, 0, 5);
 		con.anchor = GridBagConstraints.WEST;
-		add(new JLabel("Resultat"), con);
-
+      inputPanel.add(new JLabel("Resultat"), con);
 
 		// Linie 4
 		con = createGBC(0, 4, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		add(new JLabel("Fn: "), con);
+      inputPanel.add(new JLabel("Fn: "), con);
 
 		con = createGBC(1, 4, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		add(fnFormel, con);
+      inputPanel.add(fnFormel, con);
 
 		con = createGBC(2, 4, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		add(fnResultat, con);
+      inputPanel.add(fnResultat, con);
 
 		// Linie 5
 		con = createGBC(0, 5, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		add(new JLabel("Ft: "), con);
+      inputPanel.add(new JLabel("Ft: "), con);
 
 		con = createGBC(1, 5, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		add(ftFormel, con);
+      inputPanel.add(ftFormel, con);
 
 		con = createGBC(2, 5, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		add(ftResultat, con);
+      inputPanel.add(ftResultat, con);
 
 		// Linje 6 (ny)
 		con = createGBC(0, 6, 5, 1);
 		con.insets = new Insets(5, 5, 15, 5);
 		con.anchor = GridBagConstraints.WEST;
-		add(new JLabel(
+      inputPanel.add(new JLabel(
 				"_______________________________________________________________________"),
 				con);
 
@@ -253,63 +290,149 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 		con = createGBC(0, 7, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		add(new JLabel("Areal: "), con);
+      inputPanel.add(new JLabel("Areal: "), con);
 
 		con = createGBC(1, 7, 1, 1);
 		con.insets = ins;
-		add(arealIndskrivning, con);
+      inputPanel.add(arealIndskrivning, con);
 
 		con = createGBC(2, 7, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		add(arealEnhed, con);
+      inputPanel.add(arealEnhed, con);
 
 		con = createGBC(3, 7, 1, 1);
 		con.insets = ins;
-		add(arealResultat, con);
+      inputPanel.add(arealResultat, con);
 
 		con = createGBC(4, 7, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		add(new JLabel("mm^2"), con);
+      inputPanel.add(new JLabel("mm^2"), con);
 
 		// Linje 8 (ny)
 		con = createGBC(0, 8, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		add(new JLabel("tau: "), con);
+      inputPanel.add(new JLabel("tau: "), con);
 
 		con = createGBC(1, 8, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		add(tauFormel, con);
+      inputPanel.add(tauFormel, con);
 
 		con = createGBC(2, 8, 1, 1);
 		con.insets = ins;
-		add(tauResultat, con);
+      inputPanel.add(tauResultat, con);
 
 		// Linie 9 BøjningsMoment
 		con = createGBC(0, 9, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		add(new JLabel("Armens laengde:"), con);
+      inputPanel.add(new JLabel("Armens laengde:"), con);
 
 		con = createGBC(1, 9, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		add(armensLaengdeIndskrivning, con);
+      inputPanel.add(armensLaengdeIndskrivning, con);
 
 		con = createGBC(2, 9, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		add(laengdeEnhed, con);
-		
+      inputPanel.add(laengdeEnhed, con);
+
 		con = createGBC(3, 9, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		add(laengdeResultat, con);
+      inputPanel.add(laengdeResultat, con);
 
+		// linje 10
+		con = createGBC(0, 11, 1, 1);
+		con.insets = ins;
+		con.anchor = GridBagConstraints.WEST;
+      inputPanel.add(new JLabel("SigmaN:"), con);
 
+		// linie 11 IKKE IMPLEMENTERET LOGIK
+		con = createGBC(0, 11, 1, 1);
+		con.insets = ins;
+		con.anchor = GridBagConstraints.WEST;
+      inputPanel.add(new JLabel("SigmaN:"), con);
+
+		con = createGBC(1, 11, 1, 1);
+		con.insets = ins;
+		con.anchor = GridBagConstraints.WEST;
+      inputPanel.add(sigmaNResultat, con);
+
+		// linie 12 IKKE IMPLEMENTERET LOGIK
+		con = createGBC(0, 12, 1, 1);
+		con.insets = ins;
+		con.anchor = GridBagConstraints.WEST;
+      inputPanel.add(new JLabel("E :"), con);
+
+		con = createGBC(1, 12, 1, 1);
+		con.insets = ins;
+		con.anchor = GridBagConstraints.WEST;
+      inputPanel.add(eIndskrivning, con);
+
+		// linie 13 IKKE IMPLEMENTERET LOGIK
+		con = createGBC(0, 13, 1, 1);
+		con.insets = ins;
+		con.anchor = GridBagConstraints.WEST;
+      inputPanel.add(new JLabel("I :"), con);
+
+		con = createGBC(1, 13, 1, 1);
+		con.insets = ins;
+		con.anchor = GridBagConstraints.WEST;
+      inputPanel.add(iIndskrivning, con);
+
+		// Linje 14 IKKE IMPLEMENTERET LOGIK
+		con = createGBC(0, 14, 1, 1);
+		con.insets = ins;
+		con.anchor = GridBagConstraints.WEST;
+      inputPanel.add(new JLabel("SigmaBøj :"), con);
+
+		con = createGBC(1, 14, 1, 1);
+		con.insets = ins;
+		con.anchor = GridBagConstraints.WEST;
+      inputPanel.add(sigmaBojResultat, con);
+
+		// linje 15 IKKE IMPLEMENTERET ENDNU!!!!!!
+		con = createGBC(0, 15, 1, 1);
+		con.insets = ins;
+		con.anchor = GridBagConstraints.WEST;
+      inputPanel.add(new JLabel("SigmaRef :"), con);
+
+		con = createGBC(1, 15, 1, 1);
+		con.insets = ins;
+		con.anchor = GridBagConstraints.WEST;
+      inputPanel.add(sigmaRefResultat, con);
+
+		// Linje 16 IKKE IMPLEMENTERET ENDNU!!!!!!
+		con = createGBC(0, 16, 1, 1);
+		con.insets = ins;
+		con.anchor = GridBagConstraints.WEST;
+      inputPanel.add(new JLabel("Tilladelig Spænding :"), con);
+
+		con = createGBC(1, 16, 1, 1);
+		con.insets = ins;
+		con.anchor = GridBagConstraints.WEST;
+      inputPanel.add(tilladeligSpaendingIndskrivning, con);
+
+		// Linje 17 IKKE IMPLEMENTERET ENDNU!!!!!!
+		con = createGBC(0, 17, 1, 1);
+		con.insets = ins;
+		con.anchor = GridBagConstraints.WEST;
+      inputPanel.add(new JLabel("Sikkerhedsfaktor :"), con);
+
+		con = createGBC(1, 17, 1, 1);
+		con.insets = ins;
+		con.anchor = GridBagConstraints.WEST;
+      inputPanel.add(sikkerhedsfaktorResultat, con);
+
+      JPanel visPanel = new JPanel(new BorderLayout());
+      add(visPanel, BorderLayout.EAST);
+      visPanel.setBorder(BorderFactory.createLoweredBevelBorder());
+      visPanel.add(visualizer);
 	}
 
 	public GridBagConstraints createGBC(int x, int y, int width, int height) {
@@ -355,10 +478,11 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 			fDim.setText(forceFormatter.format(f));
 		}
 
-		if (pteCalc.getVinkel() != null)
-			vandretLodret
-					.setSelectedItem(pteCalc.getVinkel().tilVandret() ? VANDRET
-							: LODRET);
+      Vinkel v = pteCalc.getVinkel();
+      if (v != null) {
+         vandretLodret.setSelectedItem(v.tilVandret() ? VANDRET : LODRET);
+         visualizer.setVinkel(v);
+      }
 
 		if (pteCalc.getTvaerkraft() != null) {
 			double f = pteCalc.getTvaerkraft().getTvaerkraft();
@@ -394,10 +518,38 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 					.getForskydningsspaending();
 			tauResultat.setText(forceFormatter.format(n));
 		}
-		if(pteCalc.getBojningsmoment() != null) {
+
+		if (pteCalc.getBojningsmoment() != null) {
+			double angivetArmLaengde;
+			Laengde lEnhed = (Laengde) laengdeEnhed.getSelectedItem();
+			switch (lEnhed) {
+			case cm:
+				angivetArmLaengde = pteCalc.getBojningsmoment()
+						.getArmlaengdeIcm();
+				break;
+			case m:
+				angivetArmLaengde = pteCalc.getBojningsmoment()
+						.getArmlaengdeIm();
+				break;
+			default:
+				angivetArmLaengde = pteCalc.getBojningsmoment()
+						.getArmlaengdeImm();
+				break;
+			}
+			armensLaengdeIndskrivning.setText("" + angivetArmLaengde);
+		}
+
+		if (pteCalc.getBojningsmoment() != null) {
 			double n = pteCalc.getBojningsmoment().getBojningsmoment();
 			laengdeResultat.setText(forceFormatter.format(n));
+
 		}
+
+		if (pteCalc.getNormalspaending() != null) {
+			double n = pteCalc.getNormalspaending().getNormalspaending();
+			sigmaNResultat.setText(forceFormatter.format(n));
+		}
+
 	}
 
 	@Override
@@ -460,17 +612,36 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 							"Ugyldigt Areal. Areal skal være skarpt positivt.");
 				}
 			}
-		} else if (e == armensLaengdeIndskrivning || e == laengdeResultat) {
-			if(!armensLaengdeIndskrivning.getText().isEmpty()) {
+		} else if (e == armensLaengdeIndskrivning) {
+			if (!armensLaengdeIndskrivning.getText().isEmpty()) {
 				try {
-					double laengde = Double.parseDouble(armensLaengdeIndskrivning.getText());
-					pteCalc.beregnBojningsmoment(laengde);
+					double laengde = Double
+							.parseDouble(armensLaengdeIndskrivning.getText());
+					pteCalc.beregnBojningsmoment(laengde,
+							(Laengde) laengdeEnhed.getSelectedItem());
 				} catch (UgyldigLaengdeException | NumberFormatException e2) {
-					JOptionPane.showMessageDialog(null, "Ugyldig laengde. Laengde skal være skarpt positivt");
+					JOptionPane
+							.showMessageDialog(null,
+									"Ugyldig laengde. Laengde skal være skarpt positivt");
 				}
 			}
 		}
-		
+
+		else if (e == arealIndskrivning)
+			if (!arealIndskrivning.getText().isEmpty()
+					&& !fnResultat.getText().isEmpty()) {
+				try {
+					double areal = Double.parseDouble(arealIndskrivning
+							.getText());
+					pteCalc.beregnNormalspaending(areal,
+							(ArealEnhed) arealEnhed.getSelectedItem());
+					sigmaNResultat.setText(pteCalc.getNormalspaending().getNormalspaending() + "");
+				} catch (UgyldigArealException | NumberFormatException e3) {
+					JOptionPane.showMessageDialog(null,
+							"Ugyldigt Areal. Areal skal være skarpt positivt.");
+				}
+			}
+
 	}
 
 }

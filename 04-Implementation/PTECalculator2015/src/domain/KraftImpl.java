@@ -1,7 +1,7 @@
 package domain;
 
 
-public class KraftImpl implements Kraft {
+public abstract class KraftImpl implements Kraft {
 	protected Vinkel vinkel;
 	protected Belastning belastning;
 
