@@ -128,24 +128,30 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 
 		fnResultat = new JTextField(6);
 		fnResultat.setEditable(false);
+		fnResultat.setFocusable(false);
 
 		ftFormel = new JTextField(8);
 		ftFormel.setEditable(false);
 
 		ftResultat = new JTextField(6);
 		ftResultat.setEditable(false);
+		ftResultat.setFocusable(false);
 
 		sigmaNResultat = new JTextField(8);
 		sigmaNResultat.setEditable(false);
+		sigmaNResultat.setFocusable(false);
 
 		sigmaBojResultat = new JTextField(8);
 		sigmaBojResultat.setEditable(false);
+		sigmaBojResultat.setFocusable(false);
 
 		sigmaRefResultat = new JTextField(8);
 		sigmaRefResultat.setEditable(false);
+		sigmaRefResultat.setFocusable(false);
 
 		sikkerhedsfaktorResultat = new JTextField(8);
 		sikkerhedsfaktorResultat.setEditable(false);
+		sikkerhedsfaktorResultat.setFocusable(false);
 
 		arealIndskrivning = new JTextField(8);
 		arealIndskrivning.setEditable(true);
@@ -169,15 +175,18 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 
 		arealResultat = new JTextField(10);
 		arealResultat.setEditable(false);
+		arealResultat.setFocusable(false);
 
 		tauFormel = new JTextField(8);
 		tauFormel.setEditable(false);
 
 		tauResultat = new JTextField(6);
 		tauResultat.setEditable(false);
+		tauResultat.setFocusable(false);
 
 		laengdeResultat = new JTextField(8);
 		laengdeResultat.setEditable(false);
+		laengdeResultat.setFocusable(false);
 
       visualizer = new Visualizer();
       visualizer.setPreferredSize(new Dimension(300, 450));
@@ -516,7 +525,6 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 				angivetAreal = pteCalc.getAreal().getAreal();
 				break;
 			}
-			arealIndskrivning.setText("" + angivetAreal);
 		}
 
 		if (pteCalc.getForskydningsspaending() != null) {
@@ -542,7 +550,6 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 						.getArmlaengdeImm();
 				break;
 			}
-			armensLaengdeIndskrivning.setText("" + angivetArmLaengde);
 		}
 
 		if (pteCalc.getBojningsmoment() != null) {
@@ -631,7 +638,6 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
                           (ArealEnhed) arealEnhed.getSelectedItem());
                   pteCalc.beregnForskydningsspaending(areal,
                           (ArealEnhed) arealEnhed.getSelectedItem());
-                  sigmaNResultat.setText(pteCalc.getNormalspaending().getNormalspaending() + "");
                } catch (UgyldigArealException | NumberFormatException e3) {
                   JOptionPane.showMessageDialog(null,
                           "Ugyldigt Areal. Areal skal være skarpt positivt.");
