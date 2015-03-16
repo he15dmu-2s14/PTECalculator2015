@@ -166,10 +166,21 @@ public interface PTECalculatorController {
      * @return Det aktuelle halvhojdeobjekt ellers ugyldigHalvhojdeException
      */
     public Halvhojde getHalvhoejde();
-
+    /**
+     * 
+     * @return Det aktuelle Referencespaending objekt.
+     */
     public Referencespaending getReferencespaending();
-    
+   
+    /**
+     * Denne metode udregner Sikkerhedsfaktoren ved hjaelp af Refererencespaending og Tilladeligspaending.
+     * @param tilladelig, er en konstant vaerdi som brugeren selv indtaster for at udregne Sikkerhedsfaktoren.
+     */
     public void beregnSikkerhedsfaktor(double tilladelig);
-    
+   
+    /**
+     * Denne metode bruges til at faa Sikkerhedsfaktoren.
+     * @return Det aktuelle Sikkerhedsfaktorobjekt
+     */
     public Sikkerhedsfaktor getSikkerhedsfaktor();
 }
