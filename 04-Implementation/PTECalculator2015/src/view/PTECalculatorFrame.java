@@ -35,7 +35,7 @@ import exceptions.UgyldigLaengdeException;
 import exceptions.UgyldigVinkelException;
 
 public class PTECalculatorFrame extends JFrame implements PTEObserver,
-		FocusListener, ActionListener {
+FocusListener, ActionListener {
 	private static final long serialVersionUID = 1L;
 	private static final String VANDRET = "Vandret", LODRET = "Lodret";
 
@@ -45,12 +45,12 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 	private JComboBox<ArealEnhed> arealEnhed;
 	private JComboBox<String> vandretLodret;
 	private JTextField arealIndskrivning, armensLaengdeIndskrivning,
-			eIndskrivning, iIndskrivning, tilladeligSpaendingIndskrivning;
+	eIndskrivning, iIndskrivning, tilladeligSpaendingIndskrivning;
 	private JTextField fnResultat, ftResultat, arealResultat, tauResultat,
-			laengdeResultat, sigmaNResultat, sigmaBojResultat,
-			sigmaRefResultat, sikkerhedsfaktorResultat;
+	laengdeResultat, sigmaNResultat, sigmaBojResultat,
+	sigmaRefResultat, sikkerhedsfaktorResultat;
 	private JTextField fnFormel, ftFormel, tauFormel;
-   private Visualizer visualizer;
+	private Visualizer visualizer;
 	private PTECalculatorController pteCalc;
 
 	private DecimalFormat decimalFormatter, kraftFormatter, momentFormatter, spaendingFormatter, laengdeFormatter;
@@ -59,11 +59,11 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 		pteCalc = new PTECalculatorControllerImpl();
 		pteCalc.tilmeldObserver(this);
 
-      decimalFormatter = new DecimalFormat("#.##");
+		decimalFormatter = new DecimalFormat("#.##");
 		kraftFormatter = new DecimalFormat("#.## N");
-      momentFormatter = new DecimalFormat("#.## Nmm");
-      spaendingFormatter = new DecimalFormat("#.## N/mm2");
-      laengdeFormatter = new DecimalFormat("#.## mm");
+		momentFormatter = new DecimalFormat("#.## Nmm");
+		spaendingFormatter = new DecimalFormat("#.## N/mm2");
+		laengdeFormatter = new DecimalFormat("#.## Nmm");
 
 		initComponents();
 		layoutComponents();
@@ -188,15 +188,15 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 		laengdeResultat.setEditable(false);
 		laengdeResultat.setFocusable(false);
 
-      visualizer = new Visualizer();
-      visualizer.setPreferredSize(new Dimension(300, 450));
-      visualizer.setOrigin(new Point(25, 275));
-      visualizer.setDraggable(true);
+		visualizer = new Visualizer();
+		visualizer.setPreferredSize(new Dimension(300, 450));
+		visualizer.setOrigin(new Point(25, 275));
+		visualizer.setDraggable(true);
 	}
 
 	private void layoutComponents() {
 		JPanel inputPanel = new JPanel(new GridBagLayout());
-      add(inputPanel);
+		add(inputPanel);
 
 		GridBagConstraints con;
 		Insets ins = new Insets(5, 5, 5, 5);
@@ -205,99 +205,99 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 		con = createGBC(3, 0, 1, 1);
 		con.insets = new Insets(5, 15, 0, 5);
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel("Formel"), con);
+		inputPanel.add(new JLabel("Formel"), con);
 
 		con = createGBC(4, 0, 1, 1);
 		con.insets = new Insets(5, 5, 0, 5);
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel("Fdim"), con);
+		inputPanel.add(new JLabel("Fdim"), con);
 
 		// Linie 1
 		con = createGBC(0, 1, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel("Belastning (Fdim):  "), con);
+		inputPanel.add(new JLabel("Belastning (Fdim):  "), con);
 
 		con = createGBC(1, 1, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(belastning, con);
+		inputPanel.add(belastning, con);
 
 		con = createGBC(2, 1, 1, 1);
 		con.insets = ins;
-      inputPanel.add(enhed, con);
+		inputPanel.add(enhed, con);
 
 		con = createGBC(3, 1, 1, 1);
 		con.insets = new Insets(0, 5, 5, 5);
-      inputPanel.add(belastningFormel, con);
+		inputPanel.add(belastningFormel, con);
 
 		con = createGBC(4, 1, 1, 1);
 		con.insets = new Insets(0, 5, 5, 5);
-      inputPanel.add(fDim, con);
+		inputPanel.add(fDim, con);
 
 		// Linie 2
 		con = createGBC(0, 2, 1, 1);
 		con.insets = new Insets(5, 5, 20, 5);
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel("Vinkel: "), con);
+		inputPanel.add(new JLabel("Vinkel: "), con);
 
 		con = createGBC(1, 2, 1, 1);
 		con.insets = new Insets(5, 5, 20, 5);
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(vinkel, con);
+		inputPanel.add(vinkel, con);
 
 		con = createGBC(2, 2, 1, 1);
 		con.insets = new Insets(5, 5, 20, 5);
-      inputPanel.add(vandretLodret, con);
+		inputPanel.add(vandretLodret, con);
 
 		// Linie 3
 		con = createGBC(1, 3, 1, 1);
 		con.insets = new Insets(5, 5, 0, 5);
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel("Formel"), con);
+		inputPanel.add(new JLabel("Formel"), con);
 
 		con = createGBC(2, 3, 1, 1);
 		con.insets = new Insets(5, 5, 0, 5);
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel("Resultat"), con);
+		inputPanel.add(new JLabel("Resultat"), con);
 
 		// Linie 4
 		con = createGBC(0, 4, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel("Fn: "), con);
+		inputPanel.add(new JLabel("Fn: "), con);
 
 		con = createGBC(1, 4, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(fnFormel, con);
+		inputPanel.add(fnFormel, con);
 
 		con = createGBC(2, 4, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(fnResultat, con);
+		inputPanel.add(fnResultat, con);
 
 		// Linie 5
 		con = createGBC(0, 5, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel("Ft: "), con);
+		inputPanel.add(new JLabel("Ft: "), con);
 
 		con = createGBC(1, 5, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(ftFormel, con);
+		inputPanel.add(ftFormel, con);
 
 		con = createGBC(2, 5, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(ftResultat, con);
+		inputPanel.add(ftResultat, con);
 
 		// Linje 6 (ny)
 		con = createGBC(0, 6, 5, 1);
 		con.insets = new Insets(5, 5, 15, 5);
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel(
+		inputPanel.add(new JLabel(
 				"_______________________________________________________________________"),
 				con);
 
@@ -305,149 +305,149 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 		con = createGBC(0, 7, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel("Areal: "), con);
+		inputPanel.add(new JLabel("Areal: "), con);
 
 		con = createGBC(1, 7, 1, 1);
 		con.insets = ins;
-      inputPanel.add(arealIndskrivning, con);
+		inputPanel.add(arealIndskrivning, con);
 
 		con = createGBC(2, 7, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(arealEnhed, con);
+		inputPanel.add(arealEnhed, con);
 
 		con = createGBC(3, 7, 1, 1);
 		con.insets = ins;
-      inputPanel.add(arealResultat, con);
+		inputPanel.add(arealResultat, con);
 
 		con = createGBC(4, 7, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel("mm^2"), con);
+		inputPanel.add(new JLabel("mm^2"), con);
 
 		// Linje 8 (ny)
 		con = createGBC(0, 8, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel("tau: "), con);
+		inputPanel.add(new JLabel("tau: "), con);
 
 		con = createGBC(1, 8, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(tauFormel, con);
+		inputPanel.add(tauFormel, con);
 
 		con = createGBC(2, 8, 1, 1);
 		con.insets = ins;
-      inputPanel.add(tauResultat, con);
+		inputPanel.add(tauResultat, con);
 
 		// Linie 9 BøjningsMoment
 		con = createGBC(0, 9, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel("Armens laengde:"), con);
+		inputPanel.add(new JLabel("Armens længde:"), con);
 
 		con = createGBC(1, 9, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(armensLaengdeIndskrivning, con);
+		inputPanel.add(armensLaengdeIndskrivning, con);
 
 		con = createGBC(2, 9, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(laengdeEnhed, con);
+		inputPanel.add(laengdeEnhed, con);
 
 		con = createGBC(3, 9, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(laengdeResultat, con);
+		inputPanel.add(laengdeResultat, con);
 
 		// linje 10
 		con = createGBC(0, 11, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel("SigmaN:"), con);
+		inputPanel.add(new JLabel("SigmaN:"), con);
 
 		// linie 11 IKKE IMPLEMENTERET LOGIK
 		con = createGBC(0, 11, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel("SigmaN:"), con);
+		inputPanel.add(new JLabel("SigmaN:"), con);
 
 		con = createGBC(1, 11, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(sigmaNResultat, con);
+		inputPanel.add(sigmaNResultat, con);
 
 		// linie 12 IKKE IMPLEMENTERET LOGIK
 		con = createGBC(0, 12, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel("E :"), con);
+		inputPanel.add(new JLabel("E :"), con);
 
 		con = createGBC(1, 12, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(eIndskrivning, con);
+		inputPanel.add(eIndskrivning, con);
 
 		// linie 13 IKKE IMPLEMENTERET LOGIK
 		con = createGBC(0, 13, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel("I :"), con);
+		inputPanel.add(new JLabel("I :"), con);
 
 		con = createGBC(1, 13, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(iIndskrivning, con);
+		inputPanel.add(iIndskrivning, con);
 
 		// Linje 14 IKKE IMPLEMENTERET LOGIK
 		con = createGBC(0, 14, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel("SigmaBøj :"), con);
+		inputPanel.add(new JLabel("SigmaBøj :"), con);
 
 		con = createGBC(1, 14, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(sigmaBojResultat, con);
+		inputPanel.add(sigmaBojResultat, con);
 
 		// linje 15 IKKE IMPLEMENTERET ENDNU!!!!!!
 		con = createGBC(0, 15, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel("SigmaRef :"), con);
+		inputPanel.add(new JLabel("SigmaRef :"), con);
 
 		con = createGBC(1, 15, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(sigmaRefResultat, con);
+		inputPanel.add(sigmaRefResultat, con);
 
 		// Linje 16 IKKE IMPLEMENTERET ENDNU!!!!!!
 		con = createGBC(0, 16, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel("Tilladelig Spænding :"), con);
+		inputPanel.add(new JLabel("Tilladelig Spænding :"), con);
 
 		con = createGBC(1, 16, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(tilladeligSpaendingIndskrivning, con);
+		inputPanel.add(tilladeligSpaendingIndskrivning, con);
 
 		// Linje 17 IKKE IMPLEMENTERET ENDNU!!!!!!
 		con = createGBC(0, 17, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(new JLabel("Sikkerhedsfaktor :"), con);
+		inputPanel.add(new JLabel("Sikkerhedsfaktor :"), con);
 
 		con = createGBC(1, 17, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-      inputPanel.add(sikkerhedsfaktorResultat, con);
+		inputPanel.add(sikkerhedsfaktorResultat, con);
 
-      JPanel visPanel = new JPanel(new BorderLayout());
-      add(visPanel, BorderLayout.EAST);
-      visPanel.setBorder(BorderFactory.createLoweredBevelBorder());
-      visPanel.add(visualizer);
+		JPanel visPanel = new JPanel(new BorderLayout());
+		add(visPanel, BorderLayout.EAST);
+		visPanel.setBorder(BorderFactory.createLoweredBevelBorder());
+		visPanel.add(visualizer);
 	}
 
 	public GridBagConstraints createGBC(int x, int y, int width, int height) {
@@ -493,11 +493,11 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 			fDim.setText(kraftFormatter.format(f));
 		}
 
-      Vinkel v = pteCalc.getVinkel();
-      if (v != null) {
-         vandretLodret.setSelectedItem(v.tilVandret() ? VANDRET : LODRET);
-         visualizer.setVinkel(v);
-      }
+		Vinkel v = pteCalc.getVinkel();
+		if (v != null) {
+//			vandretLodret.setSelectedItem(v.tilVandret() ? VANDRET : LODRET);
+			visualizer.setVinkel(v);
+		}
 
 		if (pteCalc.getTvaerkraft() != null) {
 			double f = pteCalc.getTvaerkraft().getTvaerkraft();
@@ -539,15 +539,15 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 			switch (lEnhed) {
 			case cm:
 				angivetArmLaengde = pteCalc.getBojningsmoment()
-						.getArmlaengdeIcm();
+				.getArmlaengdeIcm();
 				break;
 			case m:
 				angivetArmLaengde = pteCalc.getBojningsmoment()
-						.getArmlaengdeIm();
+				.getArmlaengdeIm();
 				break;
 			default:
 				angivetArmLaengde = pteCalc.getBojningsmoment()
-						.getArmlaengdeImm();
+				.getArmlaengdeImm();
 				break;
 			}
 		}
@@ -563,20 +563,20 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 			sigmaNResultat.setText(spaendingFormatter.format(n));
 		}
 
-      if (pteCalc.getBojningsspaending() != null) {
-         double n = pteCalc.getBojningsspaending().getBojningsspending();
-         sigmaBojResultat.setText(spaendingFormatter.format(n));
-      }
+		if (pteCalc.getBojningsspaending() != null) {
+			double n = pteCalc.getBojningsspaending().getBojningsspending();
+			sigmaBojResultat.setText(spaendingFormatter.format(n));
+		}
 
-      if (pteCalc.getReferencespaending() != null) {
-         double n = pteCalc.getReferencespaending().getReferencespaending();
-         sigmaRefResultat.setText(spaendingFormatter.format(n));
-      }
+		if (pteCalc.getReferencespaending() != null) {
+			double n = pteCalc.getReferencespaending().getReferencespaending();
+			sigmaRefResultat.setText(spaendingFormatter.format(n));
+		}
 
-      if (pteCalc.getSikkerhedsfaktor() != null) {
-         double n = pteCalc.getSikkerhedsfaktor().getSikkerhedsfaktor();
-         sikkerhedsfaktorResultat.setText(decimalFormatter.format(n));
-      }
+		if (pteCalc.getSikkerhedsfaktor() != null) {
+			double n = pteCalc.getSikkerhedsfaktor().getSikkerhedsfaktor();
+			sikkerhedsfaktorResultat.setText(decimalFormatter.format(n));
+		}
 	}
 
 	@Override
@@ -596,102 +596,94 @@ public class PTECalculatorFrame extends JFrame implements PTEObserver,
 	}
 
 	private void updateFields(Object e) {
-		if (e == belastning || e == enhed) {
-			try {
-				if (!belastning.getText().isEmpty()) { // check om belastning er
-														// tom. Gir Ugyldig
-														// input melding om det
-														// ikke checkes
-					double b = Double.parseDouble(belastning.getText());
-					Enhed enh = (Enhed) enhed.getSelectedItem();
-					pteCalc.angivBelastning(b, enh);
-				}
-			} catch (NumberFormatException | UgyldigBelastningException ex) {
-				JOptionPane.showMessageDialog(null, "Ugyldigt input");
+		try {
+			if (!belastning.getText().isEmpty()) { // check om belastning er
+				// tom. Gir Ugyldig
+				// input melding om det
+				// ikke checkes
+				double b = Double.parseDouble(belastning.getText());
+				Enhed enh = (Enhed) enhed.getSelectedItem();
+				pteCalc.angivBelastning(b, enh);
 			}
-		} else if (e == vinkel || e == vandretLodret) {
+		} catch (NumberFormatException | UgyldigBelastningException ex) {
+			JOptionPane.showMessageDialog(null, "Ugyldigt input");
+		}
+		if (!vinkel.getText().isEmpty()) {
 			try {
-				if (!vinkel.getText().isEmpty()) { // check om vinkel er tom.
-													// Gir Ugyldig nummer
-													// melding om det ikke
-													// checkes
-					double v = Double.parseDouble(vinkel.getText());
-					boolean vandret = vandretLodret.getSelectedItem().equals(
-							VANDRET);
-					pteCalc.beregnTvaerkraft(v, vandret);
-					pteCalc.beregnNormalkraft(v, vandret);
-				}
+				double v = Double.parseDouble(vinkel.getText());
+				boolean vandret = vandretLodret.getSelectedItem().equals(
+						VANDRET);
+				pteCalc.beregnTvaerkraft(v, vandret);
+				pteCalc.beregnNormalkraft(v, vandret);
+			
 			} catch (UgyldigVinkelException ex) {
 				JOptionPane.showMessageDialog(null,
 						"Vinkel skal vaere mellem 0 og 90 grader");
 			} catch (NumberFormatException ex) {
 				JOptionPane.showMessageDialog(null, "Ugyldig nummer");
 			}
-		} else if (e == arealIndskrivning || e == arealEnhed) {
-			if (!vinkel.getText().isEmpty()) {
-            if (!arealIndskrivning.getText().isEmpty()
-                    && pteCalc.getNormalkraft() != null) {
-               try {
-                  double areal = Double.parseDouble(arealIndskrivning
-                          .getText());
-                  pteCalc.beregnNormalspaending(areal,
-                          (ArealEnhed) arealEnhed.getSelectedItem());
-                  pteCalc.beregnForskydningsspaending(areal,
-                          (ArealEnhed) arealEnhed.getSelectedItem());
-               } catch (UgyldigArealException | NumberFormatException e3) {
-                  JOptionPane.showMessageDialog(null,
-                          "Ugyldigt Areal. Areal skal være skarpt positivt.");
-               }
-            }
-			}
-		} else if (e == armensLaengdeIndskrivning) {
-			if (!armensLaengdeIndskrivning.getText().isEmpty()) {
+		}
+		if (!vinkel.getText().isEmpty()) {
+			if (!arealIndskrivning.getText().isEmpty()
+					&& pteCalc.getNormalkraft() != null) {
 				try {
-					double laengde = Double
-							.parseDouble(armensLaengdeIndskrivning.getText());
-					pteCalc.beregnBojningsmoment(laengde,
-							(Laengde) laengdeEnhed.getSelectedItem());
-				} catch (UgyldigLaengdeException | NumberFormatException e2) {
-					JOptionPane
-							.showMessageDialog(null,
-									"Ugyldig laengde. Laengde skal være skarpt positivt");
+					double areal = Double.parseDouble(arealIndskrivning
+							.getText());
+					pteCalc.beregnNormalspaending(areal,
+							(ArealEnhed) arealEnhed.getSelectedItem());
+					pteCalc.beregnForskydningsspaending(areal,
+							(ArealEnhed) arealEnhed.getSelectedItem());
+				} catch (UgyldigArealException | NumberFormatException e3) {
+					JOptionPane.showMessageDialog(null,
+							"Ugyldigt Areal. Areal skal være skarpt positivt.");
 				}
 			}
-		} else if (e == eIndskrivning || e == iIndskrivning) {
-         if (!eIndskrivning.getText().isEmpty() &&
-                 !iIndskrivning.getText().isEmpty() &&
-                 pteCalc.getBojningsmoment() != null) {
-            Double eVal = null, iVal = null;
-            try {
-               eVal = Double.parseDouble(eIndskrivning.getText());
-            } catch (NumberFormatException ex) {
-               JOptionPane.showMessageDialog(null, "Ugyldig vaerdi for halvhoejde");
-            }
-            try {
-               iVal = Double.parseDouble(iIndskrivning.getText());
-            } catch (NumberFormatException ex) {
-               JOptionPane.showMessageDialog(null, "Ugyldig vaerdi for inertimoment");
-            }
+		}
+		if (!armensLaengdeIndskrivning.getText().isEmpty()) {
+			try {
+				double laengde = Double
+						.parseDouble(armensLaengdeIndskrivning.getText());
+				pteCalc.beregnBojningsmoment(laengde,
+						(Laengde) laengdeEnhed.getSelectedItem());
+			} catch (UgyldigLaengdeException | NumberFormatException e2) {
+				JOptionPane
+				.showMessageDialog(null,
+						"Ugyldig laengde. Laengde skal være skarpt positivt");
+			}
+		}
+		if (!eIndskrivning.getText().isEmpty() &&
+				!iIndskrivning.getText().isEmpty() &&
+				pteCalc.getBojningsmoment() != null) {
+			Double eVal = null, iVal = null;
+			try {
+				eVal = Double.parseDouble(eIndskrivning.getText());
+			} catch (NumberFormatException ex) {
+				JOptionPane.showMessageDialog(null, "Ugyldig vaerdi for halvhoejde");
+			}
+			try {
+				iVal = Double.parseDouble(iIndskrivning.getText());
+			} catch (NumberFormatException ex) {
+				JOptionPane.showMessageDialog(null, "Ugyldig vaerdi for inertimoment");
+			}
 
-            if (eVal != null && iVal != null) {
-               try {
-                  pteCalc.beregnBojningspaending(iVal, eVal);
-               } catch (UgyldigHalvhojdeException ex) {
-                  JOptionPane.showMessageDialog(null, "Halvhoejde maa ikke vaere negativ");
-               } catch (UgyldigInertiMomentException ex) {
-                  JOptionPane.showMessageDialog(null, "Inertimoment maa ikke vaere negativ");
-               }
-            }
-         }
-      } else if (e == tilladeligSpaendingIndskrivning &&
-              !tilladeligSpaendingIndskrivning.getText().isEmpty()) {
-         try {
-            double n = Double.parseDouble(tilladeligSpaendingIndskrivning.getText());
-            pteCalc.beregnSikkerhedsfaktor(n);
-         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Ugyldig vaerdi for tilladelig spaending");
-         }
-      }
+			if (eVal != null && iVal != null) {
+				try {
+					pteCalc.beregnBojningspaending(iVal, eVal);
+				} catch (UgyldigHalvhojdeException ex) {
+					JOptionPane.showMessageDialog(null, "Halvhoejde maa ikke vaere negativ");
+				} catch (UgyldigInertiMomentException ex) {
+					JOptionPane.showMessageDialog(null, "Inertimoment maa ikke vaere negativ");
+				}
+			}
+		}
+		if(!tilladeligSpaendingIndskrivning.getText().isEmpty()) {
+			try {
+				double n = Double.parseDouble(tilladeligSpaendingIndskrivning.getText());
+				pteCalc.beregnSikkerhedsfaktor(n);
+			} catch (NumberFormatException ex) {
+				JOptionPane.showMessageDialog(null, "Ugyldig vaerdi for tilladelig spaending");
+			}
+		}
 	}
 
 }
