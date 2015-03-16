@@ -106,9 +106,6 @@ FocusListener, ActionListener {
 		arealEnhed.setPreferredSize(new Dimension(70, 22));
 		arealEnhed.addActionListener(this);
 
-		belastningFormel = new JTextField(8);
-		belastningFormel.setEditable(false);
-
 		fDim = new JTextField(6);
 		fDim.setEditable(false);
 
@@ -123,15 +120,9 @@ FocusListener, ActionListener {
 		vandretLodret.addItem(LODRET);
 		vandretLodret.addActionListener(this);
 
-		fnFormel = new JTextField(8);
-		fnFormel.setEditable(false);
-
 		fnResultat = new JTextField(6);
 		fnResultat.setEditable(false);
 		fnResultat.setFocusable(false);
-
-		ftFormel = new JTextField(8);
-		ftFormel.setEditable(false);
 
 		ftResultat = new JTextField(6);
 		ftResultat.setEditable(false);
@@ -202,10 +193,6 @@ FocusListener, ActionListener {
 		Insets ins = new Insets(5, 5, 5, 5);
 
 		// Linie 0
-		con = createGBC(3, 0, 1, 1);
-		con.insets = new Insets(5, 15, 0, 5);
-		con.anchor = GridBagConstraints.WEST;
-		inputPanel.add(new JLabel("Formel"), con);
 
 		con = createGBC(4, 0, 1, 1);
 		con.insets = new Insets(5, 5, 0, 5);
@@ -227,10 +214,6 @@ FocusListener, ActionListener {
 		con.insets = ins;
 		inputPanel.add(enhed, con);
 
-		con = createGBC(3, 1, 1, 1);
-		con.insets = new Insets(0, 5, 5, 5);
-		inputPanel.add(belastningFormel, con);
-
 		con = createGBC(4, 1, 1, 1);
 		con.insets = new Insets(0, 5, 5, 5);
 		inputPanel.add(fDim, con);
@@ -251,11 +234,6 @@ FocusListener, ActionListener {
 		inputPanel.add(vandretLodret, con);
 
 		// Linie 3
-		con = createGBC(1, 3, 1, 1);
-		con.insets = new Insets(5, 5, 0, 5);
-		con.anchor = GridBagConstraints.WEST;
-		inputPanel.add(new JLabel("Formel"), con);
-
 		con = createGBC(2, 3, 1, 1);
 		con.insets = new Insets(5, 5, 0, 5);
 		con.anchor = GridBagConstraints.WEST;
@@ -265,12 +243,7 @@ FocusListener, ActionListener {
 		con = createGBC(0, 4, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		inputPanel.add(new JLabel("Fn: "), con);
-
-		con = createGBC(1, 4, 1, 1);
-		con.insets = ins;
-		con.anchor = GridBagConstraints.WEST;
-		inputPanel.add(fnFormel, con);
+		inputPanel.add(new JLabel("Normalkraft Fn: "), con);
 
 		con = createGBC(2, 4, 1, 1);
 		con.insets = ins;
@@ -281,12 +254,7 @@ FocusListener, ActionListener {
 		con = createGBC(0, 5, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		inputPanel.add(new JLabel("Ft: "), con);
-
-		con = createGBC(1, 5, 1, 1);
-		con.insets = ins;
-		con.anchor = GridBagConstraints.WEST;
-		inputPanel.add(ftFormel, con);
+		inputPanel.add(new JLabel("Tværkraft Ft: "), con);
 
 		con = createGBC(2, 5, 1, 1);
 		con.insets = ins;
@@ -382,7 +350,7 @@ FocusListener, ActionListener {
 		con = createGBC(0, 12, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		inputPanel.add(new JLabel("E :"), con);
+		inputPanel.add(new JLabel("Halvhøjde E :"), con);
 
 		con = createGBC(1, 12, 1, 1);
 		con.insets = ins;
@@ -393,7 +361,7 @@ FocusListener, ActionListener {
 		con = createGBC(0, 13, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		inputPanel.add(new JLabel("I :"), con);
+		inputPanel.add(new JLabel("Inertimoment I :"), con);
 
 		con = createGBC(1, 13, 1, 1);
 		con.insets = ins;
