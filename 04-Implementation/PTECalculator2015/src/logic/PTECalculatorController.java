@@ -146,7 +146,13 @@ public interface PTECalculatorController {
      * @return Det aktuelle bojningsmomentobjekt
      */
     public Bojningsmoment getBojningsmoment();
-
+    
+    /**
+     * Beregn normalspaending ud fra normalkraft/areal
+     * @param areal
+     * @param enhed
+     * @throws UgyldigArealException
+     */
     public void beregnNormalspaending(double areal, ArealEnhed enhed) throws UgyldigArealException;
 
     /**
@@ -155,10 +161,24 @@ public interface PTECalculatorController {
      */
     public Normalspaending getNormalspaending();
 
+    /**
+     * Denne metode bruges til at instantiere et Inertimoment objekt, og saetter dens datakerne til den angivne parameter.
+     * @param i er inertimomentet, angivet i mm^4. 
+     * @throws UgyldigInertiMomentException
+     */
     public void angivInertimoment(double i) throws UgyldigInertiMomentException;
 
+    /**
+     * Denne metode bruges til at returnere Inertimomentet
+     * @return Det aktuelle Inertimoment
+     */
     public Inertimoment getInertimoment();
-
+    
+	/**
+	 * Denne metode bruges til at instantiere et hlavhoejde objekt, og saetter dens datakerne til den angivne parameter.
+	 * @param e den angivne halvhoejde
+	 * @throws UgyldigHalvhojdeException
+	 */
     public void angivHalvhoejde(double e) throws UgyldigHalvhojdeException;
 
     /**
