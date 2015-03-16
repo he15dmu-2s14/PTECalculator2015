@@ -53,7 +53,7 @@ FocusListener, ActionListener {
 	private Visualizer visualizer;
 	private PTECalculatorController pteCalc;
 
-	private DecimalFormat decimalFormatter, kraftFormatter, momentFormatter, spaendingFormatter, laengdeFormatter;
+	private DecimalFormat decimalFormatter, kraftFormatter, momentFormatter, spaendingFormatter, laengdeFormatter, arealFormatter;
 
 	public PTECalculatorFrame() {
 		pteCalc = new PTECalculatorControllerImpl();
@@ -62,15 +62,16 @@ FocusListener, ActionListener {
 		decimalFormatter = new DecimalFormat("#.##");
 		kraftFormatter = new DecimalFormat("#.## N");
 		momentFormatter = new DecimalFormat("#.## Nmm");
-		spaendingFormatter = new DecimalFormat("#.## N/mm2");
+		spaendingFormatter = new DecimalFormat("#.## N/mm²");
 		laengdeFormatter = new DecimalFormat("#.## Nmm");
+		arealFormatter = new DecimalFormat("#.## mm²");
 
 		initComponents();
 		layoutComponents();
 
 		// settings på framen
 		setTitle("PTECalculator");
-		setSize(900, 600);
+		setSize(1000, 600);
 		setResizable(true);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -82,7 +83,7 @@ FocusListener, ActionListener {
 	private void initComponents() {
 		// Belastning har ActionListener og FoculListener saa det er mulig aa
 		// bruke baade tab og enter for aa beregne resultat
-		belastning = new JTextField(8);
+		belastning = new JTextField(10);
 		belastning.addFocusListener(this);
 		belastning.addActionListener(this);
 
@@ -96,22 +97,22 @@ FocusListener, ActionListener {
 		laengdeEnhed.addItem(Laengde.mm);
 		laengdeEnhed.addItem(Laengde.cm);
 		laengdeEnhed.addItem(Laengde.m);
-		laengdeEnhed.setPreferredSize(new Dimension(73, 22));
+		laengdeEnhed.setPreferredSize(new Dimension(117, 22));
 		laengdeEnhed.addActionListener(this);
 
 		arealEnhed = new JComboBox<ArealEnhed>();
 		arealEnhed.addItem(ArealEnhed.mm2);
 		arealEnhed.addItem(ArealEnhed.cm2);
 		arealEnhed.addItem(ArealEnhed.m2);
-		arealEnhed.setPreferredSize(new Dimension(70, 22));
+		arealEnhed.setPreferredSize(new Dimension(117, 22));
 		arealEnhed.addActionListener(this);
 
-		fDim = new JTextField(6);
+		fDim = new JTextField(10);
 		fDim.setEditable(false);
 
 		// vinkel har ActionListener og FocusListener saa det er mulig aa bruke
 		// baade tab og enter for aa beregne resultat
-		vinkel = new JTextField(8);
+		vinkel = new JTextField(10);
 		vinkel.addFocusListener(this);
 		vinkel.addActionListener(this);
 
@@ -120,47 +121,47 @@ FocusListener, ActionListener {
 		vandretLodret.addItem(LODRET);
 		vandretLodret.addActionListener(this);
 
-		fnResultat = new JTextField(6);
+		fnResultat = new JTextField(10);
 		fnResultat.setEditable(false);
 		fnResultat.setFocusable(false);
 
-		ftResultat = new JTextField(6);
+		ftResultat = new JTextField(10);
 		ftResultat.setEditable(false);
 		ftResultat.setFocusable(false);
 
-		sigmaNResultat = new JTextField(8);
+		sigmaNResultat = new JTextField(10);
 		sigmaNResultat.setEditable(false);
 		sigmaNResultat.setFocusable(false);
 
-		sigmaBojResultat = new JTextField(8);
+		sigmaBojResultat = new JTextField(10);
 		sigmaBojResultat.setEditable(false);
 		sigmaBojResultat.setFocusable(false);
 
-		sigmaRefResultat = new JTextField(8);
+		sigmaRefResultat = new JTextField(10);
 		sigmaRefResultat.setEditable(false);
 		sigmaRefResultat.setFocusable(false);
 
-		sikkerhedsfaktorResultat = new JTextField(8);
+		sikkerhedsfaktorResultat = new JTextField(10);
 		sikkerhedsfaktorResultat.setEditable(false);
 		sikkerhedsfaktorResultat.setFocusable(false);
 
-		arealIndskrivning = new JTextField(8);
+		arealIndskrivning = new JTextField(10);
 		arealIndskrivning.setEditable(true);
 		arealIndskrivning.addFocusListener(this);
 
-		armensLaengdeIndskrivning = new JTextField(8);
+		armensLaengdeIndskrivning = new JTextField(10);
 		armensLaengdeIndskrivning.setEditable(true);
 		armensLaengdeIndskrivning.addFocusListener(this);
 
-		tilladeligSpaendingIndskrivning = new JTextField(8);
+		tilladeligSpaendingIndskrivning = new JTextField(10);
 		tilladeligSpaendingIndskrivning.setEditable(true);
 		tilladeligSpaendingIndskrivning.addFocusListener(this);
 
-		eIndskrivning = new JTextField(8);
+		eIndskrivning = new JTextField(10);
 		eIndskrivning.setEditable(true);
 		eIndskrivning.addFocusListener(this);
 
-		iIndskrivning = new JTextField(8);
+		iIndskrivning = new JTextField(10);
 		iIndskrivning.setEditable(true);
 		iIndskrivning.addFocusListener(this);
 
@@ -168,14 +169,11 @@ FocusListener, ActionListener {
 		arealResultat.setEditable(false);
 		arealResultat.setFocusable(false);
 
-		tauFormel = new JTextField(8);
-		tauFormel.setEditable(false);
-
-		tauResultat = new JTextField(6);
+		tauResultat = new JTextField(10);
 		tauResultat.setEditable(false);
 		tauResultat.setFocusable(false);
 
-		laengdeResultat = new JTextField(8);
+		laengdeResultat = new JTextField(10);
 		laengdeResultat.setEditable(false);
 		laengdeResultat.setFocusable(false);
 
@@ -194,7 +192,7 @@ FocusListener, ActionListener {
 
 		// Linie 0
 
-		con = createGBC(4, 0, 1, 1);
+		con = createGBC(0, 3, 1, 1);
 		con.insets = new Insets(5, 5, 0, 5);
 		con.anchor = GridBagConstraints.WEST;
 		inputPanel.add(new JLabel("Fdim"), con);
@@ -214,7 +212,7 @@ FocusListener, ActionListener {
 		con.insets = ins;
 		inputPanel.add(enhed, con);
 
-		con = createGBC(4, 1, 1, 1);
+		con = createGBC(1, 3, 1, 1);
 		con.insets = new Insets(0, 5, 5, 5);
 		inputPanel.add(fDim, con);
 
@@ -233,19 +231,13 @@ FocusListener, ActionListener {
 		con.insets = new Insets(5, 5, 20, 5);
 		inputPanel.add(vandretLodret, con);
 
-		// Linie 3
-		con = createGBC(2, 3, 1, 1);
-		con.insets = new Insets(5, 5, 0, 5);
-		con.anchor = GridBagConstraints.WEST;
-		inputPanel.add(new JLabel("Resultat"), con);
-
 		// Linie 4
 		con = createGBC(0, 4, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		inputPanel.add(new JLabel("Normalkraft Fn: "), con);
+		inputPanel.add(new JLabel("Normalkraft (Fn): "), con);
 
-		con = createGBC(2, 4, 1, 1);
+		con = createGBC(1, 4, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
 		inputPanel.add(fnResultat, con);
@@ -254,9 +246,9 @@ FocusListener, ActionListener {
 		con = createGBC(0, 5, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		inputPanel.add(new JLabel("Tværkraft Ft: "), con);
+		inputPanel.add(new JLabel("Tværkraft (Ft): "), con);
 
-		con = createGBC(2, 5, 1, 1);
+		con = createGBC(1, 5, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
 		inputPanel.add(ftResultat, con);
@@ -288,23 +280,13 @@ FocusListener, ActionListener {
 		con.insets = ins;
 		inputPanel.add(arealResultat, con);
 
-		con = createGBC(4, 7, 1, 1);
-		con.insets = ins;
-		con.anchor = GridBagConstraints.WEST;
-		inputPanel.add(new JLabel("mm^2"), con);
-
 		// Linje 8 (ny)
 		con = createGBC(0, 8, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		inputPanel.add(new JLabel("tau: "), con);
+		inputPanel.add(new JLabel("Forskydningsspænding (tau): "), con);
 
 		con = createGBC(1, 8, 1, 1);
-		con.insets = ins;
-		con.anchor = GridBagConstraints.WEST;
-		inputPanel.add(tauFormel, con);
-
-		con = createGBC(2, 8, 1, 1);
 		con.insets = ins;
 		inputPanel.add(tauResultat, con);
 
@@ -324,22 +306,21 @@ FocusListener, ActionListener {
 		con.anchor = GridBagConstraints.WEST;
 		inputPanel.add(laengdeEnhed, con);
 
-		con = createGBC(3, 9, 1, 1);
+		con = createGBC(1, 10, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
 		inputPanel.add(laengdeResultat, con);
-
-		// linje 10
-		con = createGBC(0, 11, 1, 1);
+		
+		con = createGBC(0, 10, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		inputPanel.add(new JLabel("SigmaN:"), con);
+		inputPanel.add(new JLabel("Bøjningsmoment (MB)"), con);
 
 		// linie 11 IKKE IMPLEMENTERET LOGIK
 		con = createGBC(0, 11, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		inputPanel.add(new JLabel("SigmaN:"), con);
+		inputPanel.add(new JLabel("Normalspænding (SigmaN):"), con);
 
 		con = createGBC(1, 11, 1, 1);
 		con.insets = ins;
@@ -350,7 +331,7 @@ FocusListener, ActionListener {
 		con = createGBC(0, 12, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		inputPanel.add(new JLabel("Halvhøjde E :"), con);
+		inputPanel.add(new JLabel("Halvhøjde (E) :"), con);
 
 		con = createGBC(1, 12, 1, 1);
 		con.insets = ins;
@@ -361,7 +342,7 @@ FocusListener, ActionListener {
 		con = createGBC(0, 13, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		inputPanel.add(new JLabel("Inertimoment I :"), con);
+		inputPanel.add(new JLabel("Inertimoment (I) :"), con);
 
 		con = createGBC(1, 13, 1, 1);
 		con.insets = ins;
@@ -372,7 +353,7 @@ FocusListener, ActionListener {
 		con = createGBC(0, 14, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		inputPanel.add(new JLabel("SigmaBøj :"), con);
+		inputPanel.add(new JLabel("Bøjningspænding (SigmaBøj) :"), con);
 
 		con = createGBC(1, 14, 1, 1);
 		con.insets = ins;
@@ -383,7 +364,7 @@ FocusListener, ActionListener {
 		con = createGBC(0, 15, 1, 1);
 		con.insets = ins;
 		con.anchor = GridBagConstraints.WEST;
-		inputPanel.add(new JLabel("SigmaRef :"), con);
+		inputPanel.add(new JLabel("Referencespænding (SigmaRef) :"), con);
 
 		con = createGBC(1, 15, 1, 1);
 		con.insets = ins;
@@ -479,7 +460,7 @@ FocusListener, ActionListener {
 
 		if (pteCalc.getAreal() != null) {
 			double n = pteCalc.getAreal().getAreal();
-			arealResultat.setText("" + n);
+			arealResultat.setText(arealFormatter.format(n));
 			double angivetAreal;
 			ArealEnhed aEnhed = (ArealEnhed) arealEnhed.getSelectedItem();
 			switch (aEnhed) {
