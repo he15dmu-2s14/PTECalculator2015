@@ -21,7 +21,7 @@ public class ArealTest {
   }
 
   @AfterClass
-  public static void tearDownAfterClass() throws Exception {
+  public static void tearDownAfterClass() throws Exception {  
   }
 
   @Before
